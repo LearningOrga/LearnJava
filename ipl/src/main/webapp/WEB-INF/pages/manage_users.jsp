@@ -139,16 +139,7 @@ font-weight: bold !important;
 		
 	}); 
 	
-	//uncomment to run with static response
-/* 	$scope.users=[{"id":1,"loginName":"sudeepg","loginPass":"sudeepg","loginRole":"ROLE_ADMIN","loginStatus":1,"availablePoints":500.0, "goldenPredict":"Kings XI Punjab (KXIP)"},{"id":2,"loginName":"jitendrah","loginPass":"jitendrah","loginRole":"ROLE_ADMIN","loginStatus":1,"availablePoints":500.0},{"id":3,"loginName":"ravig","loginPass":"ravig","loginRole":"ROLE_USER","loginStatus":1,"availablePoints":500.0},{"id":4,"loginName":"Ijlal","loginPass":"ij@bbin2015","loginRole":"ROLE_USER","loginStatus":1,"availablePoints":500.0},{"id":5,"loginName":"TEMP","loginPass":"test","loginRole":"ROLE_USER","loginStatus":1,"availablePoints":1000.0},{"id":6,"loginName":"Aishwarya","loginPass":"ayrvhsia","loginRole":"ROLE_USER","loginStatus":1,"availablePoints":500.0},{"id":7,"loginName":"NeerajPriya","loginPass":"P@ss123","loginRole":"ROLE_USER","loginStatus":1,"availablePoints":500.0}];
-	$scope.teamJson = [{"id":01,"teamName":"Kings XI Punjab (KXIP)","teamHomeVenue":null,"teamCaptain":"David Miller"},
-		{"id":02,"teamName":"Delhi Daredevils (DD)","teamHomeVenue":null,"teamCaptain":"JP Duminy"},
-		{"id":03,"teamName":"Mumbai Indians (MI)","teamHomeVenue":null,"teamCaptain":"Rohit Sharma"},
-		{"id":04,"teamName":"Royal Challengers Bangalore (RCB)","teamHomeVenue":null,"teamCaptain":"Virat Kohli"},
-		{"id":05,"teamName":"Kolkata Knight Riders (KKR)","teamHomeVenue":null,"teamCaptain":"Gautam Gambhir"},
-		{"id":06,"teamName":"Sunrisers Hyderabad (SRH)","teamHomeVenue":null,"teamCaptain":"Shikhar Dhavan"},
-		{"id":07,"teamName":"Rising Pune Supergiants (RPS)","teamHomeVenue":null,"teamCaptain":"MS Dhoni"},
-		{"id":08,"teamName":"Gujarat Lions (GL)","teamHomeVenue":null,"teamCaptain":"Suresh Raina"}];  */
+
 	
 
     $scope.selectedTeam = function (mySelectGoldenPredictTeam) {

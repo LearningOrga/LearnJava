@@ -118,11 +118,7 @@ background-color: #ff0000;
 		$scope.matchInvSummary = response;		
 	}); 
 	
-    //uncomment
-   /*  $scope.matchInvSummary =  [
-                               {"userName":"Harikrishna","totalNumberWins":3,"totalPoints":500.0,"totalPointsInvested":30.0,"totalPointsEarned":65.0,"rank":0,"winLossPer":75.0},
-                               {"userName":"Harikrishna1","totalNumberWins":8,"totalPoints":500.0,"totalPointsInvested":30.0,"totalPointsEarned":65.0,"rank":0,"winLossPer":90.0}];
- */
+   
     $scope.sort = {
             active: '',
             descending: undefined

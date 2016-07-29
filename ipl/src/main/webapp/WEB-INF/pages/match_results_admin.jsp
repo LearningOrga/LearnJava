@@ -166,15 +166,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 			$scope.rulesJson = response;
 		});  
 
-		
-	//uncomment to call rule all and match id static data service			
-  	/* var match = {"id":1,"matchDate":"09-04-2016","matchDay":"Saturday","matchTime":"20:00 PM (2:30pm GMT) ","matchDetails" :"Mumbai Indians vs Rising Pune Supergiants","matchVenue":"Mumbai"};
-	$scope.rulesJson = [{"id":1,"ruleName":"Winning Team","ruleDesc":"Which team is winning","ruleStatus":"A","ruleBasedOn":"Team"},{"id":2,"ruleName":"Toss Winning Team","ruleDesc":"Which team is winning toss","ruleStatus":"A","ruleBasedOn":"Team"}];
-	$scope.dataAfterSubmit = [{"id":1,"matchId":"1","ruleId":"1","ruleResult":"Mumbai Indians"},{"id":2,"matchId":"1","ruleId":"2","ruleResult":"Kolkata Knight Riders"}];
-	$scope.matchDetails = match.matchDetails;
-	$scope.matchDate = match.matchDate;
-	$scope.matchTime = match.matchTime;
-	$scope.teamName = $scope.matchDetails.split(" vs ");   */
+
 	 
 
     $scope.selectedRule = function (mySelectRule) {

@@ -208,16 +208,7 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
 			
 		});	
 		
-	//uncomment to call rule all and match id static data service			
 
-/* 	$scope.teamJson = [{"id":01,"teamName":"Kings XI Punjab (KXIP)","teamHomeVenue":null,"teamCaptain":"David Miller"},
-	           		{"id":02,"teamName":"Delhi Daredevils (DD)","teamHomeVenue":null,"teamCaptain":"JP Duminy"},
-	           		{"id":03,"teamName":"Mumbai Indians (MI)","teamHomeVenue":null,"teamCaptain":"Rohit Sharma"},
-	           		{"id":04,"teamName":"Royal Challengers Bangalore (RCB)","teamHomeVenue":null,"teamCaptain":"Virat Kohli"},
-	           		{"id":05,"teamName":"Kolkata Knight Riders (KKR)","teamHomeVenue":null,"teamCaptain":"Gautam Gambhir"},
-	           		{"id":06,"teamName":"Sunrisers Hyderabad (SRH)","teamHomeVenue":null,"teamCaptain":"Shikhar Dhavan"},
-	           		{"id":07,"teamName":"Rising Pune Supergiants (RPS)","teamHomeVenue":null,"teamCaptain":"MS Dhoni"},
-	           		{"id":08,"teamName":"Gujarat Lions (GL)","teamHomeVenue":null,"teamCaptain":"Suresh Raina"}];  */
 
 	           		
         	    $scope.selectedTeam1 = function (mySelectGoldenPredictTeam1) {
