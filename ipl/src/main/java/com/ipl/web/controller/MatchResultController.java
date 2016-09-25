@@ -59,7 +59,7 @@ public class MatchResultController {
 			@RequestParam("selTeamName") String ruleResult) {
 		MatchResult matchResult;
 		List<MatchResult> retVal = new ArrayList();
-		if (request.getSession().getAttribute("token").equals("45675011090")) {
+		
 			matchResult = matchResultService.findAllRecordsByRuleIdnadMatchId(
 					ruleId, matchId);
 			if (matchResult != null) {
@@ -78,7 +78,7 @@ public class MatchResultController {
 				matchResultService.saveMatchResult(matchResult);
 			}
 			retVal = matchResultService.findAllRecordsByMatchId(matchId);
-		}
+		
 		return retVal;
 
 	}

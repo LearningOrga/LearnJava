@@ -180,7 +180,7 @@ public class PlayResultController {
 			@RequestParam("matchId") int matchId) {
 
 		List<User> users = new ArrayList();
-		if(request.getSession().getAttribute("token").equals("45675011090")){
+		
 
 		users = userService.findAllUsers();
 		for (User user : users) {
@@ -203,7 +203,7 @@ public class PlayResultController {
 			user.setAvailablePoints(user.getAvailablePoints() + totalLossOrWin);
 			userService.updateUser(user);
 		}
-		}
+		
 		// TODO: this list may not be updated so if you are planning to use get
 		// one
 		return users;
@@ -228,7 +228,7 @@ public class PlayResultController {
 
 		List<PlayResult> results=new ArrayList();
 		
-		if(request.getSession().getAttribute("token").equals("45675011090")){
+		
 
 		results = playResultService
 				.findAllRecordsByParams((param));
@@ -244,7 +244,7 @@ public class PlayResultController {
 
 		playResultService.updateByResult(calculateTotalPoints(results, matchId,
 				ruleId));
-		}
+		
 		return results;
 	}
 

@@ -223,7 +223,7 @@ font-weight: bold !important;
 
 
 		$http({
-			method: "GET",
+			method: "PUT",
 			url : url,
 			params: {
 				selUserId : $scope.userId,

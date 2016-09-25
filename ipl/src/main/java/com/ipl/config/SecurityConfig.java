@@ -40,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   
       http.authorizeRequests()
         .antMatchers("/", "/home").permitAll() 
+        .antMatchers("/user/all").access("hasRole('ADMIN')")     
         .antMatchers("/admin/**").access("hasRole('ADMIN')")        
         .antMatchers("/dba/**").access("hasRole('ADMIN') and hasRole('DBA')")
         .and().formLogin().defaultSuccessUrl("/ipl_home")

@@ -23,9 +23,9 @@ public class SetUpController {
 			HttpServletResponse response,ModelMap model,@PathVariable("fileName") String fileName) {
 		//("DataBase setup started-"+fileName);
 		
-		if (request.getSession().getAttribute("token").equals("45675011090")) {
+		
 		setUpService.setup(fileName);
-		}
+		
 		//("DataBase setup Done-"+fileName);
 		return "admin";
 	}

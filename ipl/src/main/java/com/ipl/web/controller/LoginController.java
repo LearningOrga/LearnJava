@@ -44,11 +44,6 @@ public class LoginController {
 		request.getSession().setAttribute("totalRemainingPoints",
 				getCompleteUserDetailss(model).getAvailablePoints());
 
-		if (getCompleteUserDetailss(model).getLoginName().equals("Ravi")) {
-			request.getSession().setAttribute("token", "45675011090");
-		} else {
-			request.getSession().setAttribute("token", "9011057654");
-		}
 		return "ipl_home";
 	}
 
@@ -101,10 +96,10 @@ public class LoginController {
 			HttpServletResponse response, ModelMap model) {
 
 		User user = null;
-		if (request.getSession().getAttribute("token").equals("45675011090")) {
-			String userName = getPrincipal();
-			user = loginMasterService.findUserByName(userName);
-		}
+
+		String userName = getPrincipal();
+		user = loginMasterService.findUserByName(userName);
+
 		return user;
 	}
 
@@ -122,9 +117,9 @@ public class LoginController {
 			@RequestParam("selUserId") int userId) {
 
 		User user = null;
-		if (request.getSession().getAttribute("token").equals("45675011090")) {
-			user = loginMasterService.findUserById(userId);
-		}
+
+		user = loginMasterService.findUserById(userId);
+
 		return user;
 	}
 
@@ -136,7 +131,7 @@ public class LoginController {
 	 * loginMasterService.deleteUserById(userId); }
 	 */
 
-	@RequestMapping(value = "/user/update", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/update", method = RequestMethod.PUT)
 	public @ResponseBody
 	void updateUserById(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model,
@@ -148,18 +143,16 @@ public class LoginController {
 			@RequestParam("selloginPass") String selloginPass,
 			@RequestParam("selgoldenPredict") String selGoldenPredict) {
 
-		if (request.getSession().getAttribute("token").equals("45675011090")) {
+		User user = loginMasterService.findUserById(userId);
 
-			User user = loginMasterService.findUserById(userId);
+		user.setLoginName(selloginName);
+		user.setLoginRole(selloginRole);
+		user.setLoginStatus(Integer.parseInt(selloginStatus));
+		user.setAvailablePoints(Double.parseDouble(selavailablePoints));
+		user.setLoginPass(selloginPass);
+		user.setGoldenPredict(selGoldenPredict);
+		loginMasterService.updateUser(user);
 
-			user.setLoginName(selloginName);
-			user.setLoginRole(selloginRole);
-			user.setLoginStatus(Integer.parseInt(selloginStatus));
-			user.setAvailablePoints(Double.parseDouble(selavailablePoints));
-			user.setLoginPass(selloginPass);
-			user.setGoldenPredict(selGoldenPredict);
-			loginMasterService.updateUser(user);
-		}
 		// ("updatedSuccessfully");
 	}
 
@@ -169,10 +162,9 @@ public class LoginController {
 			HttpServletResponse response, ModelMap model) {
 
 		List<User> users = new ArrayList();
-		if (request.getSession().getAttribute("token").equals("45675011090")) {
 
-			users = loginMasterService.findAllUsers();
-		}
+		users = loginMasterService.findAllUsers();
+
 		return users;
 	}
 
