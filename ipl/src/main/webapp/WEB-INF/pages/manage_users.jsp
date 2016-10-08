@@ -96,6 +96,7 @@ font-weight: bold !important;
     <input class="w3-input w3-border" type="password" ng-model="loginPass2" placeholder="Repeat Password">
   <br>
    <button class="w3-btn w3-green w3-ripple" ng-click="updateUsers()" ng-disabled="team || error || incomplete">&#10004; Save Changes</button> 
+   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 </form>
 
 </div>
@@ -223,7 +224,7 @@ font-weight: bold !important;
 
 
 		$http({
-			method: "PUT",
+			method: "POST",
 			url : url,
 			params: {
 				selUserId : $scope.userId,

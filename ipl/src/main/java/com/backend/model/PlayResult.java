@@ -105,8 +105,7 @@ public class PlayResult implements Serializable {
 	public Double getPointsInvested() {
 		return pointsInvested;
 	}
-	@PrePersist  
-	 @PreUpdate
+	
 	public void setPointsInvested(Double pointsInvested) {
 		this.pointsInvested = pointsInvested;
 		if( Double.isInfinite(this.pointsInvested))
@@ -124,8 +123,7 @@ public class PlayResult implements Serializable {
 	public Double getIndicativePoints() {
 		return indicativePoints;
 	}
-	@PrePersist  
-	 @PreUpdate
+	
 	public void setIndicativePoints(Double indicativePoints) {
 		this.indicativePoints = indicativePoints;
 		if( Double.isInfinite(this.indicativePoints))
@@ -135,8 +133,7 @@ public class PlayResult implements Serializable {
 	public Double getTotalPointsEarned() {
 		return totalPointsEarned;
 	}
-	@PrePersist  
-	 @PreUpdate
+	
 	public void setTotalPointsEarned(Double totalPointsEarned) {
 		this.totalPointsEarned = totalPointsEarned;
 		if( Double.isInfinite(this.totalPointsEarned))

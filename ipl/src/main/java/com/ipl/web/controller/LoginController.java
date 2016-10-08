@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.backend.model.User;
@@ -131,30 +132,7 @@ public class LoginController {
 	 * loginMasterService.deleteUserById(userId); }
 	 */
 
-	@RequestMapping(value = "/user/update", method = RequestMethod.PUT)
-	public @ResponseBody
-	void updateUserById(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model,
-			@RequestParam("selUserId") int userId,
-			@RequestParam("selloginName") String selloginName,
-			@RequestParam("selloginRole") String selloginRole,
-			@RequestParam("selloginStatus") String selloginStatus,
-			@RequestParam("selavailablePoints") String selavailablePoints,
-			@RequestParam("selloginPass") String selloginPass,
-			@RequestParam("selgoldenPredict") String selGoldenPredict) {
-
-		User user = loginMasterService.findUserById(userId);
-
-		user.setLoginName(selloginName);
-		user.setLoginRole(selloginRole);
-		user.setLoginStatus(Integer.parseInt(selloginStatus));
-		user.setAvailablePoints(Double.parseDouble(selavailablePoints));
-		user.setLoginPass(selloginPass);
-		user.setGoldenPredict(selGoldenPredict);
-		loginMasterService.updateUser(user);
-
-		// ("updatedSuccessfully");
-	}
+	
 
 	@RequestMapping(value = "/user/all", method = RequestMethod.GET)
 	public @ResponseBody
