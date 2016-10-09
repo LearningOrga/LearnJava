@@ -105,6 +105,14 @@ public class PlayResult implements Serializable {
 	public Double getPointsInvested() {
 		return pointsInvested;
 	}
+	/*TODO
+	@PrePersist  
+	@PreUpdate
+	public void setPointsInvested(Double pointsInvested) {
+		this.pointsInvested = pointsInvested;
+		if( Double.isInfinite(this.pointsInvested))
+			this.pointsInvested = new Double("0");
+	}*/
 	
 	public void setPointsInvested(Double pointsInvested) {
 		this.pointsInvested = pointsInvested;
@@ -120,9 +128,18 @@ public class PlayResult implements Serializable {
 		this.result = result;
 	}
 
+	
 	public Double getIndicativePoints() {
 		return indicativePoints;
 	}
+	/*TODO
+	@PrePersist  
+	@PreUpdate
+	public void setIndicativePoints(Double indicativePoints) {
+		this.indicativePoints = indicativePoints;
+		if( Double.isInfinite(this.indicativePoints))
+			this.indicativePoints = new Double("0");
+	}*/
 	
 	public void setIndicativePoints(Double indicativePoints) {
 		this.indicativePoints = indicativePoints;
@@ -134,12 +151,21 @@ public class PlayResult implements Serializable {
 		return totalPointsEarned;
 	}
 	
+	/*TODO
+	@PrePersist  
+	@PreUpdate
+	public void setTotalPointsEarned(Double totalPointsEarned) {
+		this.totalPointsEarned = totalPointsEarned;
+		if( Double.isInfinite(this.totalPointsEarned))
+			this.totalPointsEarned = new Double("0");
+	}*/
+	
+	
 	public void setTotalPointsEarned(Double totalPointsEarned) {
 		this.totalPointsEarned = totalPointsEarned;
 		if( Double.isInfinite(this.totalPointsEarned))
 			this.totalPointsEarned = new Double("0");
 	}
-	
 	
 	
 	public String getRuleResult() {

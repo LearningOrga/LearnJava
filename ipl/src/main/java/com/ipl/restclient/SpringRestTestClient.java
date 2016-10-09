@@ -71,11 +71,12 @@ public class SpringRestTestClient {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(REST_SERVICE_URI+"/user/");
     }
- 
+    /*
+   
     public static void main(String args[]){
         listAllUsers();
         createUser();
-      /*  getUser();
+        getUser();
        
         listAllUsers();
         updateUser();
@@ -83,6 +84,6 @@ public class SpringRestTestClient {
         deleteUser();
         listAllUsers();
         deleteAllUsers();
-        listAllUsers();*/
-    }
+        listAllUsers();
+    }*/
 }

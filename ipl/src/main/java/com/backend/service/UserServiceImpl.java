@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.backend.dao.UserDao;
 import com.backend.model.User;
 
-@Service("loginMasterService")
+@Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService{
 
