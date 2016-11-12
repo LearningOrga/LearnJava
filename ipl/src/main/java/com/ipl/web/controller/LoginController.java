@@ -17,25 +17,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.backend.model.User;
 import com.backend.service.UserService;
 
-@Controller
+@RestController
 public class LoginController {
 
 	@Autowired
 	UserService loginMasterService;
 
 	@RequestMapping(value = { "/", "/home" }, method = RequestMethod.GET)
-	public String homePage(ModelMap model) {
+	public ModelAndView   homePage(ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to Predict and Win. ");
-		return "welcome";
+		ModelAndView mav = new ModelAndView("welcome");
+		mav.addObject(model);
+		
+		return mav;
 	}
 
 	@RequestMapping(value = { "/ipl_home" }, method = RequestMethod.GET)
-	public String iplehomePage(HttpServletRequest request, ModelMap model) {
+	public ModelAndView iplehomePage(HttpServletRequest request, ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to Predict and Win. ");
 		request.getSession().setAttribute("loginName",
 				getCompleteUserDetailss(model).getLoginName());
@@ -43,51 +47,73 @@ public class LoginController {
 				getCompleteUserDetailss(model).getId());
 		request.getSession().setAttribute("totalRemainingPoints",
 				getCompleteUserDetailss(model).getAvailablePoints());
-
-		return "ipl_home";
+		
+		ModelAndView mav = new ModelAndView("ipl_home");
+		mav.addObject(model);
+		return mav;
+		//return "ipl_home";
 	}
 
 	@RequestMapping(value = { "/summary" }, method = RequestMethod.GET)
-	public String summaryPage(ModelMap model) {
-		return "summary";
+	public ModelAndView summaryPage(ModelMap model) {
+		ModelAndView mav = new ModelAndView("summary");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	@RequestMapping(value = { "/userReports" }, method = RequestMethod.GET)
-	public String reportsPage(ModelMap model) {
-		return "userReports";
+	public ModelAndView reportsPage(ModelMap model) {
+		ModelAndView mav = new ModelAndView("userReports");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	@RequestMapping(value = { "/winningRules" }, method = RequestMethod.GET)
-	public String winningRules(ModelMap model) {
-		return "winningRules";
+	public ModelAndView winningRules(ModelMap model) {
+		ModelAndView mav = new ModelAndView("winningRules");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	@RequestMapping(value = { "/manageUsers" }, method = RequestMethod.GET)
-	public String manageUsersPage(ModelMap model) {
-		return "manage_users";
+	public ModelAndView manageUsersPage(ModelMap model) {
+		ModelAndView mav = new ModelAndView("manage_users");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String adminPage(ModelMap model) {
+	public ModelAndView adminPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
-		return "admin";
+		ModelAndView mav = new ModelAndView("admin");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	@RequestMapping(value = "/dba", method = RequestMethod.GET)
-	public String dbaPage(ModelMap model) {
+	public ModelAndView dbaPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
-		return "dba";
+		ModelAndView mav = new ModelAndView("dba");
+		mav.addObject(model);
+		return mav;
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutPage(HttpServletRequest request,
+	public ModelAndView logoutPage(HttpServletRequest request,
 			HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "welcome";
+		
+		ModelAndView mav = new ModelAndView("welcome");
+				return mav;
 	}
 
 	@RequestMapping(value = "/user/{userName}", method = RequestMethod.GET)
@@ -146,9 +172,12 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
-	public String accessDeniedPage(ModelMap model) {
+	public ModelAndView accessDeniedPage(ModelMap model) {
 		model.addAttribute("user", getPrincipal());
-		return "accessDenied";
+		ModelAndView mav = new ModelAndView("accessDenied");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	private String getPrincipal() {
