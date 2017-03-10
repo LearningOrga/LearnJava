@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,6 +23,7 @@ import com.backend.service.RuleService;
 
 @Controller
 public class MatchResultController {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	RuleService ruleService;
@@ -57,6 +60,8 @@ public class MatchResultController {
 			@RequestParam("selMatchId") int matchId,
 			@RequestParam("selRuleId") int ruleId,
 			@RequestParam("selTeamName") String ruleResult) {
+		 logger.info("Updating Playresult......");
+		
 		MatchResult matchResult;
 		List<MatchResult> retVal = new ArrayList();
 		
@@ -78,7 +83,7 @@ public class MatchResultController {
 				matchResultService.saveMatchResult(matchResult);
 			}
 			retVal = matchResultService.findAllRecordsByMatchId(matchId);
-		
+			 logger.info("Updating Playresult......done");
 		return retVal;
 
 	}

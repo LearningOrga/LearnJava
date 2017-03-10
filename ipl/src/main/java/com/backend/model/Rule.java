@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name="rule_master")
+@Audited
 public class Rule implements Serializable {	
 	/**
 	 * 

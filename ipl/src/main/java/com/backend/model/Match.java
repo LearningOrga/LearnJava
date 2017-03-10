@@ -10,11 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 @Entity
 @Table(name="match_master")
+@Audited
 public class Match implements Serializable {
 	
 	

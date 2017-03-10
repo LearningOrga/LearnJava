@@ -10,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
 import org.joda.time.LocalDate;
 
 @Entity
 @Table(name="EMPLOYEE")
+@Audited
 public class Employee {
 
 	@Id

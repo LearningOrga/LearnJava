@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +27,7 @@ import com.backend.service.UserService;
 
 @RestController
 public class LoginController {
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	UserService loginMasterService;
@@ -56,8 +59,10 @@ public class LoginController {
 
 	@RequestMapping(value = { "/summary" }, method = RequestMethod.GET)
 	public ModelAndView summaryPage(ModelMap model) {
+		logger.info("summary");
 		ModelAndView mav = new ModelAndView("summary");
 		mav.addObject(model);
+		logger.info("summary");
 		return mav;
 		
 	}
@@ -72,6 +77,7 @@ public class LoginController {
 
 	@RequestMapping(value = { "/winningRules" }, method = RequestMethod.GET)
 	public ModelAndView winningRules(ModelMap model) {
+		logger.info("Winning Rules");
 		ModelAndView mav = new ModelAndView("winningRules");
 		mav.addObject(model);
 		return mav;
@@ -80,6 +86,7 @@ public class LoginController {
 
 	@RequestMapping(value = { "/manageUsers" }, method = RequestMethod.GET)
 	public ModelAndView manageUsersPage(ModelMap model) {
+		logger.debug("manageUsers");
 		ModelAndView mav = new ModelAndView("manage_users");
 		mav.addObject(model);
 		return mav;
@@ -193,36 +200,7 @@ public class LoginController {
 		return userName;
 	}
 
-	/*
-	 * 
-	 * @RequestMapping(value = "/user/add", method = RequestMethod.GET) public
-	 * 
-	 * @ResponseBody void addUser(ModelMap model,
-	 * 
-	 * @RequestParam("selloginName") String selloginName,
-	 * 
-	 * @RequestParam("selloginRole") String selloginRole,
-	 * 
-	 * @RequestParam("selloginStatus") String selloginStatus,
-	 * 
-	 * @RequestParam("selavailablePoints") String selavailablePoints,
-	 * 
-	 * @RequestParam("selloginPass") String selloginPass,
-	 * 
-	 * @RequestParam("selgoldenPredict") String selGoldenPredict) {
-	 * 
-	 * //("---inside-------");
-	 * 
-	 * User user = new User(selloginName, selloginPass, selloginRole,
-	 * Integer.parseInt(selloginStatus), Double.parseDouble(selavailablePoints),
-	 * selGoldenPredict);
-	 * 
-	 * loginMasterService.saveUser(user);
-	 * 
-	 * //("------success-----");
-	 * 
-	 * }
-	 */
+	
 
 	// Spring Security see this :
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

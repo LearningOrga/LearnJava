@@ -14,8 +14,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
 @Entity
 @Table(name="play_result")
+@Audited
+
 public class PlayResult implements Serializable {
 	
 	/**

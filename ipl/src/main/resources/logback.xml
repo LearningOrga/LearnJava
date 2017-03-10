@@ -13,11 +13,11 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<logger name="com" level="debug" additivity="false">
-		<appender-ref ref="OFF" />
+	<logger name="com" level="info" additivity="false">
+		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<root level="error">
+	<root level="info">
 		<appender-ref ref="STDOUT" />
 	</root>
 
