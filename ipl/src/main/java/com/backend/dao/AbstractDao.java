@@ -12,7 +12,7 @@ public abstract class AbstractDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
+	//added comment
 	protected Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
