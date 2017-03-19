@@ -13,10 +13,12 @@ import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 
 @Entity
 @Table(name="match_master")
 @Audited
+
 public class Match implements Serializable {
 	
 	

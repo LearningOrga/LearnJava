@@ -4,6 +4,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Abstract dao cfor session factory etc
+ *
+ */
 public abstract class AbstractDao {
 
 	@Autowired

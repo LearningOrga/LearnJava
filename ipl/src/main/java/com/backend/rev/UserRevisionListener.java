@@ -1,14 +1,13 @@
-package com.backend.dao;
+package com.backend.rev;
 
 import org.hibernate.envers.RevisionListener;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.backend.model.RevInfoUser;
 
 public class UserRevisionListener implements RevisionListener {
 
-	private String USERNAME = "Jitendra";
+	private String USERNAME = "deefaultused";
 
 	@Override
 	public void newRevision(Object revisionEntity) {

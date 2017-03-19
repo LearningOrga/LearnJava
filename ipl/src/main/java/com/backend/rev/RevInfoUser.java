@@ -1,4 +1,4 @@
-package com.backend.model;
+package com.backend.rev;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.envers.RevisionEntity;
 
-import com.backend.dao.UserRevisionListener;
 
 @Entity
 @RevisionEntity(UserRevisionListener.class)
