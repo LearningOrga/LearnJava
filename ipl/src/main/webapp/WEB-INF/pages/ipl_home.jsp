@@ -6,16 +6,24 @@
 <html>
 <style>
 table, th, td {
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 font-size:11px !important;
 }
 
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+.w3-ripple{
+color: deepskyblue !important	;
+}
+
 th{
-background-color: #C5C500 !important;
+background-color: rgba(30, 167, 233, 0.22) !important;
 }
 .displaySuccessMessageClass{
 text-align: center !important;
-color: dodgerblue !important;
+color: rgba(222, 30, 255, 0.78) !important;
 }
 .todaysMatchClass{
 background-color: #9CAEB7 !important;
