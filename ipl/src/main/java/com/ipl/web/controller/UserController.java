@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.User;
 import com.backend.service.UserService;
-import com.ipl.config.PasswordHashing;
 
 @RestController
 @RequestMapping("/user")
@@ -44,7 +43,7 @@ public class UserController {
 		user.setLoginRole(selloginRole);
 		user.setLoginStatus(Integer.parseInt(selloginStatus));
 		user.setAvailablePoints(Double.parseDouble(selavailablePoints));
-		user.setLoginPass(PasswordHashing.generateHash(selloginPass));
+		user.setLoginPass(selloginPass);
 		user.setGoldenPredict(selGoldenPredict);
 		loginMasterService.updateUser(user);
 		 logger.info("updated Successfully");
