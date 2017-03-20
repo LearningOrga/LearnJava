@@ -74,12 +74,20 @@
 <style>
 
 table, th, td {
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 font-size: 13px !important;
 }
 
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+.w3-ripple{
+color: deepskyblue !important	;
+}
+
 th{
-background-color: #C5C500 !important;
+background-color: rgba(30, 167, 233, 0.22) !important;
 }
 
   .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable.ui-resizable{
@@ -90,6 +98,7 @@ height:auto;
 .displaySuccessMessageClass{
 text-align: center !important;
 font-weight: bold !important;
+color: rgba(222, 30, 255, 0.78) !important;
 }
 
 

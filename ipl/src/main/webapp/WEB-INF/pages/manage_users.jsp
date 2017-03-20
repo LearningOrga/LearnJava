@@ -8,16 +8,40 @@
 <style>
 
 table, th, td {
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 }
+
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+.w3-ripple{
+color: deepskyblue !important	;
+}
+
 form{
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 margin-top:10px !important;
 }
 
 .displaySuccessMessageClass{
 text-align: center !important;
 font-weight: bold !important;
+color: rgba(222, 30, 255, 0.78) !important;
+}
+
+.w3-border{
+border : 1px solid rgba(222, 30, 255, 0.78) !important;
+}
+
+th{
+background-color: rgba(30, 167, 233, 0.22) !important;
+}
+
+
+.w3-green, .w3-hover-green:hover{
+background-color: rgba(156, 39, 176, 0.58) !important;
+color: #9c27b0 !important;
 }
 
 </style>
@@ -35,7 +59,12 @@ font-weight: bold !important;
 <div class="w3-container">
 
 <h3>Predict and Win - Manage Users Admin</h3>
-<br>
+<br></br>
+
+<button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
+<br></br>
+
+
 <table class="w3-table w3-bordered w3-striped">
   <tr>
     <th>Edit User</th>
@@ -59,8 +88,7 @@ font-weight: bold !important;
   </tr>
 </table>
 <br>
-<!-- 
-<button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>  -->
+
 
 		<h4  ng-show="displayAddMessage" class="displaySuccessMessageClass">{{addMessageResult}}</h4>
 		<h4  ng-show="displayUpdatedMessage" class="displaySuccessMessageClass">{{updateMessageResult}}</h4>

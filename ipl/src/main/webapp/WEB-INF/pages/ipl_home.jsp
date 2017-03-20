@@ -23,7 +23,7 @@ background-color: rgba(30, 167, 233, 0.22) !important;
 }
 .displaySuccessMessageClass{
 text-align: center !important;
-color: rgba(222, 30, 255, 0.78) !important;
+color: #e91e63 !important;
 }
 .todaysMatchClass{
 background-color: #9CAEB7 !important;
