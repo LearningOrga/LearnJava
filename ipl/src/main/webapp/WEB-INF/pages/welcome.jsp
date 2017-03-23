@@ -2,6 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+<style>
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+.w3-ripple{
+color: deepskyblue !important;
+}
+</style>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Predict and Win - Welcome Page</title>
     

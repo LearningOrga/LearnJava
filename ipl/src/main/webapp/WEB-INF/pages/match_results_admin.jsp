@@ -11,22 +11,32 @@ float:left;
 margin-left:50px;
 }
 table, th, td {
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 font-size:11px !important;
 }
 
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+.w3-ripple{
+color: deepskyblue !important;
+}
+
 th{
-background-color: #C5C500 !important;
+background-color: rgba(30, 167, 233, 0.22) !important;
 }
 td{
-background-color: #AF9D5D !important;
+background-color: rgba(205, 236, 250, 0.16) !important;
 }
 select{
-background-color: #00BCD4 !important;
+background-color: #9c27b0 !important;
+color: beige;
 }
 .displaySuccessMessageClass{
 text-align: center !important;
 font-weight: bold !important;
+color: #e91e63 !important;
 }
 </style>
 
