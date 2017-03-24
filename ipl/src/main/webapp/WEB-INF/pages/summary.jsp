@@ -8,8 +8,21 @@
 
 <style>
 table, th, td {
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 }
+
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+.w3-ripple{
+color: deepskyblue !important	;
+}
+
+th{
+background-color: rgba(30, 167, 233, 0.22) !important;
+}
+
 #contributorHeader, #rankHeader{
 cursor : pointer !important;
 }
