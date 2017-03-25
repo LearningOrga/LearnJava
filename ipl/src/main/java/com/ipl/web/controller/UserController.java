@@ -51,8 +51,8 @@ public class UserController {
 		// ("updatedSuccessfully");
 	}
 
-	/*
-	@RequestMapping(value = "/user/add", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
 	public @ResponseBody
 	void addUser(ModelMap model,
 	@RequestParam("selloginName") String selloginName,
@@ -72,6 +72,6 @@ public class UserController {
 
 		// ("------success-----");
 
-	}*/
+	}
 
 }

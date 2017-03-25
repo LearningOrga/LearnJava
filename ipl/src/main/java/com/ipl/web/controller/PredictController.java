@@ -3,24 +3,26 @@ package com.ipl.web.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.backend.model.Predict;
 import com.backend.model.Team;
 import com.backend.model.User;
-import com.backend.service.MatchService;
 import com.backend.service.PredictService;
 import com.backend.service.TeamService;
 import com.backend.service.UserService;
 
-@Controller
+@RestController
 public class PredictController {
 
 	@Autowired
@@ -41,15 +43,22 @@ public class PredictController {
 	}
 
 	@RequestMapping(value = { "/addGoldenPredicts" }, method = RequestMethod.GET)
-	public String addGoldenPredicts(ModelMap model) {
-		return "add_golden_predicts";
+	public ModelAndView addGoldenPredicts(HttpServletRequest request,ModelMap model) {
+		
+		ModelAndView mav = new ModelAndView("add_golden_predicts");
+		mav.addObject(model);
+		return mav;
+		
 	}
 
 	@RequestMapping(value = { "/viewGoldenPredicts" }, method = RequestMethod.GET)
-	public String viewGoldenPredicts(ModelMap model) {
-		return "view_all_golden_predicts";
+	public ModelAndView viewGoldenPredicts(ModelMap model) {
+		ModelAndView mav = new ModelAndView("view_all_golden_predicts");
+		mav.addObject(model);
+		return mav;
+		
 	}
-/*
+
 	@RequestMapping(value = "/predict/add", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Predict> addPredict(ModelMap model,
@@ -103,7 +112,7 @@ public class PredictController {
 		}
 		predicted.add(predict);
 		return predicted;
-	}*/
+	}
 
 	/*
 	 * @RequestMapping(value = "/predict/reconcile", method = RequestMethod.GET)

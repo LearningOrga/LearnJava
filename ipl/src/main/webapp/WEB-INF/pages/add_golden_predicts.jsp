@@ -347,14 +347,14 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
 
 
             $scope.computeTime = function () {
-             	var sDate = "11-05-2016";
+             	var sDate = "05-05-2017";
              	var temp = "19:00";
              	$scope.storedTime = sDate+" "+temp;
              	processTimeRemaining($scope.storedTime);
                 } 
                 
             $scope.checkTimer = function () {    
-            		var sDate = "11-05-2016";
+            		var sDate = "05-05-2017";
             		var temp = "19:00";
                  	var remainingTime = sDate+" "+temp;
                     var now = moment().utc();
