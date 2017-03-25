@@ -42,6 +42,12 @@ text-align: center !important;
 font-weight: bold !important;
 color: #e91e63 !important;
 }
+
+.displaySuccessMessageClass2{
+text-align: center !important;
+color: #e91e63 !important;
+}
+
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -70,6 +76,8 @@ color: #e91e63 !important;
 	    <button ng-click="enableDisableThisMatch('A')" class="w3-btn w3-ripple">&#10004; Enable this match</button>
 		<br>
 		</br>
+		
+		<h5 class="displaySuccessMessageClass2">Note: Please 'Submit' and 'Reconcile' both the rule's result first and then update total points !!!</h5>
 		
 <!-- 		<h4 ng-show="displayAddMessage" class="displaySuccessMessageClass">Points Added Successfully !!!</h4>
 		<h4 ng-show="displayErrMessage" class="displaySuccessMessageClass">Oops..Some issue while adding. Please try again !!!</h4> -->
