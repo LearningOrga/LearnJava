@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,31 +47,17 @@ public class UserController {
 		user.setLoginPass(selloginPass);
 		user.setGoldenPredict(selGoldenPredict);
 		loginMasterService.updateUser(user);
-		 logger.info("updated Successfully");
+		logger.info("updated Successfully");
 
 		// ("updatedSuccessfully");
 	}
 
-
-	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/add", method = RequestMethod.PUT)
 	public @ResponseBody
-	void addUser(ModelMap model,
-	@RequestParam("selloginName") String selloginName,
-	@RequestParam("selloginRole") String selloginRole,
-	@RequestParam("selloginStatus") String selloginStatus,
-	@RequestParam("selavailablePoints") String selavailablePoints,
-	@RequestParam("selloginPass") String selloginPass,
-	@RequestParam("selgoldenPredict") String selGoldenPredict) {
-
-		// ("---inside-------");
-
-		User user = new User(selloginName, selloginPass, selloginRole,
-				Integer.parseInt(selloginStatus),
-				Double.parseDouble(selavailablePoints), selGoldenPredict);
-
+	void addUser(ModelMap model, @RequestBody User user) {
+		logger.debug("Entry");
 		loginMasterService.saveUser(user);
-
-		// ("------success-----");
+		logger.debug("exit");
 
 	}
 

@@ -94,7 +94,7 @@ color: #9c27b0 !important;
 		<h4  ng-show="displayUpdatedMessage" class="displaySuccessMessageClass">{{updateMessageResult}}</h4>
 		
 
-<form ng-hide="hideform">
+<form ng-hide="hideform" >
   <h3 ng-show="edit"><b>Create New User:</b></h3>
   <h3 ng-hide="edit"><b>Edit User:</b></h3>
     <label>Login Name:</label>
@@ -250,26 +250,26 @@ color: #9c27b0 !important;
 			$scope.displayUpdatedMessage=true;
 		}
 
-
-		$http({
-			method: "POST",
-			url : url,
-			params: {
-				selUserId : $scope.userId,
-				selloginName : $scope.loginName,
-				selloginRole : $scope.loginRole,
-				selloginStatus : $scope.loginStatus,
-				selavailablePoints : $scope.availablePoints,
-				selloginPass : $scope.loginPass2,
-				selgoldenPredict : $scope.selectedTeamName,
-			}					
-		}).success(function(response){
+		var dataObj= {
+			id : $scope.userId,
+			loginName : $scope.loginName,
+			loginRole : $scope.loginRole,
+			loginStatus : $scope.loginStatus,
+			availablePoints : $scope.availablePoints,
+			loginPass : $scope.loginPass2,
+			goldenPredict : $scope.selectedTeamName,
+		}	;		
+		
+		var res = $http.put('/user/add',dataObj);
+				  
+		res.success(function(data,status,headers,config){
 		if($scope.displayAddMessage){
 			$scope.addMessageResult = "User "+$scope.loginName+" added successfully";
 		}if($scope.displayUpdatedMessage){
 			$scope.updateMessageResult = "User "+$scope.loginName+" updated successfully";
 		}			
-		}).error(function(err){
+		});
+		res.error(function(data,status,headers,config){
 			alert("err::"+err);
 			if($scope.displayAddMessage){
 				$scope.addMessageResult = "Some issue in adding the user "+$scope.loginName+" ";
