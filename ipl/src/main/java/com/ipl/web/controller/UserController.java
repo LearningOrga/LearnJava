@@ -29,30 +29,16 @@ public class UserController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
 	public @ResponseBody
-	void updateUser(HttpServletRequest request, HttpServletResponse response,
-			ModelMap model, @RequestParam("selUserId") int userId,
-			@RequestParam("selloginName") String selloginName,
-			@RequestParam("selloginRole") String selloginRole,
-			@RequestParam("selloginStatus") String selloginStatus,
-			@RequestParam("selavailablePoints") String selavailablePoints,
-			@RequestParam("selloginPass") String selloginPass,
-			@RequestParam("selgoldenPredict") String selGoldenPredict) {
+	void updateUser(ModelMap model, @RequestBody User user) {
 
-		User user = loginMasterService.findUserById(userId);
 
-		user.setLoginName(selloginName);
-		user.setLoginRole(selloginRole);
-		user.setLoginStatus(Integer.parseInt(selloginStatus));
-		user.setAvailablePoints(Double.parseDouble(selavailablePoints));
-		user.setLoginPass(selloginPass);
-		user.setGoldenPredict(selGoldenPredict);
 		loginMasterService.updateUser(user);
 		logger.info("updated Successfully");
 
 		// ("updatedSuccessfully");
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.PUT)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody
 	void addUser(ModelMap model, @RequestBody User user) {
 		logger.debug("Entry");

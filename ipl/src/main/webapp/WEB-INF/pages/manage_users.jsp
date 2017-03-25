@@ -11,6 +11,10 @@ table, th, td {
 border: 2px solid rgba(30, 167, 233, 0.22) !important;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 .w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
 color:#9c27b0;
 }
@@ -58,7 +62,7 @@ color: #9c27b0 !important;
 
 <div class="w3-container">
 
-<h3>Predict and Win - Manage Users Admin</h3>
+<h2>Predict and Win - Manage Users Admin</h2>
 <br></br>
 
 <button class="w3-btn w3-green w3-ripple" ng-click="editUser('new')">&#9998; Create New User</button>
@@ -101,7 +105,7 @@ color: #9c27b0 !important;
     <input class="w3-input w3-border" type="text" ng-model="loginName" placeholder="First Name is the login name">
   <br>
     <label>Login Role:</label>
-    <input class="w3-input w3-border" type="text" ng-model="loginRole"  placeholder="User or admin role">
+    <input class="w3-input w3-border" type="text" ng-model="loginRole"  placeholder="ROLE_USER or ROLE_ADMIN">
   <br>
   <br>
     <label>Login Status:</label>
@@ -109,7 +113,7 @@ color: #9c27b0 !important;
   <br>
     
     <label>Total Points:</label>
-    <input class="w3-input w3-border" type="number" ng-model="availablePoints" placeholder="Total Points (Use scroller on the right to add)">
+    <input class="w3-input w3-border" type="number" ng-model="availablePoints" placeholder="Total Points (Use scroller on the right to add)" >
  <br>   
     <label>Golden Predict:</label>
     <!-- <input class="w3-input w3-border" type="text" ng-model="goldenPredict"  placeholder="Select a team who may win the finals">  -->
@@ -240,12 +244,12 @@ color: #9c27b0 !important;
 	$scope.updateUsers = function() {
 		var url;
 		if($scope.edit){
-			url = "user/add";
+			url = "/user/add";
 			$scope.displayUpdatedMessage=false;
 			$scope.displayAddMessage = true;
 		}
 		 else{
-			url = "user/update";
+			url = "/user/update";
 			$scope.displayAddMessage = false;
 			$scope.displayUpdatedMessage=true;
 		}
@@ -257,10 +261,10 @@ color: #9c27b0 !important;
 			loginStatus : $scope.loginStatus,
 			availablePoints : $scope.availablePoints,
 			loginPass : $scope.loginPass2,
-			goldenPredict : $scope.selectedTeamName,
-		}	;		
+			goldenPredict : $scope.selectedTeamName
+		};		
 		
-		var res = $http.put('/user/add',dataObj);
+		var res = $http.post(url,dataObj);
 				  
 		res.success(function(data,status,headers,config){
 		if($scope.displayAddMessage){
@@ -270,7 +274,6 @@ color: #9c27b0 !important;
 		}			
 		});
 		res.error(function(data,status,headers,config){
-			alert("err::"+err);
 			if($scope.displayAddMessage){
 				$scope.addMessageResult = "Some issue in adding the user "+$scope.loginName+" ";
 			}if($scope.displayUpdatedMessage){

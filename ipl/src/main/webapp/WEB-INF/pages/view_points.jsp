@@ -82,6 +82,10 @@ font-size: 13px !important;
 color:#9c27b0;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 .w3-ripple{
 color: deepskyblue !important	;
 }
@@ -131,7 +135,7 @@ color: rgba(222, 30, 255, 0.78) !important;
 
 	<div ng-app="myApp" ng-controller="myCtrl" class="w3-container">
 
-		<h3>Predict and Win - View Points</h3>
+		<h2>Predict and Win - View Points</h2>
 		
 		<div><b>{{dataAfterView[0].matchId.matchDetails}} - {{dataAfterView[0].matchId.matchDate | jsDate | date}} ({{dataAfterView[0].matchId.matchTime | jsTime}})</b>
 		</div>
@@ -140,7 +144,7 @@ color: rgba(222, 30, 255, 0.78) !important;
 		<h4 ng-show="displayAddMessage" class="displaySuccessMessageClass">No one has predicted for this match yet.</h4>
 
 <br>
-<p>Predictions - Winning Team</p>
+<h4>Predictions - Winning Team</h4>
 
 <table class="w3-table w3-bordered w3-striped">
 <th>Contributor</th>
@@ -160,7 +164,7 @@ color: rgba(222, 30, 255, 0.78) !important;
 </table>
 
 <br>
-<p>Predictions - Toss Winning Team</p>
+<h4>Predictions - Toss Winning Team</h4>
 
 <table class="w3-table w3-bordered w3-striped" >
 <th>Contributor</th>

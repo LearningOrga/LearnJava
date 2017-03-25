@@ -35,6 +35,10 @@ font-weight: bold !important;
 color: rgba(222, 30, 255, 0.78) !important;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -56,14 +60,14 @@ color: rgba(222, 30, 255, 0.78) !important;
 
 	<div ng-app="myApp" ng-controller="myCtrl" class="w3-container">
 	
-		<h3>Predict and Win - Match Results</h3>
+		<h2>Predict and Win - Match Results</h2>
 		<div><b>{{dataAfterResults[0].matchId.matchDetails}} - {{dataAfterResults[0].matchId.matchDate | jsDate | date}} ({{dataAfterResults[0].matchId.matchTime | jsTime}})</b>
 		</div>
 		<br>
 		
 		<h4 ng-show="displayAddMessage" class="displaySuccessMessageClass">Match result not yet updated</h4>
 
-<p>Results - Winning Team</p>
+<h3>Results - Winning Team</h3>
 
 <table class="w3-table w3-bordered w3-striped">
 <th ng-click="changeSorting('dataAfterResults.userId.loginName')" id="contributorHeader">Contributor
@@ -89,7 +93,7 @@ color: rgba(222, 30, 255, 0.78) !important;
     	</tr>
 </table>
 
-<p>Results - Toss Winning Team</p>
+<h3>Results - Toss Winning Team</h3>
 
 <table class="w3-table w3-bordered w3-striped">
 <th ng-click="changeSorting('dataAfterResults.userId.loginName')" id="contributorHeader">Contributor

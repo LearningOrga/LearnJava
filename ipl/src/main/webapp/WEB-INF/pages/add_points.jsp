@@ -90,6 +90,10 @@ font-size:13px !important
 color:#9c27b0;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 .w3-ripple{
 color: deepskyblue !important	;
 }

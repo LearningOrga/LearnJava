@@ -15,6 +15,10 @@ border: 2px solid rgba(30, 167, 233, 0.22) !important;
 font-size:11px !important;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 .w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
 color:#9c27b0;
 }
@@ -59,7 +63,7 @@ color: #e91e63 !important;
 
 	<div ng-app="myApp" ng-controller="myCtrl" class="w3-container">
 	
-		<h3>Predict and Win - Match Results Admin</h3>
+		<h2>Predict and Win - Match Results Admin</h2>
 		
 		<br>
 		<button ng-click="enableDisableThisMatch('D')" class="w3-btn w3-ripple">&#10004; Disable this match</button>

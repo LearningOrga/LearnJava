@@ -11,6 +11,10 @@ table, th, td {
 border: 2px solid rgba(30, 167, 233, 0.22) !important;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 .w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
 color:#9c27b0;
 }
@@ -44,7 +48,7 @@ color: deepskyblue !important	;
 
 	<div ng-app="myApp" ng-controller="myCtrl" class="w3-container">
 	
-		<h3>Predict and Win - Winning Rules</h3>
+		<h2>Predict and Win - Winning Rules</h2>
 
 <table class="w3-table w3-bordered w3-striped">
 <th>Sr No</th>

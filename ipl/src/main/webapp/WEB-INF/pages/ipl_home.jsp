@@ -14,6 +14,10 @@ font-size:11px !important;
 color:#9c27b0;
 }
 
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
 .w3-ripple{
 color: deepskyblue !important	;
 }
@@ -52,7 +56,7 @@ background-color: #9CAEB7 !important;
 
 <div ng-app="myIplApp" ng-controller="userController" class="w3-container"> 
 
-		<h3>Predict and Win - Home</h3>
+		<h2>Predict and Win - Home</h2>
 		
 		<a href="<c:url value="/summary" />" class="w3-btn w3-ripple">&#10004;Summary</a>
 		

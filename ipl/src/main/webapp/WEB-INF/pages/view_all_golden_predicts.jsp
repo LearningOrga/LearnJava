@@ -7,12 +7,27 @@
 <style>
 
 table, th, td {
-border: 2px solid bisque !important;
+border: 2px solid rgba(30, 167, 233, 0.22) !important;
 font-size: 11px !important;
 }
 
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th{
+color:#9c27b0;
+}
+
+h1, h2, h3, h4, h5, h6{
+color: mediumpurple !important;
+}
+
+.w3-ripple{
+color: deepskyblue !important	;
+}
+
 th{
-background-color: #C5C500 !important;
+background-color: rgba(30, 167, 233, 0.22) !important;
+}
+td{
+background-color: rgba(205, 236, 250, 0.16) !important;
 }
 
   .ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-draggable.ui-resizable{
@@ -47,7 +62,7 @@ font-weight: bold !important;
 
 	<div ng-app="myApp" ng-controller="myCtrl" class="w3-container">
 	
-		<h3>Predict and Win - View Golden Predicts</h3>		
+		<h2>Predict and Win - View Golden Predicts</h2>		
 		<br>
 
 <a href="<c:url value="/addGoldenPredicts" />" class="w3-btn w3-ripple">&#10004;Click to add / update your Golden Predict </a>
