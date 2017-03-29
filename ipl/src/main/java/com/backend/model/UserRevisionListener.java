@@ -1,8 +1,9 @@
-package com.backend.rev;
+package com.backend.model;
 
 import org.hibernate.envers.RevisionListener;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 
 public class UserRevisionListener implements RevisionListener {
