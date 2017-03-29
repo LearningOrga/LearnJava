@@ -3,6 +3,7 @@ package com.ipl.web.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,8 @@ public class UserController {
 	UserService loginMasterService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
-	public @ResponseBody
+	@Secured ("ROLE_ADMIN")
+	public @ResponseBody	
 	void updateUser(ModelMap model, @RequestBody User user) {
 
 
@@ -33,6 +35,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	void addUser(ModelMap model, @RequestBody User user) {
 		logger.debug("Entry");

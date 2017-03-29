@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -104,6 +105,7 @@ public class MatchController {
 	}
 
 	@RequestMapping(value = "/add/{matchDate}/{matchDay}/{matchTime}/{matchDetails}/{matchVenue}/{matchStatus}", method = RequestMethod.GET)
+	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	void addMatch(ModelMap model, @PathVariable("matchDate") String matchDate,
 			@PathVariable("matchDay") String matchDay,
@@ -122,6 +124,7 @@ public class MatchController {
 	}
 
 	@RequestMapping(value = "/UpdateStatus", method = RequestMethod.GET)
+	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	List<String> updateMatchStatus(ModelMap model,
 			@RequestParam("selMatchId") int matchId,

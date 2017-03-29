@@ -28,7 +28,7 @@
 		<li><a href="<c:url value="/match/all" />">/match/all</a></li>
 		<li><a href="<c:url value="/match/{matchId}" />">/match/{matchId}</a></li>
 		<li><a href="<c:url value="/match/add/{matchDate}/{matchDay}/{matchTime}/{matchDetails}/{matchVenue}/{matchStatus}" />">/match/add/{matchDate}/{matchDay}/{matchTime}/{matchDetails}/{matchVenue}/{matchStatus}</a></li>
-		e.g. localhost:8080/ipl/match/add/22-4-16/Saturday/8.00 PM (2:30pm GMT)/Gujarat Lions vs Kolkata Knight Riders/rajkot
+		e.g. localhost:8080/ipl/match/add/22-4-16/Saturday/8.00 PM (2:30pm GMT)/Gujarat Lions vs Kolkata Knight Riders/rajkot/A
 	</ul>
 	
 	Match Result Controller URLS 	

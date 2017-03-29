@@ -38,6 +38,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.ModelMap;
@@ -178,6 +179,7 @@ public class PlayResultController {
 	}
 
 	@RequestMapping(value = "/reconcileAllUsersPoints", method = RequestMethod.GET)
+	@Secured ("ROLE_ADMIN")
 	@ResponseBody
 	public List<User> reconcilePlayResultByUserId(HttpServletRequest request,
 			HttpServletResponse response,ModelMap model,
@@ -214,6 +216,7 @@ public class PlayResultController {
 	}
 
 	@RequestMapping(value = "/reconcile", method = RequestMethod.GET)
+	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	List<PlayResult> getReconcileData(HttpServletRequest request,
 			HttpServletResponse response,ModelMap model,
