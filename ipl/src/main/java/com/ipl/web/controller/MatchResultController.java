@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.MatchResult;
 import com.backend.service.MatchResultService;
 import com.backend.service.MatchService;
 import com.backend.service.RuleService;
 
-@Controller
+@RestController
 public class MatchResultController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
