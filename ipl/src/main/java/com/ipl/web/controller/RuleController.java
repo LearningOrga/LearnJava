@@ -3,22 +3,23 @@ package com.ipl.web.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.Rule;
 import com.backend.service.RuleService;
 
-@Controller
+@RestController
+@RequestMapping("/rule")
 public class RuleController {
 	@Autowired
 	RuleService ruleService;
 
-	@RequestMapping(value = "/rule/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Rule> getAllRules(ModelMap model) {
 
@@ -27,7 +28,7 @@ public class RuleController {
 		return rules;
 	}
 
-	@RequestMapping(value = "/rule/{ruleId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{ruleId}", method = RequestMethod.GET)
 	public @ResponseBody
 	Rule getRuleById(ModelMap model,
 			@PathVariable("ruleId") int ruleId) {

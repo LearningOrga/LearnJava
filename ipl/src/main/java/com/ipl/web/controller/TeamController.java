@@ -9,18 +9,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.PlayResult;
 import com.backend.model.Team;
 import com.backend.service.TeamService;
 
-@Controller
+@RestController
+@RequestMapping("/team")
 public class TeamController {
 
 	@Autowired
 	TeamService teamService;
 
-	@RequestMapping(value = "/team/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Team> getAllTeams(ModelMap model) {
 
@@ -29,7 +31,7 @@ public class TeamController {
 		return teams;
 	}
 
-	@RequestMapping(value = "/team/{teamId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{teamId}", method = RequestMethod.GET)
 	public @ResponseBody
 	Team getTeamById(ModelMap model, @PathVariable("teamId") int teamId) {
 
@@ -38,7 +40,7 @@ public class TeamController {
 		return team;
 	}
 
-	@RequestMapping(value = "/team/add/{teamName}/{homeVenue}/{captain}", method = RequestMethod.GET)
+	@RequestMapping(value = "/add/{teamName}/{homeVenue}/{captain}", method = RequestMethod.GET)
 	public @ResponseBody
 	void addTeam(ModelMap model, @PathVariable("teamName") String teamName,
 			@PathVariable("homeVenue") String homeVenue,

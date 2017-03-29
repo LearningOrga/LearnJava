@@ -40,13 +40,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.Match;
 import com.backend.model.MatchResult;
@@ -59,7 +59,8 @@ import com.backend.service.PlayResultService;
 import com.backend.service.RuleService;
 import com.backend.service.UserService;
 
-@Controller
+@RestController
+@RequestMapping("/playResult")
 public class PlayResultController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -78,7 +79,7 @@ public class PlayResultController {
 	@Autowired
 	MatchResultService matchResultService;
 
-	@RequestMapping(value = "/playResult/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody
 	List<PlayResult> getAllRecords(ModelMap model) {
 
@@ -87,7 +88,7 @@ public class PlayResultController {
 		return results;
 	}
 
-	@RequestMapping(value = "/playResult/allForSummary", method = RequestMethod.GET)
+	@RequestMapping(value = "/allForSummary", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Summary> getALlRecordsForSummary(ModelMap model) {
 
@@ -137,7 +138,7 @@ public class PlayResultController {
 		return userSumm;
 	}
 
-	@RequestMapping(value = "/playResult/{matchId}/{ruleId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{matchId}/{ruleId}", method = RequestMethod.GET)
 	public @ResponseBody
 	List<PlayResult> getPlayResultByMatchIdAndRuleId(ModelMap model,
 			@PathVariable("matchId") int matchId,
@@ -159,7 +160,7 @@ public class PlayResultController {
 		return results;
 	}
 
-	@RequestMapping(value = "/playResult/byMatchId", method = RequestMethod.GET)
+	@RequestMapping(value = "/byMatchId", method = RequestMethod.GET)
 	public @ResponseBody
 	List<PlayResult> getPlayResultByUserId(ModelMap model,
 			@RequestParam("matchId") int matchId) {
@@ -441,7 +442,7 @@ public class PlayResultController {
 		return playResult;
 	}
 
-	@RequestMapping(value = "/playResult/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public @ResponseBody
 	List<PlayResult> getResultByPara(HttpServletRequest request,
 			ModelMap model, @RequestParam("selRuleId") int ruleId,

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.backend.model.Match;
@@ -23,12 +26,16 @@ import com.backend.service.MatchService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Controller
+@RestController
+@RequestMapping("/match")
 public class MatchController {
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	MatchService matchMasterService;
 
-	@RequestMapping(value = "/match/all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Match> getAllMatches(ModelMap model) {
 
@@ -86,7 +93,7 @@ public class MatchController {
 	 * model1.addObject("obj", obj); return model1; }
 	 */
 
-	@RequestMapping(value = "/match/{matchId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{matchId}", method = RequestMethod.GET)
 	public @ResponseBody
 	Match getMatchById(ModelMap model, @PathVariable("matchId") int matchId) {
 
@@ -103,7 +110,7 @@ public class MatchController {
 
 	}
 
-	@RequestMapping(value = "/match/add/{matchDate}/{matchDay}/{matchTime}/{matchDetails}/{matchVenue}/{matchStatus}", method = RequestMethod.GET)
+	@RequestMapping(value = "/add/{matchDate}/{matchDay}/{matchTime}/{matchDetails}/{matchVenue}/{matchStatus}", method = RequestMethod.GET)
 	public @ResponseBody
 	void addMatch(ModelMap model, @PathVariable("matchDate") String matchDate,
 			@PathVariable("matchDay") String matchDay,
@@ -111,15 +118,17 @@ public class MatchController {
 			@PathVariable("matchDetails") String matchDetails,
 			@PathVariable("matchVenue") String matchVenue,
 			@PathVariable("matchStatus") String matchStatus) {
+		
+		logger.debug("Entry");
 
 		Match match = new Match(matchDate, matchDay, matchTime, matchDetails,
 				matchVenue, matchStatus);
 
 		matchMasterService.saveMatch(match);
-
+		logger.debug("Exit"+match);
 	}
 
-	@RequestMapping(value = "/match/UpdateStatus", method = RequestMethod.GET)
+	@RequestMapping(value = "/UpdateStatus", method = RequestMethod.GET)
 	public @ResponseBody
 	List<String> updateMatchStatus(ModelMap model,
 			@RequestParam("selMatchId") int matchId,
