@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.backend.model.Match;
 import com.backend.service.MatchService;
@@ -39,35 +40,50 @@ public class MatchController {
 	}
 
 	@RequestMapping(value = "/addMatchPoints", method = RequestMethod.GET)
-	public String addMatchPoints(HttpServletRequest request,
+	public ModelAndView addMatchPoints(HttpServletRequest request, ModelMap model,
 			@RequestParam("matchid") int matchId) {
 		request.getSession().setAttribute("matchId", matchId);
 
-		return "add_points";
+		ModelAndView mav = new ModelAndView("add_points");
+		mav.addObject(model);
+		
+		return mav;
+
 	}
 
 	@RequestMapping(value = "/viewMatchPoints", method = RequestMethod.GET)
-	public String viewMatchPoints(HttpServletRequest request,
+	public ModelAndView viewMatchPoints(HttpServletRequest request, ModelMap model,
 			@RequestParam("matchid") int matchId) {
 		request.getSession().setAttribute("matchId", matchId);
 
-		return "view_points";
+		ModelAndView mav = new ModelAndView("view_points");
+		mav.addObject(model);
+		
+		return mav;
 	}
 
 	@RequestMapping(value = "/matchResults", method = RequestMethod.GET)
-	public String matchResult(HttpServletRequest request,
+	public ModelAndView matchResult(HttpServletRequest request, ModelMap model,
 			@RequestParam("matchid") int matchId) {
 		request.getSession().setAttribute("matchId", matchId);
 
-		return "match_result";
+		ModelAndView mav = new ModelAndView("match_result");
+		mav.addObject(model);
+		
+		return mav;
+		
 	}
 
 	@RequestMapping(value = "/matchResultAdmin", method = RequestMethod.GET)
-	public String matchResultAdmin(HttpServletRequest request,
+	public ModelAndView matchResultAdmin(HttpServletRequest request, ModelMap model,
 			@RequestParam("matchid") int matchId) {
 		request.getSession().setAttribute("matchId", matchId);
 
-		return "match_results_admin";
+		ModelAndView mav = new ModelAndView("match_results_admin");
+		mav.addObject(model);
+		
+		return mav;
+		
 	}
 
 	/*
