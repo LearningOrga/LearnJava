@@ -88,6 +88,8 @@ color: #e91e63 !important;
 		<h4  ng-show="displayReconcileMessage" class="displaySuccessMessageClass">{{reconcileMessageResult}}</h4>
 		<h4  ng-show="displayUpdatedPointsMessage" class="displaySuccessMessageClass">{{updatedPointsMessageResult}}</h4>		
 
+<form>
+
 <table class="w3-table w3-bordered w3-striped">
 			<th>Match</th>
 			<th>Match Date</th>
@@ -114,6 +116,10 @@ color: #e91e63 !important;
 			</tr>
 
 		</table>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>		
+
+</form>
+
 <br>
 
 	<section ng-show="ajaxSuccessResponse">	
@@ -234,15 +240,14 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 		
     	
 		var url = "matchResult/add";
-		$http({
-			method: "GET",
-			url : url,
-			params: {
-				selRuleId : $scope.selectedRuleId,
-				selTeamName : $scope.selectedTeamName,
-				selMatchId :$scope.matchId,
-			}					
-		}).success(function(response){
+		var dataObj= {
+				ruleId : $scope.selectedRuleId,
+				ruleResult : $scope.selectedTeamName,
+				matchId : parseInt($scope.matchId)
+			};
+		var res = $http.post(url,dataObj);
+		
+		res.success(function(response){
 			$scope.dataAfterSubmit = response;
 			$scope.ajaxSuccessResponse = true;
 	    	$scope.reconcile = false;
@@ -250,7 +255,9 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.submitMessageResult = "Submitted the results successfully !!!";
 			}		
 
-		}).error(function(err){
+		});
+		
+		res.error(function(err){
 			$scope.ajaxSuccessResponse = false;
 	    	$scope.reconcile = true;
 			if($scope.displaySubmitMessage){
@@ -264,21 +271,22 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 		$scope.displaySubmitMessage = false;
 		$scope.displayReconcileMessage=true;		
     	$scope.selectedRuleId;    	
-		var url = "reconcile";
-		$http({
-			method: "GET",
-			url : url,
-			params: {
-				selRuleId : $scope.selectedRuleId,
-				selMatchId : $scope.matchId,
-			}					
-		}).success(function(response){
+		var url = "playResult/reconcile";
+		
+		var dataObj= {
+				ruleId : $scope.selectedRuleId,
+				matchId : parseInt($scope.matchId)
+			};
+		var res = $http.post(url,dataObj);
+		
+		res.success(function(response){
 			$scope.updateTotalPoints = false;
 			if($scope.displayReconcileMessage){
 				$scope.reconcileMessageResult = "Reconciled the results successfully !!!";
 			}		
 
-		}).error(function(err){
+		});
+		res.error(function(err){
 			$scope.updateTotalPoints = true;
 			if($scope.displayReconcileMessage){
 				$scope.reconcileMessageResult = "Issue while reconciling the results !!!";
@@ -291,19 +299,20 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 		$scope.displayReconcileMessage=false;
 		$scope.displayUpdatedPointsMessage=true;
    	
-		var url = "reconcileAllUsersPoints";
-		$http({
-			method: "GET",
-			url : url,	
-			params: {
-				matchId : $scope.matchId,
-			}				
-		}).success(function(response){
+		var url = "playResult/reconcileAllUsersPoints";
+		
+		var dataObj= {
+				id : parseInt($scope.matchId)
+			};
+		var res = $http.post(url,dataObj);
+		
+		res.success(function(response){
 			if($scope.displayUpdatedPointsMessage){
 				$scope.updatedPointsMessageResult = "Updated the total points successfully !!!";
 			}		
 
-		}).error(function(err){
+		})
+		res.error(function(err){
 			if($scope.displayUpdatedPointsMessage){
 				$scope.updatedPointsMessageResult = "Issue while updating the total points!!!";
 			}
@@ -313,18 +322,18 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.enableDisableThisMatch = function (status) {	
     	$scope.displayMessageStatusChangeMessage=true;
 		var url = "match/UpdateStatus";
-		$http({
-			method: "GET",
-			url : url,
-			params: {
-				selMatchId : $scope.matchId,
-				selMatchStatus: status,
-				
-			}					
-		}).success(function(response){
+		
+		var dataObj= {
+				id : parseInt($scope.matchId),
+				matchStatus : status
+			};
+		var res = $http.post(url,dataObj);
+		
+		res.success(function(response){
 				$scope.statusChangeMessage = "Changed the match status successfully with status - "+response+" ";		
 
-		}).error(function(err){
+		});
+		res.error(function(err){
 				$scope.statusChangeMessage = "Issue while enabling the match !!!";
 
 		});            	

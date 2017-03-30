@@ -43,6 +43,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -178,20 +179,18 @@ public class PlayResultController {
 		return results;
 	}
 
-	@RequestMapping(value = "/reconcileAllUsersPoints", method = RequestMethod.GET)
+	@RequestMapping(value = "/reconcileAllUsersPoints", method = RequestMethod.POST)
 	@Secured ("ROLE_ADMIN")
 	@ResponseBody
 	public List<User> reconcilePlayResultByUserId(HttpServletRequest request,
-			HttpServletResponse response,ModelMap model,
-			@RequestParam("matchId") int matchId) {
+			HttpServletResponse response,ModelMap model, @RequestBody Match matchReq) {
 
 		List<User> users = new ArrayList();
-		
 
 		users = userService.findAllUsers();
 		for (User user : users) {
 			Map params = new HashMap();
-			params.put("matchId", matchId);
+			params.put("matchId", matchReq.getId());
 			params.put("userId", user.getId());
 
 			List<PlayResult> results = playResultService
@@ -206,6 +205,7 @@ public class PlayResultController {
 
 				totalLossOrWin = totalLossOrWin + totalPointsEarned;
 			}
+
 			user.setAvailablePoints(user.getAvailablePoints() + totalLossOrWin);
 			userService.updateUser(user);
 		}
@@ -215,23 +215,22 @@ public class PlayResultController {
 		return users;
 	}
 
-	@RequestMapping(value = "/reconcile", method = RequestMethod.GET)
+	@RequestMapping(value = "/reconcile", method = RequestMethod.POST)
 	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	List<PlayResult> getReconcileData(HttpServletRequest request,
-			HttpServletResponse response,ModelMap model,
-			@RequestParam("selMatchId") int matchId,
-			@RequestParam("selRuleId") int ruleId) {
+			HttpServletResponse response,ModelMap model, @RequestBody MatchResult matchResultReq) {
 
+		
 		// TODO: update match result in play result from match result
 		MatchResult matchresult = matchResultService
-				.findAllRecordsByRuleIdnadMatchId(ruleId, matchId);
+				.findAllRecordsByRuleIdnadMatchId(matchResultReq.getRuleId().getId(), matchResultReq.getMatchId().getId());
 
 		// (matchId);
 		// (" ----- " + ruleId);
 		Map param = new HashMap();
-		param.put("matchId", matchId);
-		param.put("ruleId", ruleId);
+		param.put("matchId", matchResultReq.getMatchId().getId());
+		param.put("ruleId", matchResultReq.getRuleId().getId());
 
 		List<PlayResult> results=new ArrayList();
 		
@@ -249,8 +248,8 @@ public class PlayResultController {
 
 		}
 
-		playResultService.updateByResult(calculateTotalPoints(results, matchId,
-				ruleId));
+		playResultService.updateByResult(calculateTotalPoints(results, matchResultReq.getMatchId().getId(),
+				matchResultReq.getRuleId().getId()));
 		
 		return results;
 	}
@@ -422,7 +421,6 @@ public class PlayResultController {
 				 */
 
 				result.setTotalPointsEarned(result2);
-
 			} else {
 				// double temp = result.getPointsInvested() /
 				// Double.parseDouble(pointsInvested.get(result.getRuleValue()).toString());

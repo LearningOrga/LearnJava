@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -88,22 +89,20 @@ public class MatchController {
 		logger.debug("Exit"+match);
 	}
 
-	@RequestMapping(value = "/UpdateStatus", method = RequestMethod.GET)
+	@RequestMapping(value = "/UpdateStatus", method = RequestMethod.POST)
 	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
-	List<String> updateMatchStatus(ModelMap model,
-			@RequestParam("selMatchId") int matchId,
-			@RequestParam("selMatchStatus") String matchStatus) {
+	List<String> updateMatchStatus(ModelMap model, @RequestBody Match matchReq) {
 
 		// ("Diabling/Enabling this....");
 
-		Match match = matchMasterService.findMatchById(matchId);
-		match.setMatchStatus(matchStatus);
+		Match match = matchMasterService.findMatchById(matchReq.getId());
+		match.setMatchStatus(matchReq.getMatchStatus());
 
 		matchMasterService.updateMatch(match);
 
 		// ("Diabling/Enabling this...."+match);
-		Match updatedMatch = matchMasterService.findMatchById(matchId);
+		Match updatedMatch = matchMasterService.findMatchById(matchReq.getId());
 		// ("STATUS FROM UPDATED TABLE...."+updatedMatch.getMatchStatus());
 		List retVal = new ArrayList();
 		retVal.add(updatedMatch.getMatchStatus());

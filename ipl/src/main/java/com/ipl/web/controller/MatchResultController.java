@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,37 +55,34 @@ public class MatchResultController {
 		return results;
 	}
 
-	@RequestMapping(value = "/matchResult/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/matchResult/add", method = RequestMethod.POST)
 	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	List<MatchResult> addMatchResult(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model,
-			@RequestParam("selMatchId") int matchId,
-			@RequestParam("selRuleId") int ruleId,
-			@RequestParam("selTeamName") String ruleResult) {
+			HttpServletResponse response, ModelMap model, @RequestBody MatchResult matchResultReq) {
 		 logger.info("Updating Playresult......");
 		
 		MatchResult matchResult;
 		List<MatchResult> retVal = new ArrayList();
 		
 			matchResult = matchResultService.findAllRecordsByRuleIdnadMatchId(
-					ruleId, matchId);
+					matchResultReq.getRuleId().getId(), matchResultReq.getMatchId().getId());
 			if (matchResult != null) {
 
 				// matchResult.setMatchId(matchService.findMatchById(matchId));
 				// matchResult.setRuleId(ruleService.findRuleById(ruleId));
-				matchResult.setRuleResult(ruleResult);
+				matchResult.setRuleResult(matchResultReq.getRuleResult());
 				matchResultService.updateMatchResult(matchResult);
 			} else {
 
 				matchResult = new MatchResult();
-				matchResult.setMatchId(matchService.findMatchById(matchId));
-				matchResult.setRuleId(ruleService.findRuleById(ruleId));
-				matchResult.setRuleResult(ruleResult);
+				matchResult.setMatchId(matchService.findMatchById(matchResultReq.getMatchId().getId()));
+				matchResult.setRuleId(ruleService.findRuleById(matchResultReq.getRuleId().getId()));
+				matchResult.setRuleResult(matchResultReq.getRuleResult());
 
 				matchResultService.saveMatchResult(matchResult);
 			}
-			retVal = matchResultService.findAllRecordsByMatchId(matchId);
+			retVal = matchResultService.findAllRecordsByMatchId(matchResultReq.getMatchId().getId());
 			 logger.info("Updating Playresult......done");
 		return retVal;
 

@@ -57,6 +57,11 @@ public class Match implements Serializable {
 
 public Match(){}
 
+public Match(int id) {
+	super();
+	this.id = id;
+}
+
 	public Match(String matchDate, String matchDay, String matchTime,
 			String matchDetails, String matchVenue,String matchStatus) {
 		super();

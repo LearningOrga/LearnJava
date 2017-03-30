@@ -37,7 +37,12 @@ public class Rule implements Serializable {
 	private String ruleBasedOn;
 	
 
-
+	public Rule(){}
+	
+	public Rule(int id) {
+		super();
+		this.id = id;
+	}
 
 	public int getId() {
 		return id;
