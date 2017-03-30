@@ -15,7 +15,6 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name="player_master")
-@Audited
 public class Player implements Serializable{	
 	/**
 	 * 

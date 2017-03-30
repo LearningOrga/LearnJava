@@ -17,8 +17,6 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 
 @Entity
 @Table(name="match_master")
-@Audited
-
 public class Match implements Serializable {
 	
 	

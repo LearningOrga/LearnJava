@@ -11,7 +11,6 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name="rule_master")
-@Audited
 public class Rule implements Serializable {	
 	/**
 	 * 
