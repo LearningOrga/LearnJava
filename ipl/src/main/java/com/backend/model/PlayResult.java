@@ -15,11 +15,11 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 @Entity
 @Table(name="play_result")
 @Audited
-
 public class PlayResult implements Serializable {
 	
 	/**
@@ -34,10 +34,12 @@ public class PlayResult implements Serializable {
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="LOGIN_ID", nullable = false)
+	 @NotAudited
 	private User userId;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="RULE_ID", nullable = false)
+	 @NotAudited
 	private Rule ruleId;
 	
 	@Column(name = "RULE_VALUE", nullable = false)
@@ -48,6 +50,7 @@ public class PlayResult implements Serializable {
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="MATCH_ID", nullable = false)
+	 @NotAudited
 	private Match matchId;
 	
 	

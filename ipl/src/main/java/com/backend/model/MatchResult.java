@@ -13,10 +13,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 @Entity
 @Table(name="match_result")
-@Audited
 public class MatchResult implements Serializable{
 	
 	/**
@@ -29,13 +29,15 @@ public class MatchResult implements Serializable{
 	@Column(name = "MATCH_RESULT_ID", nullable = false)
 	private int id;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)	
 	@JoinColumn(name="MATCH_ID", nullable = false)
+	 @NotAudited
 	private Match matchId;
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="RULE_ID", nullable = false)
+	 @NotAudited
 	private Rule ruleId;
 	
 	@Column(name = "RULE_RESULT", nullable = false)

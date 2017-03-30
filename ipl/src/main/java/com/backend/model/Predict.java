@@ -16,7 +16,6 @@ import org.hibernate.envers.Audited;
 
 @Entity
 @Table(name="predict_master")
-@Audited
 public class Predict implements Serializable {
 
 	/**
