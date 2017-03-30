@@ -96,15 +96,15 @@ background-color: #9CAEB7 !important;
      
       <td>
     	<button class="w3-btn w3-ripple" ng-show ="checkTimer(x.matchDate, x.matchTime)" ng-disabled="checkTimer(x.matchDate, x.matchTime)">&#10004;Add</button>
-    	<a ng-hide="checkTimer(x.matchDate, x.matchTime)" href="<c:url value="/match/addMatchPoints?matchid={{x.id}}" />" class="w3-btn w3-ripple">&#10004;Add</a>
-    	<a href="<c:url value="/match/viewMatchPoints?matchid={{x.id}}" />" class="w3-btn w3-ripple">&#10004;View</a>
+    	<a ng-hide="checkTimer(x.matchDate, x.matchTime)" href="<c:url value="/addMatchPoints?matchid={{x.id}}" />" class="w3-btn w3-ripple">&#10004;Add</a>
+    	<a href="<c:url value="/viewMatchPoints?matchid={{x.id}}" />" class="w3-btn w3-ripple">&#10004;View</a>
     </td>
     
     <td>
-        <a href="<c:url value="/match/matchResults?matchid={{x.id}}" />" class="w3-btn w3-ripple">&#10004;Results</a>
+        <a href="<c:url value="/matchResults?matchid={{x.id}}" />" class="w3-btn w3-ripple">&#10004;Results</a>
     </td>
 	<td ng-hide="userRole">
-		<a href="<c:url value="/match/matchResultAdmin?matchid={{x.id}}"  />" class="w3-btn w3-ripple">&#10004;Admin</a>
+		<a href="<c:url value="/matchResultAdmin?matchid={{x.id}}"  />" class="w3-btn w3-ripple">&#10004;Admin</a>
 	</td>
   </tr>
 </table>
