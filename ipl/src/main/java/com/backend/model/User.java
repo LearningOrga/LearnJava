@@ -64,6 +64,11 @@ public class User implements Serializable{
 
 	public User(){}
 	
+	public User(int id) {
+		super();
+		this.id = id;
+	}
+
 	public User(String loginName, String loginPass, String loginRole,
 			int loginStatus, Double availablePoints,String goldenPredict) {
 		super();

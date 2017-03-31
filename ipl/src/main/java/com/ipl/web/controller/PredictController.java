@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.backend.model.MatchResult;
 import com.backend.model.Predict;
 import com.backend.model.Team;
 import com.backend.model.User;
@@ -59,47 +61,38 @@ public class PredictController {
 		
 	}
 
-	@RequestMapping(value = "/predict/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/predict/add", method = RequestMethod.POST)
 	public @ResponseBody
-	List<Predict> addPredict(ModelMap model,
-			@RequestParam("userId") int userId,
-			@RequestParam("qmatchId1") int qmatchId1,
-			@RequestParam("qmatchId2") int qmatchId2,
-			@RequestParam("qmatchId3") int qmatchId3,
-			@RequestParam("qmatchId4") int qmatchId4,
-			@RequestParam("smatchId1") int smatchId1,
-			@RequestParam("smatchId2") int smatchId2,
-			@RequestParam("fmatchId1") int fmatchId1
-
-	) {
+	List<Predict> addPredict(ModelMap model, @RequestBody Predict predtictReq) {
 		// ("I am here");
 		Predict predict;
 		List<Predict> predicted = new ArrayList<Predict>();
 
-		User user = loginMasterService.findUserById(userId);
-		predict = predictService.findByUserId(userId);
+		
+		User user = loginMasterService.findUserById(predtictReq.getUserId().getId());
+		predict = predictService.findByUserId(predtictReq.getUserId().getId());
 		if (predict == null) {
 
-			Team one = teamService.findTeamById(qmatchId1);
-			Team two = teamService.findTeamById(qmatchId2);
-			Team three = teamService.findTeamById(qmatchId3);
-			Team four = teamService.findTeamById(qmatchId4);
-			Team sem1 = teamService.findTeamById(smatchId1);
-			Team sem2 = teamService.findTeamById(smatchId2);
-			Team finalt = teamService.findTeamById(fmatchId1);
+			Team one = teamService.findTeamById(predtictReq.getQfteam1().getId());
+			Team two = teamService.findTeamById(predtictReq.getQfteam2().getId());
+			Team three = teamService.findTeamById(predtictReq.getQfteam3().getId());
+			Team four = teamService.findTeamById(predtictReq.getQfteam4().getId());
+			Team sem1 = teamService.findTeamById(predtictReq.getSfteam1().getId());
+			Team sem2 = teamService.findTeamById(predtictReq.getSfteam2().getId());
+			Team finalt = teamService.findTeamById(predtictReq.getFinalWinningTeam().getId());
 
 			predict = new Predict(user, one, two, three, four, sem1, sem2,
 					finalt);
 			predictService.savePredict(predict);
 		} else {// update
 
-			Team one = teamService.findTeamById(qmatchId1);
-			Team two = teamService.findTeamById(qmatchId2);
-			Team three = teamService.findTeamById(qmatchId3);
-			Team four = teamService.findTeamById(qmatchId4);
-			Team sem1 = teamService.findTeamById(smatchId1);
-			Team sem2 = teamService.findTeamById(smatchId2);
-			Team finalt = teamService.findTeamById(fmatchId1);
+			Team one = teamService.findTeamById(predtictReq.getQfteam1().getId());
+			Team two = teamService.findTeamById(predtictReq.getQfteam2().getId());
+			Team three = teamService.findTeamById(predtictReq.getQfteam3().getId());
+			Team four = teamService.findTeamById(predtictReq.getQfteam4().getId());
+			Team sem1 = teamService.findTeamById(predtictReq.getSfteam1().getId());
+			Team sem2 = teamService.findTeamById(predtictReq.getSfteam2().getId());
+			Team finalt = teamService.findTeamById(predtictReq.getFinalWinningTeam().getId());
 
 			predict.setQfteam1(one);
 			predict.setQfteam2(two);

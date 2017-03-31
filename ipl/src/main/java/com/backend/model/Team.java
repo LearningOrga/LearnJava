@@ -34,7 +34,12 @@ public class Team implements Serializable{
 	
 	
 	
-
+	public Team(){}
+	
+	public Team(int id) {
+		super();
+		this.id = id;
+	}
 
 	
 	

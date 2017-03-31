@@ -83,6 +83,7 @@ color:#ea821c !important;
 
 <p class="backColor">Predict all the four quarter finalists in order from below </p>
 
+<form>
 		<table class="w3-table w3-bordered w3-striped">
 			<th>Quarter Finalist 1</th>
 			<th>Quarter Finalist 2</th>
@@ -107,7 +108,9 @@ color:#ea821c !important;
 			</select></td>	
 </tr>
 		</table>
-
+		
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>		
+</form>
 <br>
 
 <p class="backColor"> Predict both the semi quarter finalists from above selected Quarter finalists only</p>
@@ -323,20 +326,20 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
 
             $scope.addGoldenPredicitons = function () {
 				var url = "predict/add";
-				$http({
-					method: "GET",
-					url : url,
-					params: {
-						userId : $scope.userId,
-						qmatchId1 : $scope.selectedTeam1Id,
-						qmatchId2 : $scope.selectedTeam2Id,
-						qmatchId3 : $scope.selectedTeam3Id,
-						qmatchId4 : $scope.selectedTeam4Id,
-						smatchId1: $scope.selectedTeam5Id,
-						smatchId2: $scope.selectedTeam6Id,
-						fmatchId1: $scope.selectedTeam7Id,
-					}					
-				}).success(function(response){
+				
+				var dataObj= {
+						userId : parseInt($scope.userId),
+						qfteam1 : $scope.selectedTeam1Id,
+						qfteam2 : $scope.selectedTeam2Id,
+						qfteam3 : $scope.selectedTeam3Id,
+						qfteam4 : $scope.selectedTeam4Id,
+						sfteam1 : $scope.selectedTeam5Id,
+						sfteam2 : $scope.selectedTeam6Id,
+						finalWinningTeam : $scope.selectedTeam7Id
+					};
+				var res = $http.post(url,dataObj);
+				
+				res.success(function(response){
 					if(response){
 						$scope.ajaxSuccessResponse = true;
 						$scope.displayAddMessage = true;
@@ -350,7 +353,8 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
 						$scope.displayAddMessage = false;
 						$scope.displayErrMessage = true;					
 					}
-				}).error(function(err){
+				});
+				res.error(function(err){
 					console.log(err);					
 					$scope.ajaxSuccessResponse = false;
 					$scope.displayAddMessage = false;
