@@ -443,21 +443,17 @@ public class PlayResultController {
 		return playResult;
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody
 	List<PlayResult> getResultByPara(HttpServletRequest request,
-			ModelMap model, @RequestParam("selRuleId") int ruleId,
-			@RequestParam("selTeamName") String selTeamName,
-			@RequestParam("selMatchId") int matchId,
-			@RequestParam("selPointsInv") String pointsInvested,
-			@RequestParam("selMatchTime") String selMatchTime) {
+			ModelMap model, @RequestBody PlayResult playResultReq) {
 
 		List updatedPlayResult = null;
-		Match match = matchService.findMatchById(matchId);
+		Match match = matchService.findMatchById(playResultReq.getMatchId().getId());
 		// ("matchStatus-"+match.getMatchStatus());
 		if (match.getMatchStatus().equals("A")) {
 			// For timehandling
-			DateFormat formatter = null;
+			/*DateFormat formatter = null;
 			formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 			String matDateTime = "";
@@ -465,22 +461,21 @@ public class PlayResultController {
 				Date convertedDate = (Date) formatter.parse(selMatchTime);
 				matDateTime = formatter.format(convertedDate);
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 
 			// Date matchDate = new Date(formatter.parse(selMatchTime));
 
 			// if (checkTiming(matDateTime)){
 
 			Map param = new HashMap();
-			param.put("matchId", matchId);
-			param.put("ruleId", ruleId);
+			param.put("matchId", playResultReq.getMatchId().getId());
+			param.put("ruleId", playResultReq.getRuleId().getId());
 			param.put("userId", userService.findUserByName(getPrincipal())
 					.getId());
 
 			Map customParam = new HashMap();
-			customParam.put("matchId", matchId);
+			customParam.put("matchId", playResultReq.getMatchId().getId());
 			customParam.put("userId", userService
 					.findUserByName(getPrincipal()).getId());
 
@@ -497,11 +492,11 @@ public class PlayResultController {
 				playResult = new PlayResult();
 				playResult
 						.setUserId(userService.findUserByName(getPrincipal()));
-				playResult.setRuleId(ruleService.findRuleById(ruleId));
-				playResult.setRuleValue(selTeamName);
-				playResult.setMatchId(matchService.findMatchById(matchId));
+				playResult.setRuleId(ruleService.findRuleById(playResultReq.getRuleId().getId()));
+				playResult.setRuleValue(playResultReq.getRuleValue());
+				playResult.setMatchId(matchService.findMatchById(playResultReq.getMatchId().getId()));
 				playResult
-						.setPointsInvested(Double.parseDouble(pointsInvested));
+						.setPointsInvested(Double.parseDouble(playResultReq.getPointsInvested().toString()));
 
 				playResultService.savePlayResult(playResult);
 
@@ -509,18 +504,18 @@ public class PlayResultController {
 				playResult = (PlayResult) playResultList.get(0);
 				playResult
 						.setUserId(userService.findUserByName(getPrincipal()));
-				playResult.setRuleId(ruleService.findRuleById(ruleId));
-				playResult.setRuleValue(selTeamName);
-				playResult.setMatchId(matchService.findMatchById(matchId));
+				playResult.setRuleId(ruleService.findRuleById(playResultReq.getRuleId().getId()));
+				playResult.setRuleValue(playResultReq.getRuleValue());
+				playResult.setMatchId(matchService.findMatchById(playResultReq.getMatchId().getId()));
 				playResult
-						.setPointsInvested(Double.parseDouble(pointsInvested));
+						.setPointsInvested(Double.parseDouble(playResultReq.getPointsInvested().toString()));
 
 				playResultService.updateResult(playResult);
 			}
 
 			// return updated;
 
-			getPlayResultByMatchIdAndRuleId(null, matchId, ruleId);
+			getPlayResultByMatchIdAndRuleId(null, playResultReq.getMatchId().getId(), playResultReq.getRuleId().getId());
 
 			updatedPlayResult = playResultService
 					.findAllRecordsByParams(customParam);

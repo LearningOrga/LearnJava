@@ -147,6 +147,7 @@ color: #e91e63 !important;
 
 <br></br>
 
+<form>
 		<table class="w3-table w3-bordered w3-striped">
 			<th>Match</th>
 			<th>Match Date</th>
@@ -205,6 +206,8 @@ color: #e91e63 !important;
 
 		</table>
 		
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>		
+</form>		
 		<br>			
 
 		<h4 ng-show="displayAddMessage" class="displaySuccessMessageClass">Your selection updated successfully !!!</h4>
@@ -429,17 +432,14 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
             	$scope.selectedPointsInv;
             	
 				var url = "playResult/add";
-				$http({
-					method: "GET",
-					url : url,
-					params: {
-						selRuleId : $scope.selectedRuleId,
-						selTeamName : $scope.selectedTeamName,
-						selPointsInv : $scope.selectedPointsInv,
-						selMatchId : $scope.matchId,
-						selMatchTime: $scope.storedTime,
-					}					
-				}).success(function(response){
+				var dataObj= {
+						ruleId : $scope.selectedRuleId,
+						ruleValue : $scope.selectedTeamName,
+						pointsInvested : $scope.selectedPointsInv,
+						matchId : parseInt($scope.matchId)
+					};	
+				var res = $http.post(url,dataObj);
+				res.success(function(response){
 					if(response){
 						$scope.ajaxSuccessResponse = true;
 						$scope.displayAddMessage = true;
@@ -459,7 +459,8 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
 						$scope.displayErrMessage = true;
 						$scope.errMessagetext = "Time is passed !!!"					
 					}
-				}).error(function(err){
+				});
+				res.error(function(err){
 					console.log(err);					
 					$scope.ajaxSuccessResponse = false;
 					$scope.displayAddMessage = false;
