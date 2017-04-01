@@ -105,7 +105,7 @@ public class PlayResultController {
 			int numberofWins;
 			int numberOfLoss;
 			DecimalFormat df = new DecimalFormat("#.##");
-			double winnLossPer = 0;
+			
 
 			List<PlayResult> results = playResultService
 					.findAllRecordsByUserId(userId);
@@ -129,9 +129,15 @@ public class PlayResultController {
 			summ.setTotalNumberWins(numberofWins);
 			int totalPlayed = numberofWins + numberOfLoss;
 			summ.setTotalNumberPredicted(totalPlayed);
-			winnLossPer = (double) numberofWins / totalPlayed;
-			winnLossPer = winnLossPer * 100;
-			summ.setWinLossPer(Double.parseDouble(df.format(winnLossPer)));
+			if(totalPlayed!=0) {
+				double winnLossPer = 0;
+				winnLossPer = (double) numberofWins / totalPlayed;
+				
+				winnLossPer = winnLossPer * 100;
+				summ.setWinLossPer(Double.parseDouble(df.format(winnLossPer)));
+			}
+			
+			
 			userSumm.add(summ);
 
 		}
