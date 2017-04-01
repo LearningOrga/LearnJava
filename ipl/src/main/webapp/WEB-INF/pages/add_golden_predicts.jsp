@@ -45,7 +45,7 @@ font-weight: bold !important;
 color: #e91e63 !important;
 }
 .backColor{
-color:#ea821c !important;
+color:#e91e63 !important;
 }
 </style>
 

@@ -84,13 +84,13 @@ font-weight: bold !important;
 		<tr ng-repeat="x in dataAfterView">
 			<td><b>{{ $index + 1 }}</b></td>	
 			<td><b>{{ x.userId.loginName }}</b></td>		
-    		<td><b>{{x.qfteam1.teamName}}</b></td>
-    		<td><b>{{x.qfteam2.teamName}}</b></td>
-    		<td><b>{{x.qfteam3.teamName}}</b></td>
-    		<td><b>{{x.qfteam4.teamName}}</b></td>
-    		<td><b>{{x.sfteam1.teamName}}</b></td>
-    		<td><b>{{x.sfteam2.teamName}}</b></td>
-    		<td><b>{{x.finalWinningTeam.teamName}}</b></td>
+    		<td>{{x.qfteam1.teamName}}</td>
+    		<td>{{x.qfteam2.teamName}}</td>
+    		<td>{{x.qfteam3.teamName}}</td>
+    		<td>{{x.qfteam4.teamName}}</td>
+    		<td>{{x.sfteam1.teamName}}</td>
+    		<td>{{x.sfteam2.teamName}}</td>
+    		<td>{{x.finalWinningTeam.teamName}}</td>
     	</tr>
 </table>
 <br>

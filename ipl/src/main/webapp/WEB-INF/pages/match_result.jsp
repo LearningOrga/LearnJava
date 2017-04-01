@@ -39,6 +39,13 @@ h1, h2, h3, h4, h5, h6{
 color: mediumpurple !important;
 }
 
+.winClass{
+color: rgba(32, 233, 30, 0.88) !important;
+}
+.lossClass{
+color: #ff0000 !important;
+}
+
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -82,13 +89,13 @@ color: mediumpurple !important;
 
 
 		<tr ng-repeat="x in dataAfterResults | orderBy:sort.active:sort.descending" ng-show="checkRule1(x.ruleId.id)">
-    		<td>{{x.userId.loginName}}</td>
+    		<td ng-class="checkWinLoss(x.result)"><b>{{x.userId.loginName}}</b></td>
     		<td>{{x.ruleId.ruleName}}</td>
     		<td>{{x.ruleValue}}</td>
     		<td>{{x.pointsInvested}}</td>
-    		<td ng-hide="!x.totalPointsEarned">{{x.totalPointsEarned}}</td>
+    		<td ng-hide="!x.totalPointsEarned" ng-class="checkWinLoss(x.result)"><b>{{x.totalPointsEarned}}</b></td>
     		<td ng-show="!x.totalPointsEarned">Match Winner not yet updated</td>
-    		<td ng-hide="!x.result"  ng-init="getWinLoss(x.result)">{{x.result}}</td>
+    		<td ng-hide="!x.result"  ng-init="getWinLoss(x.result)" ng-class="checkWinLoss(x.result)"><b>{{x.result}}</b></td>
     		<td ng-show="!x.result">Rule Result not yet updated</td>    		
     	</tr>
 </table>
@@ -108,13 +115,13 @@ color: mediumpurple !important;
 
 
 		<tr ng-repeat="x in dataAfterResults | orderBy:sort.active:sort.descending" ng-show="checkRule2(x.ruleId.id)">
-    		<td>{{x.userId.loginName}}</td>
+    		<td ng-class="checkWinLoss(x.result)"><b>{{x.userId.loginName}}</b></td>
     		<td>{{x.ruleId.ruleName}}</td>
     		<td>{{x.ruleValue}}</td>
     		<td>{{x.pointsInvested}}</td>
-    		<td ng-hide="!x.totalPointsEarned">{{x.totalPointsEarned}}</td>
+    		<td ng-hide="!x.totalPointsEarned" ng-class="checkWinLoss(x.result)"><b>{{x.totalPointsEarned}}</b></td>
     		<td ng-show="!x.totalPointsEarned">Match Winner not yet updated</td>
-    		<td ng-hide="!x.result"  ng-init="getWinLoss(x.result)">{{x.result}}</td>
+    		<td ng-hide="!x.result"  ng-init="getWinLoss(x.result)" ng-class="checkWinLoss(x.result)"><b>{{x.result}}</b></td>
     		<td ng-show="!x.result">Rule Result not yet updated</td>    		
     	</tr>
 </table>
@@ -167,6 +174,14 @@ app.controller('myCtrl', ['$scope','$http', function($scope, $http) {
         }
     };
     
+    $scope.checkWinLoss = function (result) {
+
+    	if(result =="WIN"){
+    		return 'winClass'
+    	}else if(result =="LOSS"){
+    		return 'lossClass'
+    	}    	
+}    
 	
     $scope.sort = {
             active: '',

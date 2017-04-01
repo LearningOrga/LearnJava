@@ -105,6 +105,9 @@ font-weight: bold !important;
 color: rgba(222, 30, 255, 0.78) !important;
 }
 
+.bgColor{
+color: #f44336 !important;
+}
 
 </style>
 
@@ -155,10 +158,10 @@ color: rgba(222, 30, 255, 0.78) !important;
 
 		<tr ng-repeat="x in dataAfterView"  ng-show="checkRule1(x.ruleId.id)">
 
-    		<td>{{x.userId.loginName}}</td>
+    		<td><b>{{x.userId.loginName}}</b></td>
     		<td>{{x.ruleId.ruleName}}</td>
     		<td>{{x.ruleValue}}</td>
-    		<td ng-hide="!x.pointsInvested">{{x.pointsInvested}}</td>
+    		<td ng-hide="!x.pointsInvested" class="bgColor"><b>{{x.pointsInvested}}</b></td>
     		<td ng-hide="x.pointsInvested">Selections not yet done</td>
     	</tr>
 </table>
@@ -174,10 +177,10 @@ color: rgba(222, 30, 255, 0.78) !important;
 
 
 		<tr ng-repeat="x in dataAfterView" ng-show="checkRule2(x.ruleId.id)">
-    		<td>{{x.userId.loginName}}</td>
+    		<td><b>{{x.userId.loginName}}</b></td>
     		<td>{{x.ruleId.ruleName}}</td>
     		<td>{{x.ruleValue}}</td>
-    		<td ng-hide="!x.pointsInvested">{{x.pointsInvested}}</td>
+    		<td ng-hide="!x.pointsInvested" class="bgColor"><b>{{x.pointsInvested}}</b></td>
     		<td ng-hide="x.pointsInvested">Selections not yet done</td>
     	</tr>
 </table>

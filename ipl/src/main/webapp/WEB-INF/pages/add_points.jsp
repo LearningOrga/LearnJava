@@ -113,6 +113,9 @@ text-align: center !important;
 font-weight: bold !important;
 color: #e91e63 !important;
 }
+.bgColor{
+color: #f44336 !important;
+}
 </style>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -234,7 +237,7 @@ color: #e91e63 !important;
     		<td><b>{{x.ruleId.ruleName}}</b></td>
     		<td><b>{{x.ruleValue}}</b></td>
     		<td><b>{{x.pointsInvested}}</b></td>
-    		<td><b>{{x.indicativePoints}}</b></td>
+    		<td class="bgColor"><b>{{x.indicativePoints}}</b></td>
     	</tr>
 	</table> 
 
