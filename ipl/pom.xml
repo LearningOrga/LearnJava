@@ -12,7 +12,7 @@
 	</parent>
 
 	<properties>
-		<hibernate-envers.version>4.1.7.FINAL</hibernate-envers.version>
+		<hibernate-envers.version>4.3.11.FINAL</hibernate-envers.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -58,7 +58,15 @@
 			<artifactId>spring-cloud-spring-service-connector</artifactId>
 			<scope>compile</scope>
 		</dependency>
-		<!-- end::security[] -->
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-server</artifactId>
+		</dependency>
 
 		<!-- MySQL -->
 		<dependency>
@@ -94,26 +102,21 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-envers</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.hibernate</groupId> -->
-<!-- 			<artifactId>hibernate-entitymanager</artifactId> -->
-<!-- 			<scope>compile</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.hibernate</groupId> -->
-<!-- 			<artifactId>hibernate-validator</artifactId> -->
-<!-- 			<scope>compile</scope> -->
-<!-- 		</dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.data</groupId> -->
-<!-- 			<artifactId>spring-data-jpa</artifactId> -->
-<!-- 			<scope>compile</scope> -->
-<!-- 		</dependency> -->
 	</dependencies>
 
 
-
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Camden.SR5</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
