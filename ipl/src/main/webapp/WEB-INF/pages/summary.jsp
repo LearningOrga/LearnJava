@@ -32,13 +32,39 @@ cursor : pointer !important;
 }
 
 .topPerformer{
-background-color:#00ff00;
+    border: solid #00ff00 !important;
+    border-width: 0 4px 4px 0 !important;
+    display: inline-block !important;
+    padding: 4px !important;
+	transform: rotate(-135deg) !important;
+	margin-left: 25px !important;
+	margin-top: 14px !important;
+}
+.notPredicted{
+
 }
 .averagePerformer{
-background-color: #ffb84d;
+    border: solid #ffb84d !important;
+    border-width: 0 4px 4px 0 !important;
+    display: inline-block !important;
+    padding: 4px !important;
+	transform: rotate(-45deg) !important;
+	margin-left: 23px !important;
+	margin-top: 11px !important;
 }
 .lowPerformer{
-background-color: #ff0000;
+    border: solid #ff0000 !important;
+    border-width: 0 4px 4px 0 !important;
+    display: inline-block !important;
+    padding: 4px !important;
+	transform: rotate(45deg) !important;
+	margin-left: 25px !important;
+	margin-top: 8px !important;
+}
+
+.displayLoadSuccessClass{
+text-align: center !important;
+color: rgba(0, 100, 255, 0.56) !important;
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -67,7 +93,11 @@ background-color: #ff0000;
 	
 		<h3>Predict and Win - Summary</h3>
 
-<table class="w3-table w3-bordered w3-striped">
+<br>
+<h4  ng-show="displayLoadingText" class="displayLoadSuccessClass">{{summaryPageLoadText}}</h4>	
+
+
+<table class="w3-table w3-bordered w3-striped" ng-show="!displayLoadingText">
 <th>Sr No</th>
 <th ng-click="changeSorting('userName')" id="contributorHeader">Contributor
 <i class="glyphicon" ng-class="getIcon('userName')">
@@ -128,18 +158,25 @@ background-color: #ff0000;
 	welcomeHome.controller('myCtrl', ['$scope','$http', function($scope,$http) {
 		
 		$scope.matchInvSummary;
+		$scope.displayLoadingText=true;
+		$scope.summaryPageLoadText = "Summary page loading...";
 	
 	//uncomment
   	var url = "playResult/allForSummary";
 	$http.get(url).success(function(response){
-		$scope.matchInvSummary = response;		
+		$scope.displayLoadingText = false;
+		$scope.matchInvSummary = response;	
+	}).error(function(err){
+		$scope.displayLoadingText = true;
+		$scope.summaryPageLoadText = "Summary page load issue. Contact Admin !!!";
+		console.log(err);
 	}); 
 	
    
     $scope.sort = {
             active: '',
             descending: undefined
-        } 
+        };
     $scope.changeSorting = function(column) {
 
         var sort = $scope.sort;
@@ -167,17 +204,18 @@ background-color: #ff0000;
     };
 
     $scope.funCall = function (column) {
-    	if(column>=70){
-    		return 'topPerformer'
-    	}else if(column>=30 && column<70){
-    		return 'averagePerformer'
-    	}
-    	else{
-    		return 'lowPerformer'
+    	if(column>=65){
+    		return 'topPerformer';
+    	}else if(column>=35 && column<65){
+    		return 'averagePerformer';
+    	}else if(column>0 && column<35){
+    		return 'lowPerformer';
+    	}else{
+    		return 'notPredicted';
     	}
 
 
-}
+};
 	
 }]);
 

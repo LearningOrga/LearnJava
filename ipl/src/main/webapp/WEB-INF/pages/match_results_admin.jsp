@@ -194,9 +194,6 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 			$scope.rulesJson = response;
 		});  
 
-
-	 
-
     $scope.selectedRule = function (mySelectRule) {
     	$scope.ajaxSuccessResponse = false;
     	$scope.displaySubmitMessage = false;
@@ -211,7 +208,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
     	else{
     		$scope.selectedRuleId = "";
     	}            	
-    }
+    };
 
     $scope.selectedTeam = function (mySelectTeam) {
     	$scope.ajaxSuccessResponse = false;
@@ -228,7 +225,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
     		$scope.team = true;
     		$scope.selectedTeamName = "";
     	}            	
-    }
+    };
 
     $scope.submitResults = function () {
     	$scope.reconcile = false;
@@ -255,8 +252,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.submitMessageResult = "Submitted the results successfully !!!";
 			}		
 
-		});
-		
+		});		
 		res.error(function(err){
 			$scope.ajaxSuccessResponse = false;
 	    	$scope.reconcile = true;
@@ -264,7 +260,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.submitMessageResult = "Issue while submitting the results !!!";
 			}		
 		});            	
-    } 
+    };
 
     $scope.reconcileResults = function () {
     	$scope.updateTotalPoints = false;
@@ -292,7 +288,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.reconcileMessageResult = "Issue while reconciling the results !!!";
 			}
 		});            	
-    }
+    };
 
     $scope.updatesTotalPoints = function () {
 		$scope.displaySubmitMessage = false;
@@ -311,13 +307,13 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.updatedPointsMessageResult = "Updated the total points successfully !!!";
 			}		
 
-		})
+		});
 		res.error(function(err){
 			if($scope.displayUpdatedPointsMessage){
 				$scope.updatedPointsMessageResult = "Issue while updating the total points!!!";
 			}
 		});            	
-    }
+    };
     
     $scope.enableDisableThisMatch = function (status) {	
     	$scope.displayMessageStatusChangeMessage=true;
@@ -337,7 +333,7 @@ app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.statusChangeMessage = "Issue while enabling the match !!!";
 
 		});            	
-    }
+    };
     
 }]);
 
