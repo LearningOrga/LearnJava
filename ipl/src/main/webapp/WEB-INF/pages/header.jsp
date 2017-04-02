@@ -7,7 +7,7 @@
 <style>
 .centerAlign{
 text-align: center !important;
-font-family:Comic Sans MS, cursive, sans-serif;
+font-family:Comic Sans MS;
 color: gold;
 font-weight:bold;
 }
