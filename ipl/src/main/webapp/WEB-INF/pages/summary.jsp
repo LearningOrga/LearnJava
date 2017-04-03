@@ -62,10 +62,29 @@ cursor : pointer !important;
 	margin-top: 8px !important;
 }
 
-.displayLoadSuccessClass{
+
+.greenText{
+    color: #00ff00 !important;
+}
+.amberText{
+    color: #ffb84d !important;
+}
+.redText{
+    color: #ff0000 !important;
+}
+
+
+.displayLoadSuccessClass1{
 text-align: center !important;
 color: rgba(0, 100, 255, 0.56) !important;
 }
+
+.displayLoadSuccessClass2{
+text-align: center !important;
+color: #e91e63 !important;
+font-size: 15px !important;
+}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Predict and Win - Summary</title>
@@ -94,8 +113,11 @@ color: rgba(0, 100, 255, 0.56) !important;
 		<h3>Predict and Win - Summary</h3>
 
 <br>
-<h4  ng-show="displayLoadingText" class="displayLoadSuccessClass">{{summaryPageLoadText}}</h4>	
+<h4 ng-show="displayLoadingText" class="displayLoadSuccessClass1">{{summaryPageLoadText}}</h4>
 
+<h4 ng-show="!displayLoadingText" class="displayLoadSuccessClass2">Note: To sort columns based on criteria, please click on the respective headers.</h4>
+
+</br>
 
 <table class="w3-table w3-bordered w3-striped" ng-show="!displayLoadingText">
 <th>Sr No</th>
@@ -136,7 +158,7 @@ color: rgba(0, 100, 255, 0.56) !important;
 
   <tr ng-repeat="x in matchInvSummary | orderBy:sort.active:sort.descending">
     <td>{{ $index + 1 }}</td>
-    <td><b>{{ x.userName }}</b></td>
+    <td ng-class="funCallColor(x.winLossPer)"><b>{{ x.userName }}</b></td>
     <td>{{ x.totalNumberWins }} / {{x.totalNumberPredicted}}</td>
     <td>{{ x.totalPoints }}</td>
     <td>{{ x.totalPointsInvested }}</td>
@@ -213,8 +235,18 @@ color: rgba(0, 100, 255, 0.56) !important;
     	}else{
     		return 'notPredicted';
     	}
+};
 
-
+$scope.funCallColor = function (column) {
+	if(column>=65){
+		return 'greenText';
+	}else if(column>=35 && column<65){
+		return 'amberText';
+	}else if(column>0 && column<35){
+		return 'redText';
+	}else{
+		return 'notPredicted';
+	}
 };
 	
 }]);
