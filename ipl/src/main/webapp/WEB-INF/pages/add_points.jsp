@@ -357,13 +357,13 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
         if(matchDateString){
             var formattedMatchDate = new Date( matchDateString.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         	var now = new Date();
-    	 if(((formattedMatchDate.getDate()==24) && (now.getDate()==24)) 
-    			|| ((formattedMatchDate.getDate()==25) && (now.getDate()==25)) 
-				|| ((formattedMatchDate.getDate()==27) && (now.getDate()==27))
-					|| ((formattedMatchDate.getDate()==29) && (now.getDate()==29)) ){
+    	 if(((formattedMatchDate.getDate()==16) && (now.getDate()==16)) 
+    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==17)) 
+				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==19))
+					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==21)) ){
     		return 1;
     	}
-    	else if((formattedMatchDate.getDay()==3) && (now.getDay()==3)){
+    	else if((formattedMatchDate.getDay()==3)){
     		return 2;
     	}else{
     		return 3;
@@ -376,10 +376,10 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
         if(matchDateString){
             var formattedMatchDate = new Date( matchDateString.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         	var now = new Date();
-    	if(((formattedMatchDate.getDate()==24) && (now.getDate()==24)) 
-    			|| ((formattedMatchDate.getDate()==25) && (now.getDate()==25)) 
-    				|| ((formattedMatchDate.getDate()==27) && (now.getDate()==27))
-    					|| ((formattedMatchDate.getDate()==29) && (now.getDate()==29)) ){
+    	if(((formattedMatchDate.getDate()==16) && (now.getDate()==16)) 
+    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==17)) 
+    				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==19))
+    					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==21)) ){
     		return true;
     	}
     	else{

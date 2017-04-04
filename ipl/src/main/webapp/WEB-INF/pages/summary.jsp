@@ -32,14 +32,59 @@ cursor : pointer !important;
 }
 
 .topPerformer{
-background-color:#00ff00;
+    border: solid #00ff00 !important;
+    border-width: 0 4px 4px 0 !important;
+    display: inline-block !important;
+    padding: 4px !important;
+	transform: rotate(-135deg) !important;
+	margin-left: 25px !important;
+	margin-top: 14px !important;
+}
+.notPredicted{
+
 }
 .averagePerformer{
-background-color: #ffb84d;
+    border: solid #ffb84d !important;
+    border-width: 0 4px 4px 0 !important;
+    display: inline-block !important;
+    padding: 4px !important;
+	transform: rotate(-45deg) !important;
+	margin-left: 23px !important;
+	margin-top: 11px !important;
 }
 .lowPerformer{
-background-color: #ff0000;
+    border: solid #ff0000 !important;
+    border-width: 0 4px 4px 0 !important;
+    display: inline-block !important;
+    padding: 4px !important;
+	transform: rotate(45deg) !important;
+	margin-left: 25px !important;
+	margin-top: 8px !important;
 }
+
+
+.greenText{
+    color: #00ff00 !important;
+}
+.amberText{
+    color: #ffb84d !important;
+}
+.redText{
+    color: #ff0000 !important;
+}
+
+
+.displayLoadSuccessClass1{
+text-align: center !important;
+color: rgba(0, 100, 255, 0.56) !important;
+}
+
+.displayLoadSuccessClass2{
+text-align: center !important;
+color: #e91e63 !important;
+font-size: 15px !important;
+}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Predict and Win - Summary</title>
@@ -67,7 +112,14 @@ background-color: #ff0000;
 	
 		<h3>Predict and Win - Summary</h3>
 
-<table class="w3-table w3-bordered w3-striped">
+<br>
+<h4 ng-show="displayLoadingText" class="displayLoadSuccessClass1">{{summaryPageLoadText}}</h4>
+
+<h4 ng-show="!displayLoadingText" class="displayLoadSuccessClass2">Note: To sort columns based on criteria, please click on the respective headers.</h4>
+
+</br>
+
+<table class="w3-table w3-bordered w3-striped" ng-show="!displayLoadingText">
 <th>Sr No</th>
 <th ng-click="changeSorting('userName')" id="contributorHeader">Contributor
 <i class="glyphicon" ng-class="getIcon('userName')">
@@ -106,7 +158,7 @@ background-color: #ff0000;
 
   <tr ng-repeat="x in matchInvSummary | orderBy:sort.active:sort.descending">
     <td>{{ $index + 1 }}</td>
-    <td><b>{{ x.userName }}</b></td>
+    <td ng-class="funCallColor(x.winLossPer)"><b>{{ x.userName }}</b></td>
     <td>{{ x.totalNumberWins }} / {{x.totalNumberPredicted}}</td>
     <td>{{ x.totalPoints }}</td>
     <td>{{ x.totalPointsInvested }}</td>
@@ -128,18 +180,25 @@ background-color: #ff0000;
 	welcomeHome.controller('myCtrl', ['$scope','$http', function($scope,$http) {
 		
 		$scope.matchInvSummary;
+		$scope.displayLoadingText=true;
+		$scope.summaryPageLoadText = "Summary page loading...";
 	
 	//uncomment
   	var url = "playResult/allForSummary";
 	$http.get(url).success(function(response){
-		$scope.matchInvSummary = response;		
+		$scope.displayLoadingText = false;
+		$scope.matchInvSummary = response;	
+	}).error(function(err){
+		$scope.displayLoadingText = true;
+		$scope.summaryPageLoadText = "Summary page load issue. Contact Admin !!!";
+		console.log(err);
 	}); 
 	
    
     $scope.sort = {
             active: '',
             descending: undefined
-        } 
+        };
     $scope.changeSorting = function(column) {
 
         var sort = $scope.sort;
@@ -167,17 +226,28 @@ background-color: #ff0000;
     };
 
     $scope.funCall = function (column) {
-    	if(column>=70){
-    		return 'topPerformer'
-    	}else if(column>=30 && column<70){
-    		return 'averagePerformer'
+    	if(column>=65){
+    		return 'topPerformer';
+    	}else if(column>=35 && column<65){
+    		return 'averagePerformer';
+    	}else if(column>0 && column<35){
+    		return 'lowPerformer';
+    	}else{
+    		return 'notPredicted';
     	}
-    	else{
-    		return 'lowPerformer'
-    	}
+};
 
-
-}
+$scope.funCallColor = function (column) {
+	if(column>=65){
+		return 'greenText';
+	}else if(column>=35 && column<65){
+		return 'amberText';
+	}else if(column>0 && column<35){
+		return 'redText';
+	}else{
+		return 'notPredicted';
+	}
+};
 	
 }]);
 
