@@ -88,5 +88,11 @@ public class PlayResultServiceImpl implements PlayResultService {
 	public int getTotalRulewWins(int ruleId, int userId) {
 		return dao.getTotalRulewWins(ruleId, userId);
 	}
+
+	@Override
+	public void removePlayByIds(Map params) {
+		dao.removePlayByIds(params);
+		
+	}
 	
 }

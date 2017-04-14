@@ -33,5 +33,7 @@ public interface PlayResultDao {
 	int getTotalLoss(int userId);
 	
 	int getTotalRulewWins(int ruleId, int userId);
+	
+	void removePlayByIds(Map params);
 
 }

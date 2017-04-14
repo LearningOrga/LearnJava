@@ -29,6 +29,9 @@ public class SetUpController {
 			@PathVariable("fileName") String fileName) {
 		logger.info("Processing file-" + fileName);
 
+		
+		//ClassLoader classLoader = getClass().getClassLoader();
+		//File file = new File(classLoader.getResource("user_master.sql").getFile());
 		setUpService.setup(fileName);
 
 		logger.info("DataBase setup Done-" + fileName);

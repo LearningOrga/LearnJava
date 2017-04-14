@@ -50,7 +50,7 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 		if (params.containsKey("userId")) {
 			criteria.add(Restrictions.eq("userId.id", params.get("userId")));
 		}
-		//("critera--------------" + criteria);
+		// ("critera--------------" + criteria);
 		return (List<PlayResult>) criteria.list();
 	}
 
@@ -64,7 +64,7 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 	@Override
 	public void savePlayResult(PlayResult result) {
-		//("Saving result" + result);
+		// ("Saving result" + result);
 		persist(result);
 	}
 
@@ -92,8 +92,8 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 		double retVal = 0;
 		for (PlayResult result : results) {
-			if(result.getPointsInvested()!=null)
-			retVal = retVal + result.getPointsInvested();
+			if (result.getPointsInvested() != null)
+				retVal = retVal + result.getPointsInvested();
 		}
 		return retVal;
 	}
@@ -104,8 +104,8 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 		double retVal = 0;
 		for (PlayResult result : results) {
-			if(result.getTotalPointsEarned()!=null)
-			retVal = retVal + result.getTotalPointsEarned();
+			if (result.getTotalPointsEarned() != null)
+				retVal = retVal + result.getTotalPointsEarned();
 		}
 		return retVal;
 	}
@@ -116,10 +116,10 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 		int retVal = 0;
 		for (PlayResult result : results) {
-			if(result.getResult()!=null){
-			if(result.getResult().equals("WIN"))
-			retVal++;
-		}
+			if (result.getResult() != null) {
+				if (result.getResult().equals("WIN"))
+					retVal++;
+			}
 		}
 		return retVal;
 	}
@@ -130,9 +130,9 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 		int retVal = 0;
 		for (PlayResult result : results) {
-			if(result.getResult()!=null){
-			if(result.getResult().equals("LOSS"))
-			retVal++;
+			if (result.getResult() != null) {
+				if (result.getResult().equals("LOSS"))
+					retVal++;
 			}
 		}
 		return retVal;
@@ -143,14 +143,41 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 		List<PlayResult> results = findAllRecordsByUserId(userId);
 		int retVal = 0;
 		for (PlayResult result : results) {
-			if(result.getRuleId().getId()==ruleId){
-				if(result.getResult()!=null && result.getResult().equals("WIN")){
-					retVal=retVal+1;
+			if (result.getRuleId().getId() == ruleId) {
+				if (result.getResult() != null
+						&& result.getResult().equals("WIN")) {
+					retVal = retVal + 1;
 				}
 			}
-			
+
 		}
 		return retVal;
+	}
+
+	@Override
+	public void removePlayByIds(Map params) {
+
+		Criteria criteria = getSession().createCriteria(PlayResult.class);
+		criteria = createAlias(criteria);
+		if (params.containsKey("ruleId")) {
+			criteria.add(Restrictions.eq("ruleId.id", params.get("ruleId")));
+		}
+		if (params.containsKey("matchId")) {
+			criteria.add(Restrictions.eq("matchId.id", params.get("matchId")));
+		}
+		if (params.containsKey("userId")) {
+			criteria.add(Restrictions.eq("userId.id", params.get("userId")));
+		}
+		// ("critera--------------" + criteria);
+
+		List<PlayResult> list = criteria.list();
+
+		for (int i = 1; i < list.size(); i++) {
+
+			getSession().delete(list.get(i));
+		}
+		// return getSession().delete(list);
+
 	}
 
 }

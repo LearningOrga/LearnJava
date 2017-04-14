@@ -31,4 +31,6 @@ List<PlayResult> findAllRecords();
 	int  getTotalLoss(int userId);
 	
 	int  getTotalRulewWins(int ruleId, int userId);
+	
+	void removePlayByIds(Map params);
 }

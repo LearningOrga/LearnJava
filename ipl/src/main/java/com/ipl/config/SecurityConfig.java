@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -22,8 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
-
-
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth)
 			throws Exception {
@@ -35,8 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authoritiesByUsernameQuery(
 						"select LOGIN_NAME, LOGIN_ROLE from user_master where LOGIN_NAME=?");
 	}
-	
-	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -44,15 +41,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/", "/home").permitAll()
 				.antMatchers("/user/all").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/dba/**")
-				.access("hasRole('ROLE_ADMIN') and hasRole('DBA')").and()
-				.formLogin().defaultSuccessUrl("/ipl_home").and()
+				.antMatchers("/playResult/deleteDuplicate")
+				.access("hasRole('ROLE_ADMIN')").antMatchers("/dba/**")
+				.access("hasRole('ROLE_ADMIN') and hasRole('DBA')");
+
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").permitAll();
+
+		http.formLogin().defaultSuccessUrl("/ipl_home").and()
 				.exceptionHandling().accessDeniedPage("/Access_Denied").and()
 				.formLogin().loginPage("/login").failureUrl("/login?error")
 				.usernameParameter("username").passwordParameter("password")
 				.and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
 				.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
 				.logout().logoutSuccessUrl("/login?logout");
+
+		http.sessionManagement().maximumSessions(1)
+				.expiredUrl("/login?expired").maxSessionsPreventsLogin(true)
+				.and().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+				.invalidSessionUrl("/");
+
+		// TODO http.authorizeRequests().anyRequest().authenticated();
 
 	}
 

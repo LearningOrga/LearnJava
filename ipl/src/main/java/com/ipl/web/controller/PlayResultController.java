@@ -25,10 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.backend.model.Match;
 import com.backend.model.MatchResult;
 import com.backend.model.PlayResult;
+import com.backend.model.Rule;
 import com.backend.model.Summary;
 import com.backend.model.User;
 import com.backend.service.MatchResultService;
@@ -36,6 +38,7 @@ import com.backend.service.MatchService;
 import com.backend.service.PlayResultService;
 import com.backend.service.RuleService;
 import com.backend.service.UserService;
+import com.fe.models.PlaySelection;
 
 @RestController
 @RequestMapping("/playResult")
@@ -56,6 +59,39 @@ public class PlayResultController {
 
 	@Autowired
 	MatchResultService matchResultService;
+
+	// TODO: why we need this??? 2017 why
+
+	@RequestMapping(value = "/deleteDuplicate", method = RequestMethod.GET)
+	public ModelAndView deleteDuplicate(ModelMap model) {
+
+		List<Match> allMatches = matchService.findAllMatches();
+
+		for (Match match : allMatches) {
+
+			List<User> users = userService.findAllUsers();
+			for (User user : users) {
+
+				List<Rule> rules = ruleService.findAllRules();
+
+				for (Rule rule : rules) {
+
+					Map param = new HashMap();
+					param.put("matchId", match.getId());
+					param.put("userId", user.getId());
+					param.put("ruleId", rule.getId());
+
+					playResultService.removePlayByIds(param);
+
+				}
+			}
+
+		}
+
+		ModelAndView mav = new ModelAndView("admin");
+		mav.addObject(model);
+		return mav;
+	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody
@@ -80,7 +116,7 @@ public class PlayResultController {
 			int numberofWins;
 			int numberOfLoss;
 			DecimalFormat df = new DecimalFormat("#.##");
-			
+
 			summary = new Summary();
 
 			summary.setUserId(userId);
@@ -93,26 +129,24 @@ public class PlayResultController {
 
 			summary.setRule1Wins(playResultService.getTotalRulewWins(1, userId));
 			summary.setRule2Wins(playResultService.getTotalRulewWins(2, userId));
-			
+
 			numberofWins = playResultService.getTotalWins(userId);
 			numberOfLoss = playResultService.getTotalLoss(userId);
 
 			summary.setTotalNumberWins(numberofWins);
 			int totalPlayed = numberofWins + numberOfLoss;
 			summary.setTotalNumberPredicted(totalPlayed);
-			if(totalPlayed!=0) {
+			if (totalPlayed != 0) {
 				double winnLossPer = 0;
 				winnLossPer = (double) numberofWins / totalPlayed;
-				
+
 				winnLossPer = winnLossPer * 100;
 				summary.setWinLossPer(Double.parseDouble(df.format(winnLossPer)));
 			}
-			
-			
+
 			userSumm.add(summary);
 
 		}
-		
 
 		return userSumm;
 	}
@@ -141,7 +175,6 @@ public class PlayResultController {
 	List<PlayResult> getPlayResultByUserId(ModelMap model,
 			@RequestParam("matchId") int matchId) {
 
-
 		Map param = new HashMap();
 		param.put("matchId", matchId);
 
@@ -152,10 +185,11 @@ public class PlayResultController {
 	}
 
 	@RequestMapping(value = "/reconcileAllUsersPoints", method = RequestMethod.POST)
-	@Secured ("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	@ResponseBody
 	public List<User> reconcilePlayResultByUserId(HttpServletRequest request,
-			HttpServletResponse response,ModelMap model, @RequestBody Match matchReq) {
+			HttpServletResponse response, ModelMap model,
+			@RequestBody Match matchReq) {
 
 		List<User> users = new ArrayList();
 
@@ -180,33 +214,33 @@ public class PlayResultController {
 			user.setAvailablePoints(user.getAvailablePoints() + totalLossOrWin);
 			userService.updateUser(user);
 		}
-		
+
 		// TODO: this list may not be updated so if you are planning to use get
 		// one
 		return users;
 	}
 
 	@RequestMapping(value = "/reconcile", method = RequestMethod.POST)
-	@Secured ("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	public @ResponseBody
 	List<PlayResult> getReconcileData(HttpServletRequest request,
-			HttpServletResponse response,ModelMap model, @RequestBody MatchResult matchResultReq) {
+			HttpServletResponse response, ModelMap model,
+			@RequestBody MatchResult matchResultReq) {
 
-		
+		// TODO: added in 2017 to remove duplicate rows during reconcile
+
 		// TODO: update match result in play result from match result
 		MatchResult matchresult = matchResultService
-				.findAllRecordsByRuleIdnadMatchId(matchResultReq.getRuleId().getId(), matchResultReq.getMatchId().getId());
+				.findAllRecordsByRuleIdnadMatchId(matchResultReq.getRuleId()
+						.getId(), matchResultReq.getMatchId().getId());
 
 		Map param = new HashMap();
 		param.put("matchId", matchResultReq.getMatchId().getId());
 		param.put("ruleId", matchResultReq.getRuleId().getId());
 
-		List<PlayResult> results=new ArrayList();
-		
-		
+		List<PlayResult> results = new ArrayList();
 
-		results = playResultService
-				.findAllRecordsByParams((param));
+		results = playResultService.findAllRecordsByParams((param));
 
 		for (PlayResult result : results) {
 			result.setRuleResult(matchresult.getRuleResult());
@@ -215,9 +249,10 @@ public class PlayResultController {
 
 		}
 
-		playResultService.updateByResult(calculateTotalPoints(results, matchResultReq.getMatchId().getId(),
-				matchResultReq.getRuleId().getId()));
-		
+		playResultService.updateByResult(calculateTotalPoints(results,
+				matchResultReq.getMatchId().getId(), matchResultReq.getRuleId()
+						.getId()));
+
 		return results;
 	}
 
@@ -329,15 +364,12 @@ public class PlayResultController {
 			Iterator keyListItr = keyList.iterator();
 			String val1, val2;
 
-
 			int indedofVs = result.getMatchId().getMatchDetails().indexOf("vs");
 
 			val1 = result.getMatchId().getMatchDetails()
 					.substring(0, indedofVs).trim();
 			val2 = result.getMatchId().getMatchDetails()
 					.substring(indedofVs + 3).trim();
-
-
 
 			if ((result.getRuleValue().equals(wininTeam))) {
 				double temp, temp1;
@@ -359,11 +391,8 @@ public class PlayResultController {
 
 				double result2 = temp * temp1;
 
-			
-
 				result.setTotalPointsEarned(result2);
 			} else {
-				
 
 				result.setTotalPointsEarned(result.getPointsInvested() * -1);
 			}
@@ -376,24 +405,28 @@ public class PlayResultController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public @ResponseBody
 	List<PlayResult> getResultByPara(HttpServletRequest request,
-			ModelMap model, @RequestBody PlayResult playResultReq) {
+			ModelMap model, @RequestBody PlaySelection playResultReq) {
+
+		int ruleId = playResultReq.getRuleId();
+		String selTeamName = playResultReq.getSelTeamName();
+		int matchId = playResultReq.getMatchId();
+		String pointsInvested = playResultReq.getPointsInvested();
+		String selMatchTime = playResultReq.getSelMatchTime();
 
 		List updatedPlayResult = null;
-		Match match = matchService.findMatchById(playResultReq.getMatchId().getId());
+		Match match = matchService.findMatchById(matchId);
+		User user = userService.findUserByName(getPrincipal());
+		int userId = user.getId();
 		if (match.getMatchStatus().equals("A")) {
-		
 
 			Map param = new HashMap();
-			param.put("matchId", playResultReq.getMatchId().getId());
-			param.put("ruleId", playResultReq.getRuleId().getId());
-			param.put("userId", userService.findUserByName(getPrincipal())
-					.getId());
+			param.put("matchId", matchId);
+			param.put("ruleId", ruleId);
+			param.put("userId", userId);
 
 			Map customParam = new HashMap();
-			customParam.put("matchId", playResultReq.getMatchId().getId());
-			customParam.put("userId", userService
-					.findUserByName(getPrincipal()).getId());
-
+			customParam.put("matchId", matchId);
+			customParam.put("userId", userId);
 
 			List playResultList = playResultService
 					.findAllRecordsByParams(param);
@@ -403,32 +436,30 @@ public class PlayResultController {
 			if (playResultList.size() == 0) {
 
 				playResult = new PlayResult();
-				playResult
-						.setUserId(userService.findUserByName(getPrincipal()));
-				playResult.setRuleId(ruleService.findRuleById(playResultReq.getRuleId().getId()));
+				playResult.setUserId(user);
+				playResult.setRuleId(ruleService.findRuleById(ruleId));
 				playResult.setRuleValue(playResultReq.getRuleValue());
-				playResult.setMatchId(matchService.findMatchById(playResultReq.getMatchId().getId()));
-				playResult
-						.setPointsInvested(Double.parseDouble(playResultReq.getPointsInvested().toString()));
+				playResult.setMatchId(matchService.findMatchById(matchId));
+				playResult.setPointsInvested(Double.parseDouble(playResultReq
+						.getPointsInvested().toString()));
 
 				playResultService.savePlayResult(playResult);
 
 			} else {
 				playResult = (PlayResult) playResultList.get(0);
-				playResult
-						.setUserId(userService.findUserByName(getPrincipal()));
-				playResult.setRuleId(ruleService.findRuleById(playResultReq.getRuleId().getId()));
+				playResult.setUserId(user);
+				playResult.setRuleId(ruleService.findRuleById(ruleId));
 				playResult.setRuleValue(playResultReq.getRuleValue());
-				playResult.setMatchId(matchService.findMatchById(playResultReq.getMatchId().getId()));
-				playResult
-						.setPointsInvested(Double.parseDouble(playResultReq.getPointsInvested().toString()));
+				playResult.setMatchId(matchService.findMatchById(matchId));
+				playResult.setPointsInvested(Double.parseDouble(playResultReq
+						.getPointsInvested().toString()));
 
 				playResultService.updateResult(playResult);
 			}
 
 			// return updated;
 
-			getPlayResultByMatchIdAndRuleId(null, playResultReq.getMatchId().getId(), playResultReq.getRuleId().getId());
+			getPlayResultByMatchIdAndRuleId(null, matchId, ruleId);
 
 			updatedPlayResult = playResultService
 					.findAllRecordsByParams(customParam);
@@ -438,10 +469,6 @@ public class PlayResultController {
 		}
 		return updatedPlayResult;
 	}
-
-	
-
-
 
 	private String getPrincipal() {
 		String userName = null;
@@ -456,5 +483,4 @@ public class PlayResultController {
 		return userName;
 	}
 
-	
 }
