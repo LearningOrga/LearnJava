@@ -180,4 +180,6 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 	}
 
+	
+
 }

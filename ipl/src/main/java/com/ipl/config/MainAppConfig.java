@@ -6,12 +6,14 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 
 @Configuration
+@EnableGlobalMethodSecurity(securedEnabled = true)
 @Import({ServiceConfig.class, SecurityConfig.class, HibernateConfiguration.class, WebServiceConfig.class})
 public class MainAppConfig {
 

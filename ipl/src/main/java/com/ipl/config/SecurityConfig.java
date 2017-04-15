@@ -56,10 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
 				.logout().logoutSuccessUrl("/login?logout");
 
-		http.sessionManagement().maximumSessions(1)
+		/*http.sessionManagement().maximumSessions(1)
 				.expiredUrl("/login?expired").maxSessionsPreventsLogin(true)
-				.and().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-				.invalidSessionUrl("/");
+				.and().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+				.invalidSessionUrl("/"); */
 
 		// TODO http.authorizeRequests().anyRequest().authenticated();
 

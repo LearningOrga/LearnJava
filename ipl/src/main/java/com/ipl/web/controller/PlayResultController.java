@@ -93,6 +93,22 @@ public class PlayResultController {
 		return mav;
 	}
 
+	// TODO:use delete
+	@RequestMapping(value = "/deleteAllbyMatchId/{matchId}", method = RequestMethod.GET)
+	@Secured("ROLE_ADMIN")
+	public ModelAndView deleteallByMatchid(ModelMap model,
+			@PathVariable("matchId") int matchId) {
+
+		Map param = new HashMap();
+		param.put("matchId", matchId);
+
+		playResultService.removePlayByIds(param);
+
+		ModelAndView mav = new ModelAndView("admin");
+		mav.addObject(model);
+		return mav;
+	}
+
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public @ResponseBody
 	List<PlayResult> getAllRecords(ModelMap model) {
