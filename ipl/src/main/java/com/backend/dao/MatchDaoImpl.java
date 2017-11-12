@@ -4,12 +4,19 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import com.backend.model.Match;
 
 @Repository("matchMasterDao")
+
 public class MatchDaoImpl extends AbstractDao implements MatchDao{
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
 	@Override
 	public void saveMatch(Match match) {
@@ -19,7 +26,9 @@ public class MatchDaoImpl extends AbstractDao implements MatchDao{
 
 	@Override
 	@SuppressWarnings("unchecked")
+
 	public List<Match> findAllMatches() {
+		logger.info("Calling db...");
 		Criteria criteria = getSession().createCriteria(Match.class);
 		return (List<Match>) criteria.list();
 	}

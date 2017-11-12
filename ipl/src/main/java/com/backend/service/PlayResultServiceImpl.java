@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +15,7 @@ import com.backend.model.PlayResult;
 
 @Service("playResultService")
 @Transactional
+@CacheConfig(cacheNames = "playResult")
 public class PlayResultServiceImpl implements PlayResultService {
 	
 	@Autowired
@@ -20,11 +23,13 @@ public class PlayResultServiceImpl implements PlayResultService {
 	
 
 	@Override
+	@Cacheable(value="playResult" , key="'playResult'")
 	public List<PlayResult> findAllRecords() {
 		return dao.findAllRecords();
 	}
 
 	@Override
+	@Cacheable(value="playResult" , key="#userId")
 	public List<PlayResult> findAllRecordsByUserId(int userId) {
 		return dao.findAllRecordsByUserId(userId);
 	}
