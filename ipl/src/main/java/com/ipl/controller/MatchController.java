@@ -32,8 +32,7 @@ public class MatchController {
 	List<Match> getAllMatches(ModelMap model) {
 
 		List<Match> matches = matchMasterService.findAllMatches();
-
-		return matches;
+				return matches;
 	}
 	/*
 	 * @RequestMapping(value = "/match/all", method = RequestMethod.GET) public
@@ -63,16 +62,15 @@ public class MatchController {
 
 	@RequestMapping(value = "/deletematch/{matchId}", method = RequestMethod.GET)
 	public @ResponseBody
-	void DeleteMatchById(ModelMap model, @PathVariable("matchId") int matchId) {
-
+	String deleteMatchById(ModelMap model, @PathVariable("matchId") int matchId) {
 		matchMasterService.removeMatchById(matchId);
-
+		return "Success";
 	}
 
 	@RequestMapping(value = "/add/{matchDate}/{matchDay}/{matchTime}/{matchDetails}/{matchVenue}/{matchStatus}", method = RequestMethod.GET)
 	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
-	void addMatch(ModelMap model, @PathVariable("matchDate") String matchDate,
+	String addMatch(ModelMap model, @PathVariable("matchDate") String matchDate,
 			@PathVariable("matchDay") String matchDay,
 			@PathVariable("matchTime") String matchTime,
 			@PathVariable("matchDetails") String matchDetails,
@@ -86,6 +84,7 @@ public class MatchController {
 
 		matchMasterService.saveMatch(match);
 		logger.debug("Exit"+match);
+		return "Success";
 	}
 
 	@RequestMapping(value = "/UpdateStatus", method = RequestMethod.POST)

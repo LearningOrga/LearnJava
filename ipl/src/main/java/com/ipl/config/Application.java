@@ -17,7 +17,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
  
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com")
-@EntityScan(basePackages = "com")
+@EntityScan(basePackages = "com.ipl")
 @EnableConfigServer
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableCaching(proxyTargetClass = true)
