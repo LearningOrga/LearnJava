@@ -17,13 +17,13 @@ during team event
 
 #TODOS
 1. How to install
-mvn clean install
+ -mvn clean install
 2. How to run
- a) setup database and run scripts to create tables and data
- b) set JDBC_CONNECTION_STRING as environment variable (e.g. export JDBC_CONNECTION_STRING or set in windows)
- b) run mvn spring-boot:run -Dspring.profile.active=local etc
+ - setup database and run scripts to create tables and data
+ - set JDBC_CONNECTION_STRING as environment variable (e.g. export JDBC_CONNECTION_STRING or set in windows)
+ - run mvn spring-boot:run -Dspring.profile.active=local etc
 3. How to change code and raise requests
  - Work on seprate branch
  - raise pull reqest once code review is completed
 4. How to raise issues
- a) discuss with team and raise required issues 
+ - discuss with team and raise required issues 
