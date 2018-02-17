@@ -99,7 +99,7 @@ public class MatchServiceImplTest {
         match2.setMatchDetails("Sunrisers Hyderabad vs Royal Challengers Bangalore");
         match2.setMatchStatus("A");
         match2.setMatchTime("20:00 PM (2:30pm GMT)");
-        match2.setMatchVenue("Hyderabad");;
+        match2.setMatchVenue("Hyderabad");
 
         matches.add(match1);
         matches.add(match1);
