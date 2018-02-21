@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <rule_master RULE_ID="1" RULE_NAME="Winning Team" RULE_DESC="Which team is winning"  RULE_STATUS="A" RULE_BASED_ON="Team" />
+    <rule_master RULE_ID="2" RULE_NAME="Toss Winning Team" RULE_DESC="Which team is winning toss"  RULE_STATUS="A" RULE_BASED_ON="Team" />
+</dataset>

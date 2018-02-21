@@ -6,7 +6,7 @@ import java.util.List;
  
 import org.springframework.web.client.RestTemplate;
 
-import com.backend.model.User;
+import com.ipl.model.User;
  
 
  

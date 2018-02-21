@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan({ "com.backend" })
+@ComponentScan({ "com.ipl" })
 @PropertySource(value = { "classpath:application-${spring.profile.active}.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
@@ -33,7 +33,7 @@ public class HibernateConfiguration {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "com.backend.model" });
+		sessionFactory.setPackagesToScan(new String[] { "com.ipl.model" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
 	}
