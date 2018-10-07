@@ -144,7 +144,7 @@ color: #f44336 !important;
 		
 		<a href="<c:url value="/viewMatchPoints?matchid={{matchId}}" />" class="w3-btn w3-ripple">&#10004;View All Predictions</a>
 
-		<h5 class="displaySuccessMessageClass" ng-show="checkDate(matchDate) == 2">More points more fun... Enjoy Super Wednesdays!!!</h5>
+		<h5 class="displaySuccessMessageClass" ng-show="checkDate(matchDate) == 2">More points more fun... Enjoy Bumper Wednesdays!!!</h5>
 		
 		<h5 class="displaySuccessMessageClass" ng-show="checkFinalsDate(matchDate) == 1">Predict more for the PlayOffs and get a chance to be at the TOP !!!</h5>		
 
@@ -314,10 +314,10 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
             ];
 
     $scope.pointsSpecial = [
-                            {pointSel : "25"},
                             {pointSel : "50"},
-                            {pointSel : "75"},
                             {pointSel : "100"},
+                            {pointSel : "150"},
+                            {pointSel : "200"},
                             ];
 
     $scope.pointsFinals = [
@@ -358,9 +358,9 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
             var formattedMatchDate = new Date( matchDateString.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         	var now = new Date();
     	 if(((formattedMatchDate.getDate()==16) && (now.getDate()==16)) 
-    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==17)) 
-				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==19))
-					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==21)) ){
+    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==31)) 
+				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==32))
+					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==33)) ){
     		return 1;
     	}
     	else if((formattedMatchDate.getDay()==3)){
@@ -377,9 +377,9 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
             var formattedMatchDate = new Date( matchDateString.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         	var now = new Date();
     	if(((formattedMatchDate.getDate()==16) && (now.getDate()==16)) 
-    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==17)) 
-    				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==19))
-    					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==21)) ){
+    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==31)) 
+    				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==32))
+    					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==33)) ){
     		return true;
     	}
     	else{

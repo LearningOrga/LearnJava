@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ibatis.common.jdbc.ScriptRunner;
+//TODO: import com.ibatis.common.jdbc.ScriptRunner;
 
 @Repository("setupDao")
 public class SetupDaoImpl extends AbstractDao implements SetUpDao {
@@ -44,14 +44,14 @@ public class SetupDaoImpl extends AbstractDao implements SetUpDao {
 
 		try {
 			// Initialize object for ScripRunner
-			ScriptRunner sr = new ScriptRunner(con, false, false);
+			//ScriptRunner sr = new ScriptRunner(con, false, false);
 
 			// Give the input file to Reader
 			Reader reader = new BufferedReader(new FileReader(
 					aSQLScriptFilePath));
 
 			// Exctute script
-			sr.runScript(reader);
+			//sr.runScript(reader);
 
 		} catch (Exception e) {
 			System.err.println("Failed to Execute" + aSQLScriptFilePath

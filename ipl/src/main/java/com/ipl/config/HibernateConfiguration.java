@@ -5,6 +5,8 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -22,9 +24,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.backend" })
-@PropertySource(value = { "classpath:application-${spring.profile.active}.properties" })
+@PropertySource(value = { "classpath:application-local.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private Environment environment;
@@ -43,9 +47,23 @@ public class HibernateConfiguration {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment
 				.getRequiredProperty("jdbc.driverClassName"));
-		String jbcurl = environment
-				.getRequiredProperty("JDBC_CONNECTION_STRING");
-		dataSource.setUrl(jbcurl);
+
+		String jdbcUrl = environment.getRequiredProperty("JDBC_CONNECTION_STRING");
+
+
+		String dbName = System.getProperty("RDS_DB_NAME");
+		String userName = System.getProperty("RDS_USERNAME");
+		String password = System.getProperty("RDS_PASSWORD");
+		String hostname = System.getProperty("RDS_HOSTNAME");
+		String port = System.getProperty("RDS_PORT");
+
+		//String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+		//String jdbcUrl = "jdbc:mysql://" + "aa1jop8mtpj5u1k.cep9jdg4oxmx.us-east-1.rds.amazonaws.com" + ":" + "3306" + "/" + "ebdb" + "?user=" + "ipluser" + "&password=" + "iplmaster";
+		logger.debug("Getting remote connection with connection string from environment variables."+jdbcUrl);
+
+
+
+		dataSource.setUrl(jdbcUrl);
 
 		return dataSource;
 	}
