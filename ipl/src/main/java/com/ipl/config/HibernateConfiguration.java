@@ -24,7 +24,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.backend" })
-@PropertySource(value = { "classpath:application-local.properties" })
+@PropertySource(value = { "classpath:application-${spring.profile.active}.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
 
