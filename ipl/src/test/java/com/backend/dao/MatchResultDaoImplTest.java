@@ -4,9 +4,15 @@ import com.backend.model.MatchResult;
 import org.dbunit.dataset.CompositeDataSet;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.h2.tools.Server;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.sql.SQLException;
 
 
 public class MatchResultDaoImplTest extends IPLDaoImplBaseTest{
@@ -18,6 +24,13 @@ public class MatchResultDaoImplTest extends IPLDaoImplBaseTest{
 	MatchDao matchDao;
 	@Autowired
 	RuleDao ruleDao;
+
+	@BeforeTest
+	public void initTest() throws SQLException {
+		Server webServer = Server.createWebServer("-web",
+				"-webAllowOthers", "-webPort", "9092");
+		webServer.start();
+	}
 
 
 	@Override

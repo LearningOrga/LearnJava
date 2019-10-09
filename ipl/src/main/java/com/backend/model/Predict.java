@@ -1,5 +1,7 @@
 package com.backend.model;
 
+import org.hibernate.envers.NotAudited;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -27,63 +29,78 @@ public class Predict implements Serializable {
 	private int id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "USER_ID", nullable = false)
+	@JoinColumn(name = "LOGIN_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private User userId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM1")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfteam1;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM2")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfteam2;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM3")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfteam3;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM4")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfteam4;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SF_TEAM1")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team sfteam1;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SF_TEAM2")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team sfteam2;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "FINAL_WINNING_TEAM")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team finalWinningTeam;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM1_RESULT")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfTeam1Result;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM2_RESULT")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfTeam2Result;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM3_RESULT")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfTeam3Result;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "QF_TEAM4_RESULT")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team qfTeam4Result;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SF_TEAM1_RESULT")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team sfTeam1Result;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SF_TEAM2_RESULT")
+	@JoinColumn(name = "TEAM_ID",updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team sfTeam2Result;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "FINAL_TEAM_RESULT")
+	@JoinColumn(name = "TEAM_ID" , updatable = false, insertable = false, nullable = false)
+	@NotAudited
 	private Team finalWinningTeamResult;
 
 	@Column(name = "USER_PROB_INDEX")

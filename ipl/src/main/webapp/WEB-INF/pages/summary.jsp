@@ -226,11 +226,11 @@ font-size: 15px !important;
     };
 
     $scope.funCall = function (column) {
-    	if(column>=65){
+    	if(column>=50){
     		return 'topPerformer';
-    	}else if(column>=35 && column<65){
+    	}else if(column>=40 && column<50){
     		return 'averagePerformer';
-    	}else if(column>0 && column<35){
+    	}else if(column>0 && column<40){
     		return 'lowPerformer';
     	}else{
     		return 'notPredicted';

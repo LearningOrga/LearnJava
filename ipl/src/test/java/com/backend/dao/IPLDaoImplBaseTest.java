@@ -1,8 +1,7 @@
 
 package com.backend.dao;
 
-import javax.sql.DataSource;
-
+import com.backend.configuration.HibernateTestConfiguration;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
@@ -12,10 +11,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 
-import com.backend.configuration.HibernateTestConfiguration;
+import javax.sql.DataSource;
 
 
 @ContextConfiguration(classes = { HibernateTestConfiguration.class })
+
 public abstract class IPLDaoImplBaseTest extends AbstractTransactionalTestNGSpringContextTests {
 
 	@Autowired
@@ -28,4 +28,6 @@ public abstract class IPLDaoImplBaseTest extends AbstractTransactionalTestNGSpri
 		DatabaseOperation.CLEAN_INSERT.execute(dbConn, getDataSet());
 	}
 	protected abstract IDataSet getDataSet() throws Exception;
+
+
 }

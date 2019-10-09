@@ -13,7 +13,7 @@ import com.backend.model.Predict;
 
 @Service("predictService")
 @Transactional
-@CacheConfig(cacheNames = "predict")
+//@CacheConfig(cacheNames = "predict")
 public class PredictServiceImpl implements PredictService{
 
 	@Autowired
@@ -23,13 +23,13 @@ public class PredictServiceImpl implements PredictService{
 		dao.savePredict(predict);
 	}
 	@Override
-	@Cacheable(value="predict" , key="'predict'")
+	//@Cacheable(value="predict" , key="'predict'")
 	public List<Predict> findAllPredicts() {
 		return dao.findAllPredicts();
 	}
 
 	
-	@Cacheable(value="predict" , key="#userId")
+	//@Cacheable(value="predict" , key="#userId")
 	public Predict findByUserId(int userId) {
 		return dao.findByUserId(userId);
 	}

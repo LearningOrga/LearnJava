@@ -108,13 +108,13 @@ app.controller('myCtrl', ['$scope','$http', function($scope,$http) {
 	$scope.dataAfterView;
 	
 	//Live service
-/* 		var viewPredictUrl = "predict/all";
+ 		var viewPredictUrl = "predict/all";
 		$http.get(viewPredictUrl).success(function(response){
 			$scope.dataAfterView = response;
 			
-		});	 */
+		});
 
-	  	var viewPredictUrl = "predict/all";
+	  	//var viewPredictUrl = "predict/viewGoldenPredicts";
 
 		$http({
 			method: "GET",

@@ -16,12 +16,13 @@
 		timeToIdleSeconds="120" timeToLiveSeconds="120">
 		<persistence strategy="localTempSwap" />
 	</cache>
-	
+
+
 	<cache name="user" maxEntriesLocalHeap="10000" eternal="false"
 		timeToIdleSeconds="120" timeToLiveSeconds="120">
 		<persistence strategy="localTempSwap" />
 	</cache>
-	
+
 	<cache name="matchResult" maxEntriesLocalHeap="10000" eternal="false"
 		timeToIdleSeconds="120" timeToLiveSeconds="120">
 		<persistence strategy="localTempSwap" />
@@ -31,12 +32,12 @@
 		timeToIdleSeconds="120" timeToLiveSeconds="120">
 		<persistence strategy="localTempSwap" />
 	</cache>
-	
+	<!--
 	<cache name="predict" maxEntriesLocalHeap="10000" eternal="false"
 		timeToIdleSeconds="120" timeToLiveSeconds="120">
 		<persistence strategy="localTempSwap" />
 	</cache>
-	
+	-->
 	<cache name="rule" maxEntriesLocalHeap="10000" eternal="false"
 		timeToIdleSeconds="120" timeToLiveSeconds="120">
 		<persistence strategy="localTempSwap" />

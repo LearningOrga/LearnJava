@@ -8,10 +8,7 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -22,7 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.backend" })
-@PropertySource(value = { "classpath:application-${spring.profile.active}.properties" })
+//@PropertySource(value = { "classpath:application-local.properties" })
+//@PropertySource(value = { "classpath:application-aws.properties" })
+@PropertySource(value = { "classpath:application-test.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
 
@@ -46,25 +45,22 @@ public class HibernateConfiguration {
 		dataSource.setDriverClassName(environment
 				.getRequiredProperty("jdbc.driverClassName"));
 
-		String jdbcUrl = environment.getRequiredProperty("JDBC_CONNECTION_STRING");
-
-
-		String dbName = System.getProperty("RDS_DB_NAME");
-		String userName = System.getProperty("RDS_USERNAME");
-		String password = System.getProperty("RDS_PASSWORD");
-		String hostname = System.getProperty("RDS_HOSTNAME");
-		String port = System.getProperty("RDS_PORT");
-
-		//String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
-		//String jdbcUrl = "jdbc:mysql://" + "aa1jop8mtpj5u1k.cep9jdg4oxmx.us-east-1.rds.amazonaws.com" + ":" + "3306" + "/" + "ebdb" + "?user=" + "ipluser" + "&password=" + "iplmaster";
-		logger.debug("Getting remote connection with connection string from environment variables."+jdbcUrl);
-
-
-
+		//String jdbcUrl = environment.getRequiredProperty("JDBC_CONNECTION_STRING"); for aws
+		//logger.debug("Getting remote connection with connection string from environment variables."+jdbcUrl);
+		String jdbcUrl = environment.getRequiredProperty("jdbc.url");
 		dataSource.setUrl(jdbcUrl);
+        //TODO: do we need?
+		if(this.environment.getActiveProfiles().equals("test")){
+			dataSource.setUsername("sa");
+			dataSource.setPassword("");
+
+		}
+
 
 		return dataSource;
 	}
+
+
 
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
