@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan({ "com.backend" })
 //@PropertySource(value = { "classpath:application-local.properties" })
 //@PropertySource(value = { "classpath:application-aws.properties" })
-@PropertySource(value = { "classpath:application-test.properties" })
+//@PropertySource(value = { "classpath:application-test.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
 
@@ -40,8 +40,10 @@ public class HibernateConfiguration {
 	}
 
 	@Bean
+	@Profile({"local","aws"})
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
 		dataSource.setDriverClassName(environment
 				.getRequiredProperty("jdbc.driverClassName"));
 
@@ -49,17 +51,22 @@ public class HibernateConfiguration {
 		//logger.debug("Getting remote connection with connection string from environment variables."+jdbcUrl);
 		String jdbcUrl = environment.getRequiredProperty("jdbc.url");
 		dataSource.setUrl(jdbcUrl);
-        //TODO: do we need?
-		if(this.environment.getActiveProfiles().equals("test")){
-			dataSource.setUsername("sa");
-			dataSource.setPassword("");
+       	return dataSource;
+	}
 
-		}
 
+	@Bean
+	@Profile("test")
+	public DataSource dataSourceTest() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(environment
+				.getRequiredProperty("jdbc.driverClassName"));
+		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
+		dataSource.setUsername("sa");
+		dataSource.setPassword("sa");
 
 		return dataSource;
 	}
-
 
 
 	private Properties hibernateProperties() {
