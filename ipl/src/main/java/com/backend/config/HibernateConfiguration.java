@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan({ "com.backend" })
 //@PropertySource(value = { "classpath:application-local.properties" })
 //@PropertySource(value = { "classpath:application-aws.properties" })
-//@PropertySource(value = { "classpath:application-test.properties" })
+//@PropertySource(value = { "classpath:application-inmem.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
 
@@ -33,7 +33,14 @@ public class HibernateConfiguration {
 	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
+		String[] activeProfiles = environment.getActiveProfiles();
+		String active = activeProfiles[0];
+		if(active.equals("local") || active.equals("aws")) {
+			sessionFactory.setDataSource(dataSource());
+		}
+		else{
+			sessionFactory.setDataSource(dataSourceInMem());
+		}
 		sessionFactory.setPackagesToScan(new String[] { "com.backend.model" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 		return sessionFactory;
@@ -56,8 +63,8 @@ public class HibernateConfiguration {
 
 
 	@Bean
-	@Profile("test")
-	public DataSource dataSourceTest() {
+	@Profile("inmem")
+	public DataSource dataSourceInMem() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment
 				.getRequiredProperty("jdbc.driverClassName"));

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+<changeSet id="02" author="Jitendra">
+   <!-- <insert tableName="rules_master" >
+        <column name="RULE_ID" valueNumeric="1"/>
+        <column name="RULE_NAME" value="Winning Team"/>
+        <column name="RULE_DESC" value="Which team is winning"/>
+        <column name="RULE_STATUS" value="A"/>
+        <column name="RULE_BASED_ON" value="Team"/>
+    </insert>
+    <insert tableName="rules_master">
+        <column name="RULE_ID" valueNumeric="2"/>
+        <column name="RULE_NAME" value="Toss Winning Team"/>
+        <column name="RULE_DESC" value="Which team is winning toss"/>
+        <column name="RULE_STATUS" value="A"/>
+        <column name="RULE_BASED_ON" value="Team"/>
+    </insert>
+-->
+</changeSet>
+
+    <changeSet author="liquibase-docs" id="rule_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../rule_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="match_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../match_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="match_result">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../match_result.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="play_result">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../play_result.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="predict_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../predict_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="user_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../user_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="liquibase-docs" id="team_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../team_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>
