@@ -5,7 +5,7 @@
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
          http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-    <changeSet author="liquibase-docs" id="rule_master">
+    <changeSet author="Jitendra" id="rule_master">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
@@ -15,7 +15,7 @@
                  stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="match_master">
+    <changeSet author="Jitendra" id="match_master">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
@@ -25,7 +25,7 @@
                  stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="match_result">
+    <changeSet author="Jitendra" id="match_result">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
@@ -35,7 +35,7 @@
                  stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="play_result">
+    <changeSet author="Jitendra" id="play_result">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
@@ -45,7 +45,7 @@
                  stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="predict_master">
+    <changeSet author="Jitendra" id="predict_master">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
@@ -55,7 +55,7 @@
                  stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="user_master">
+    <changeSet author="Jitendra" id="user_master">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
@@ -65,7 +65,7 @@
                  stripComments="true"/>
     </changeSet>
 
-    <changeSet author="liquibase-docs" id="team_master">
+    <changeSet author="Jitendra" id="team_master">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
                  endDelimiter=";"
