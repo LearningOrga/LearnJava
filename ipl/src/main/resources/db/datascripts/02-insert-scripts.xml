@@ -5,24 +5,6 @@
         xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
          http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-<changeSet id="02" author="Jitendra">
-   <!-- <insert tableName="rules_master" >
-        <column name="RULE_ID" valueNumeric="1"/>
-        <column name="RULE_NAME" value="Winning Team"/>
-        <column name="RULE_DESC" value="Which team is winning"/>
-        <column name="RULE_STATUS" value="A"/>
-        <column name="RULE_BASED_ON" value="Team"/>
-    </insert>
-    <insert tableName="rules_master">
-        <column name="RULE_ID" valueNumeric="2"/>
-        <column name="RULE_NAME" value="Toss Winning Team"/>
-        <column name="RULE_DESC" value="Which team is winning toss"/>
-        <column name="RULE_STATUS" value="A"/>
-        <column name="RULE_BASED_ON" value="Team"/>
-    </insert>
--->
-</changeSet>
-
     <changeSet author="liquibase-docs" id="rule_master">
         <sqlFile dbms="h2, oracle,mysql"
                  encoding="utf8"
@@ -92,7 +74,4 @@
                  splitStatements="true"
                  stripComments="true"/>
     </changeSet>
-
-
-
 </databaseChangeLog>
