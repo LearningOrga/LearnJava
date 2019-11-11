@@ -1,5 +1,9 @@
 package com.backend.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,22 +12,15 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-//TODO: import com.ibatis.common.jdbc.ScriptRunner;
-
 @Repository("setupDao")
 public class SetupDaoImpl extends AbstractDao implements SetUpDao {
 
 	@Autowired
 	DataSource dataSource;
 
-	@Override
+	//@Override
 	public void setup(String fileName) {
-		//("setup"+fileName);
+		System.out.println("setup"+fileName);
 		
 		fileName=fileName+".sql";
 		
@@ -31,7 +28,7 @@ public class SetupDaoImpl extends AbstractDao implements SetUpDao {
 		File file = new File(classLoader.getResource(fileName).getFile());
 
 		String aSQLScriptFilePath = file.getAbsolutePath();
-		//("path-"+aSQLScriptFilePath);
+		System.out.println("path-"+aSQLScriptFilePath);
 
 		Connection con = null;
 		Statement stmt = null;
@@ -39,7 +36,7 @@ public class SetupDaoImpl extends AbstractDao implements SetUpDao {
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e1) {
-			//("Errorin getting connection in setupDao");
+			System.out.println("Errorin getting connection in setupDao");
 		}
 
 		try {
@@ -57,7 +54,7 @@ public class SetupDaoImpl extends AbstractDao implements SetUpDao {
 			System.err.println("Failed to Execute" + aSQLScriptFilePath
 					+ " The error is " + e.getMessage());
 		}
-
+		System.out.println("Exit for file- " + fileName);
 	}
 
 }

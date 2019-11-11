@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,6 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	DataSource dataSource;
+
+	@Autowired
+	private Environment environment;
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth)
@@ -44,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
 				.loginPage("/login").permitAll();
 
+
 		http.formLogin().defaultSuccessUrl("/ipl_home").and()
 				.exceptionHandling().accessDeniedPage("/Access_Denied").and()
 				.formLogin().loginPage("/login").failureUrl("/login?error")
@@ -52,6 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
 				.logout().logoutSuccessUrl("/login?logout");
 
+
+		String[] activeProfiles = environment.getActiveProfiles();
+		String active = activeProfiles[0];
+		if(active.equals("inmem")) {
+			http.authorizeRequests().antMatchers("/console/*","/console/**").permitAll();
+			http.csrf().disable();
+			http.headers().frameOptions().disable();
+		}
 		/*http.sessionManagement().maximumSessions(1)
 				.expiredUrl("/login?expired").maxSessionsPreventsLogin(true)
 				.and().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)

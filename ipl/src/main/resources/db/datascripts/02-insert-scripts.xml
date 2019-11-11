@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Jitendra" id="rule_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../rule_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Jitendra" id="match_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../match_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Jitendra" id="match_result">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../match_result.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Jitendra" id="play_result">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../play_result.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Jitendra" id="predict_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../predict_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Jitendra" id="user_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../user_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet author="Jitendra" id="team_master">
+        <sqlFile dbms="h2, oracle,mysql"
+                 encoding="utf8"
+                 endDelimiter=";"
+                 path="../../team_master.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+</databaseChangeLog>

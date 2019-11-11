@@ -146,7 +146,7 @@ color: #f44336 !important;
 
 		<h5 class="displaySuccessMessageClass" ng-show="checkDate(matchDate) == 2">More points more fun... Enjoy Bumper Wednesdays!!!</h5>
 		
-		<h5 class="displaySuccessMessageClass" ng-show="checkFinalsDate(matchDate) == 1">Predict more for the PlayOffs and get a chance to be at the TOP !!!</h5>		
+		<h5 class="displaySuccessMessageClass" ng-show="checkFinalsDate(matchDate) == 1">Predict more for the PlayOffs and get a chance to be at the TOP !!!</h5>
 
 <br></br>
 
@@ -192,8 +192,8 @@ color: #f44336 !important;
 					ng-options="option.pointSel for option in pointsFinals" ng-change="selectedPoints(pointsArrayFinals)">
 					<option value="">-- Select Points--</option>
 					</select>
-				</td>				
-								
+				</td>
+
 			    <td ng-hide="true">{{matchTime | filter: computeTime(matchDate, matchTime)}}</td>
 			    <td ng-hide="checkTimer(matchDate, matchTime)"> <b>{{ remainingTime|durationview }} </b></td>
 			    <td ng-show="checkTimer(matchDate, matchTime)"> Times Up !!!</td>
@@ -322,7 +322,7 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
 
     $scope.pointsFinals = [
                             {pointSel : "50"},
-                            {pointSel : "100"},
+                            {pointSel : "75"},
                             {pointSel : "150"},
                             {pointSel : "200"},
                             ];
@@ -357,10 +357,10 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
         if(matchDateString){
             var formattedMatchDate = new Date( matchDateString.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         	var now = new Date();
-    	 if(((formattedMatchDate.getDate()==16) && (now.getDate()==16)) 
-    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==31)) 
-				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==32))
-					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==33)) ){
+    	 if(((formattedMatchDate.getDate()==07) && (now.getDate()==07))
+    			|| ((formattedMatchDate.getDate()==08) && (now.getDate()==08))
+				|| ((formattedMatchDate.getDate()==10) && (now.getDate()==10))
+					|| ((formattedMatchDate.getDate()==12) && (now.getDate()==12)) ){
     		return 1;
     	}
     	else if((formattedMatchDate.getDay()==3)){
@@ -376,10 +376,10 @@ app.controller('myCtrl', ['$scope','$rootScope' ,'$interval','$timeout', 'dateti
         if(matchDateString){
             var formattedMatchDate = new Date( matchDateString.replace( /(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
         	var now = new Date();
-    	if(((formattedMatchDate.getDate()==16) && (now.getDate()==16)) 
-    			|| ((formattedMatchDate.getDate()==17) && (now.getDate()==31)) 
-    				|| ((formattedMatchDate.getDate()==19) && (now.getDate()==32))
-    					|| ((formattedMatchDate.getDate()==21) && (now.getDate()==33)) ){
+    	if(((formattedMatchDate.getDate()==07) && (now.getDate()==07))
+    			|| ((formattedMatchDate.getDate()==08) && (now.getDate()==08))
+    				|| ((formattedMatchDate.getDate()==10) && (now.getDate()==10))
+    					|| ((formattedMatchDate.getDate()==12) && (now.getDate()==12)) ){
     		return true;
     	}
     	else{

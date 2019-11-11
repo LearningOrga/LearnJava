@@ -62,14 +62,22 @@ public class PredictController {
 	@RequestMapping(value = "/predict/add", method = RequestMethod.POST)
 	public @ResponseBody
 	List<Predict> addPredict(ModelMap model, @RequestBody Predict predtictReq) {
-		// ("I am here");
+		//System.out.println("I am here");
 		Predict predict;
 		List<Predict> predicted = new ArrayList<Predict>();
 
-		
+		//System.out.println("found prdictreq"+predtictReq);
+		//System.out.println("found prdictreq userid"+predtictReq.getUserId());
+		int userId = predtictReq.getUserId().getId();
+		//System.out.println("found user Id"+userId);
 		User user = loginMasterService.findUserById(predtictReq.getUserId().getId());
-		predict = predictService.findByUserId(predtictReq.getUserId().getId());
+		//System.out.println("found user"+user);
+		predict = predictService.findByUserId(userId);
+
+		//System.out.println("found prdict"+predict);
+
 		if (predict == null) {
+			//System.out.println("found not predict");
 
 			Team one = teamService.findTeamById(predtictReq.getQfteam1().getId());
 			Team two = teamService.findTeamById(predtictReq.getQfteam2().getId());
@@ -83,7 +91,7 @@ public class PredictController {
 					finalt);
 			predictService.savePredict(predict);
 		} else {// update
-
+			//System.out.println("found predict");
 			Team one = teamService.findTeamById(predtictReq.getQfteam1().getId());
 			Team two = teamService.findTeamById(predtictReq.getQfteam2().getId());
 			Team three = teamService.findTeamById(predtictReq.getQfteam3().getId());

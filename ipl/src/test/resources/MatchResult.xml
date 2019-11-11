@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
     <match_result MATCH_RESULT_ID="1" MATCH_ID="1" RULE_ID="1" RULE_RESULT="Royal Challengers Bangalore"/>
-
     <match_result MATCH_RESULT_ID="2" MATCH_ID="2" RULE_ID="2" RULE_RESULT="Sunrisers Hyderabad"/>
 
 </dataset>

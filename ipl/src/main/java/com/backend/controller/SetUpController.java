@@ -27,14 +27,14 @@ public class SetUpController {
 	public String setupDatabase(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model,
 			@PathVariable("fileName") String fileName) {
-		logger.info("Processing file-" + fileName);
+		System.out.println("Processing file-" + fileName);
 
 		
 		//ClassLoader classLoader = getClass().getClassLoader();
 		//File file = new File(classLoader.getResource("user_master.sql").getFile());
 		setUpService.setup(fileName);
 
-		logger.info("DataBase setup Done-" + fileName);
+		System.out.println("DataBase setup Done-" + fileName);
 		return "admin";
 	}
 
