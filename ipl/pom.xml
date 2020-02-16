@@ -17,6 +17,16 @@
         <mockito.version>1.10.19</mockito.version>
         <dbunit.version>2.2</dbunit.version>
     </properties>
+
+    <profiles>
+    <profile>
+        <id>inmem</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+    </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>

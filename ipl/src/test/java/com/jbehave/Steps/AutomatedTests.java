@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Properties;
 //1
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles(profiles="test")
+@ActiveProfiles(profiles="inmem")
 @SpringApplicationConfiguration(Application.class)
 @WebIntegrationTest("server.port:8082")
 public class AutomatedTests extends JUnitStories {
@@ -30,7 +30,7 @@ public class AutomatedTests extends JUnitStories {
     @BeforeClass
     public static void setSystemProperty() {
         Properties properties = System.getProperties();
-        properties.setProperty("spring.profiles.active", "test");
+        properties.setProperty("spring.profiles.active", "inmem");
     }
 
     public AutomatedTests(){
