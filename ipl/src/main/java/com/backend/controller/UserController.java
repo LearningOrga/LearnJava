@@ -1,9 +1,12 @@
 package com.backend.controller;
 
+import com.backend.service.KeyService;
+import com.util.EncryptionUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +25,16 @@ public class UserController {
 	@Autowired
 	UserService loginMasterService;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
 	@Secured ("ROLE_ADMIN")
 	public @ResponseBody	
 	void updateUser(ModelMap model, @RequestBody User user) {
-
-
+		user.setLoginPass(passwordEncoder.encode(user.getLoginPass()));
 		loginMasterService.updateUser(user);
 		logger.info("updated Successfully");
-
 		// ("updatedSuccessfully");
 	}
 
@@ -39,9 +43,8 @@ public class UserController {
 	public @ResponseBody
 	void addUser(ModelMap model, @RequestBody User user) {
 		logger.debug("Entry");
+		user.setLoginPass(passwordEncoder.encode(user.getLoginPass()));
 		loginMasterService.saveUser(user);
 		logger.debug("exit");
-
 	}
-
 }
