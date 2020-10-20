@@ -110,6 +110,11 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-maven-plugin</artifactId>
+            <version>3.4.1</version>
+        </dependency>
 
         <dependency>
             <groupId>jfree</groupId>
@@ -177,7 +182,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.191</version> <!-- ex: 1.2.140 -->
+           <version>1.4.199</version>
         </dependency>
         <dependency>
             <groupId>dbunit</groupId>
@@ -258,6 +263,22 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+             <!--   <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>3.4.1</version>
+                    <configuration>
+                        <propertyFile>src/main/resources/liquibase.properties</propertyFile>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>update</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>-->
+
         </plugins>
     </build>
     <artifactId>LearnJava</artifactId>

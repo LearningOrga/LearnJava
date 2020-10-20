@@ -10,6 +10,7 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
@@ -21,6 +22,7 @@ import java.util.Arrays;
 //@EnableConfigServer
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableCaching(proxyTargetClass = true)
+@PropertySource(value = { "classpath:application-${spring.profiles.active}.properties" })
 public class Application {
 	
 

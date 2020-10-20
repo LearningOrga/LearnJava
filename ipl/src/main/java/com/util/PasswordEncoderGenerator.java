@@ -4,13 +4,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordEncoderGenerator {
 
-    public static void main(String args[]) {
+ /*  public static void main(String args[]) {
 
+        //Generate passwords here before starting app to run user script otherwise login will not work
+        String password = "nicetrykeepitup";
+       //String password = "password";
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(password);
 
-    String password = "thisisnotthepassworduexpect";
-    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-    String hashedPassword = passwordEncoder.encode(password);
+        System.out.println(hashedPassword);
 
-	System.out.println(hashedPassword);
-}
+        //passwordEncoder.
+
+    }*/
 }

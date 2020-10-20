@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +20,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan({ "com.backend" })
-//@PropertySource(value = { "classpath:application-local.properties" })
-//@PropertySource(value = { "classpath:application-aws.properties" })
-//@PropertySource(value = { "classpath:application-inmem.properties" })
 @EnableJpaAuditing
 public class HibernateConfiguration {
 
@@ -98,4 +96,5 @@ public class HibernateConfiguration {
 		txManager.setSessionFactory(s);
 		return txManager;
 	}
+
 }
