@@ -1,0 +1,23 @@
+
+runtime: java
+env: flex
+entrypoint: java -Xmx64m -jar target/LearnJava-0.0.1.jar
+
+#service: library
+
+handlers:
+  - url: /.*
+    script: this field is required, but ignored
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 5
+
+resources:
+  cpu: 2
+  memory_gb: 2.3
+  disk_size_gb: 10
+  #volumes:
+  #  - name: ipl
+  #    volume_type: tmpfs
+  #    size_gb: 0.5
