@@ -3,6 +3,7 @@ package com.backend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.cache.CacheManager;
@@ -29,6 +30,11 @@ public class Application extends SpringBootServletInitializer {
     @Autowired
     private CacheManager cacheManager;
 
+    @Override
+    protected SpringApplicationBuilder configure(
+            SpringApplicationBuilder builder) {
+        return builder.sources(Application.class);
+    }
 
  
     public static void main(String[] args) throws Throwable {
