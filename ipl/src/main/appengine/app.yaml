@@ -1,7 +1,7 @@
 
 runtime: java
 env: flex
-#entrypoint: java -Xmx64m -jar target/LearnJava-0.0.1.jar
+entrypoint: java -Xmx64m -jar target/LearnJava-0.0.1.jar
 
 runtime_config:
   server: tomcat8
