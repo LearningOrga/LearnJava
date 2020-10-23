@@ -3,6 +3,7 @@ package com.backend.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableCaching(proxyTargetClass = true)
 @PropertySource(value = { "classpath:application-${spring.profiles.active}.properties" })
-public class Application {
+public class Application extends SpringBootServletInitializer {
 	
 
     @Autowired
