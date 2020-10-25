@@ -60,8 +60,8 @@ public class HibernateConfiguration {
 	}
 
 
-	@Bean
-	@Profile("inmem")
+	//@Bean
+	//@Profile("inmem")
 	public DataSource dataSourceInMem() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment
