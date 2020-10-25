@@ -6,7 +6,7 @@ entrypoint: java -Xmx64m -jar target/LearnJava-0.0.1.jar
 runtime_config:
   server: tomcat8
 
-service: iplnew
+service: iplfromflex
 
 handlers:
   - url: /.*
@@ -24,3 +24,5 @@ resources:
   #  - name: ipl
   #    volume_type: tmpfs
   #    size_gb: 0.5
+env_variables:
+  SPRING_PROFILES_ACTIVE: "inmem"
