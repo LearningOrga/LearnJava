@@ -60,9 +60,9 @@ public class HibernateConfiguration {
 	}
 
 
-	//@Bean
-	//@Profile("inmem")
-	/*public DataSource dataSourceInMem() {
+	@Bean
+	@Profile("inmem")
+	public DataSource dataSourceInMem() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment
 				.getRequiredProperty("jdbc.driverClassName"));
@@ -71,23 +71,8 @@ public class HibernateConfiguration {
 		//dataSource.setPassword("sa");
 
 		return dataSource;
-	} */
+	}
 
-
-    @Bean
-    @Profile("inmem")
-    public DataSource dataSourceInMem() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        //dataSource.setDriverClassName(environment
-          //''      .getRequiredProperty("jdbc.driverClassName"));
-        //dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:testdb");
-        dataSource.setUsername("sa");
-        //dataSource.setPassword("sa");
-
-        return dataSource;
-    }
 
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
