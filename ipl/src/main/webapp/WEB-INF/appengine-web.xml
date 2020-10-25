@@ -1,0 +1,11 @@
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+    <threadsafe>true</threadsafe>
+    <runtime>java8</runtime>
+    <system-properties>
+        <property name="java.util.logging.config.file" value="WEB-INF/classes/logging.properties"/>
+        <property name="spring.profiles.active" value="inmem" />
+    </system-properties>
+    <sessions-enabled>true</sessions-enabled>
+
+    
+</appengine-web-app>

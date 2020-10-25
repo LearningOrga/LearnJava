@@ -44,13 +44,20 @@ public class LoginController {
 	@RequestMapping(value = { "/ipl_home" }, method = RequestMethod.GET)
 	public ModelAndView iplehomePage(HttpServletRequest request, ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to Predict and Win. ");
-		request.getSession().setAttribute("loginName",
+		/*request.getSession().setAttribute("loginName",
 				getCompleteUserDetailss(model).getLoginName());
 		request.getSession().setAttribute("userId",
 				getCompleteUserDetailss(model).getId());
 		request.getSession().setAttribute("totalRemainingPoints",
-				getCompleteUserDetailss(model).getAvailablePoints());
-		
+				getCompleteUserDetailss(model).getAvailablePoints());*/
+
+        request.getSession().setAttribute("loginName",
+                "Jitendra");
+        request.getSession().setAttribute("userId",
+                "1");
+        request.getSession().setAttribute("totalRemainingPoints",
+                "505");
+
 		ModelAndView mav = new ModelAndView("ipl_home");
 		mav.addObject(model);
 		return mav;
@@ -190,6 +197,7 @@ public class LoginController {
 
 	private String getPrincipal() {
 		String userName = null;
+		System.out.print("USER NAME ");
 		Object principal = SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 
@@ -198,13 +206,14 @@ public class LoginController {
 		} else {
 			userName = principal.toString();
 		}
+		System.out.print("USER NAME "+userName);
 		return userName;
 	}
 
 	
 
 	// Spring Security see this :
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method={ RequestMethod.GET})
 	public ModelAndView login(
 			@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout) {

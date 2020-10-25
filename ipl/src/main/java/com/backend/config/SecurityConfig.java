@@ -17,37 +17,52 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	DataSource dataSource;
+    @Autowired
+    DataSource dataSource;
 
-	@Autowired
-	private Environment environment;
-
-	@Autowired
-	public void configAuthentication(AuthenticationManagerBuilder auth)
-			throws Exception {
-
-		auth.jdbcAuthentication()
-				.dataSource(dataSource)
-				.usersByUsernameQuery(
-						"select LOGIN_NAME,LOGIN_PASS, ENABLED from user_master where LOGIN_NAME=?")
-				.authoritiesByUsernameQuery(
-						"select LOGIN_NAME, LOGIN_ROLE from user_master where LOGIN_NAME=?").passwordEncoder(passwordEncoder());
-	}
+    @Autowired
+    private Environment environment;
 
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+
+
+    // In-memory authentication to authenticate the user i.e. the user credentials are stored in the memory.
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().withUser("Jitendra1").password("guest1234").roles("USER");
+        auth.inMemoryAuthentication().withUser("Jitendra").password("{noop}nicetrykeepitup").roles("ADMIN");
+    }
+
+    /*@Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth)
+            throws Exception {
+
+        System.out.print("DB USED - " + dataSource.toString());
+
+
+
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "select LOGIN_NAME,LOGIN_PASS, ENABLED from user_master where LOGIN_NAME=?")
+                .authoritiesByUsernameQuery(
+                        "select LOGIN_NAME, LOGIN_ROLE from user_master where LOGIN_NAME=?").passwordEncoder(passwordEncoder());
+    }
+
+*/
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers("/", "/home").permitAll()
+		http.authorizeRequests().antMatchers("/", "/home","/setup/**","/console/*","/console/**").permitAll()
 				.antMatchers("/user/all").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
 				.antMatchers("/playResult/deleteDuplicate")
@@ -79,13 +94,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 				.invalidSessionUrl("/"); */
 
-		// TODO http.authorizeRequests().anyRequest().authenticated();
+    // TODO http.authorizeRequests().anyRequest().authenticated();
 
-	}
+    }
 
-	private CsrfTokenRepository csrfTokenRepository() {
-		HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-		repository.setHeaderName("X-XSRF-TOKEN");
-		return repository;
-	}
+
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName("X-XSRF-TOKEN");
+        return repository;
+    }
 }

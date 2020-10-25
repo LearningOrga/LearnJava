@@ -12,30 +12,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
 import java.util.Arrays;
  
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com")
 @EnableJpaRepositories(basePackages = "com")
 @EntityScan(basePackages = "com.backend")
 //@EnableConfigServer
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @EnableCaching(proxyTargetClass = true)
 @PropertySource(value = { "classpath:application-${spring.profiles.active}.properties" })
+@EnableWebMvcSecurity
 public class Application  {
-	
 
     @Autowired
     private CacheManager cacheManager;
 
-
- 
     public static void main(String[] args) throws Throwable {
-
         SpringApplication.run(Application.class, args);
     }
-    
-    
+
     @Bean
     public CacheManager cacheManager() {
             SimpleCacheManager result = new SimpleCacheManager();
@@ -43,9 +40,7 @@ public class Application  {
             
             return result;
         }
-    
-    
-    
+
 }
     
    
