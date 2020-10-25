@@ -60,15 +60,15 @@ public class HibernateConfiguration {
 	}
 
 
-	//@Bean
-	//@Profile("inmem")
+	@Bean
+	@Profile("inmem")
 	public DataSource dataSourceInMem() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment
 				.getRequiredProperty("jdbc.driverClassName"));
 		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
 		dataSource.setUsername("sa");
-		dataSource.setPassword("sa");
+		//dataSource.setPassword("sa");
 
 		return dataSource;
 	}
