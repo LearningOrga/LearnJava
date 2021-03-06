@@ -1,22 +1,10 @@
 package com.backend.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.Cloud;
-import org.springframework.cloud.service.ServiceInfo;
-import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.backend.model.ApplicationInfo;
 
 @RestController
 public class InfoController {
-    @Autowired(required = false)
+   /* @Autowired(required = false)
     private Cloud cloud;
 
     private Environment springEnvironment;
@@ -60,5 +48,5 @@ public class InfoController {
         } else {
             return new String[]{};
         }
-    }
+    }*/
 }
