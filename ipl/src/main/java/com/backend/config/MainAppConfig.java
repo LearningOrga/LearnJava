@@ -10,7 +10,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@Import({ServiceConfig.class, SecurityConfig.class, HibernateConfiguration.class, WebServiceConfig.class})
+@Import({  WebServiceConfig.class})
 public class MainAppConfig {
 
 	@Bean
@@ -18,6 +18,7 @@ public class MainAppConfig {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
 		viewResolver.setPrefix("/WEB-INF/pages/");
+		System.out.println("resolver called......");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
 	}

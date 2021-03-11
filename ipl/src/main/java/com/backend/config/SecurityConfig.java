@@ -1,10 +1,7 @@
 package com.backend.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,7 +13,9 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
-@Configuration
+import javax.sql.DataSource;
+
+//@Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -30,13 +29,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     // In-memory authentication to authenticate the user i.e. the user credentials are stored in the memory.
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("Jitendra1").password("guest1234").roles("USER");
         auth.inMemoryAuthentication().withUser("Jitendra").password("{noop}nicetrykeepitup").roles("ADMIN");
-    }
+    }*/
 
-    /*@Autowired
+
+    @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth)
             throws Exception {
 
@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "select LOGIN_NAME, LOGIN_ROLE from user_master where LOGIN_NAME=?").passwordEncoder(passwordEncoder());
     }
 
-*/
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -84,11 +85,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		String[] activeProfiles = environment.getActiveProfiles();
 		String active = activeProfiles[0];
-		if(active.equals("inmem")) {
+		/*if(active.equals("inmem")) {
 			http.authorizeRequests().antMatchers("/console/*","/console/**").permitAll();
 			http.csrf().disable();
 			http.headers().frameOptions().disable();
-		}
+		}*/
 		/*http.sessionManagement().maximumSessions(1)
 				.expiredUrl("/login?expired").maxSessionsPreventsLogin(true)
 				.and().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)

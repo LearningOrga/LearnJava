@@ -9,10 +9,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Arrays;
  
@@ -24,6 +26,8 @@ import java.util.Arrays;
 @EnableCaching(proxyTargetClass = true)
 @PropertySource(value = { "classpath:application-${spring.profiles.active}.properties" })
 @EnableWebMvcSecurity
+@ComponentScan({"com.backend"})
+@EnableWebMvc
 public class Application  {
 
     @Autowired
