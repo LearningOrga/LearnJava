@@ -1,19 +1,18 @@
+/*
 package com.backend.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@Import({  WebServiceConfig.class})
+@Import({ SecurityConfig.class, HibernateConfiguration.class})
 public class MainAppConfig {
 
-	@Bean
+	*/
+/*@Bean
 	public InternalResourceViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
 		viewResolver.setViewClass(JstlView.class);
@@ -21,6 +20,7 @@ public class MainAppConfig {
 		System.out.println("resolver called......");
 		viewResolver.setSuffix(".jsp");
 		return viewResolver;
-	}
+	}*//*
+
 	
-}
+}*/

@@ -1,31 +1,40 @@
+/*
 package com.backend.config;
 
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-@EnableWebMvc
 @Configuration
-@ComponentScan({"com.backend.web.controller"})
+//@ComponentScan({"com.backend.web.controller"})
 public class WebServiceConfig implements WebMvcConfigurer {
-	/*@Autowired
-	private ApplicationContext applicationContext;*/
+
 	@Override
 	public void configureViewResolvers(ViewResolverRegistry registry) {
-		registry.jsp("/WEB-INF/pages/", ".jsp");
-	}
 
-	/*@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}*/
+*/
+/*InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/webapp/views/pages/");
+		resolver.setSuffix(".jsp");
+		resolver.setViewClass(JstlView.class);
+		registry.viewResolver(resolver);*//*
+
+
+		registry.jsp("/META-INF/resources/views/pages/", ".jsp");
+	}
 
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+		//registry.addResourceHandler("/webapp/**").addResourceLocations("/webapp/");
 	}
+
+
+
 
 }
 
 
+*/

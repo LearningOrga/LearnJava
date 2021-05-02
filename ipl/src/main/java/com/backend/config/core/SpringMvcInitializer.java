@@ -1,19 +1,19 @@
+/*
 package com.backend.config.core;
 
+import com.backend.config.WebServiceConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import com.backend.config.MainAppConfig;
 
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { MainAppConfig.class };
+		return new Class[] {};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return null;
+		return new Class[] { WebServiceConfig.class };
 	}
 
 	@Override
@@ -21,4 +21,4 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
 		return new String[] { "/" };
 	}
 	
-}
+}*/
