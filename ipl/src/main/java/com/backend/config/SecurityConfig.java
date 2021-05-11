@@ -75,7 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().permitAll();
 
         //http.csrf().disable();
-
         http.formLogin().defaultSuccessUrl("/ipl_home").and()
                 .exceptionHandling().accessDeniedPage("/Access_Denied").and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")

@@ -1,3 +1,4 @@
+/*
 package com.backend.config;
 
 import org.hibernate.SessionFactory;
@@ -22,6 +23,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan({ "com.backend" })
 @EnableJpaAuditing
+//@EnableAutoConfiguration(exclude = { HibernateJpaAutoConfiguration.class })
 public class HibernateConfiguration {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -61,24 +63,22 @@ public class HibernateConfiguration {
 	}
 
 
-	//@Bean
-	//@Profile("inmem")
+	@Bean
+	@Profile("inmem")
 	public DataSource dataSourceInMem() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName(environment
-				.getRequiredProperty("jdbc.driverClassName"));
-		dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
-		dataSource.setUsername("sa");
-		//dataSource.setPassword("sa");
-
+				.getRequiredProperty("spring.datasource.driverClassName"));
+		dataSource.setUrl(environment.getRequiredProperty("spring.datasource.url"));
+		dataSource.setUsername(environment.getRequiredProperty("spring.datasource.username"));
+		dataSource.setPassword(environment.getRequiredProperty("spring.datasource.password"));
 		return dataSource;
 	}
-
 
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect",
-				environment.getRequiredProperty("hibernate.dialect"));
+				environment.getRequiredProperty("spring.jpa.database-platform"));
 		properties.put("hibernate.show_sql",
 				environment.getRequiredProperty("hibernate.show_sql"));
 		properties.put("hibernate.format_sql",
@@ -99,3 +99,4 @@ public class HibernateConfiguration {
 	}
 
 }
+*/

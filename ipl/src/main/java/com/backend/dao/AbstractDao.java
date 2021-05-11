@@ -1,8 +1,9 @@
 package com.backend.dao;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.EntityManager;
 
 /**
  * Abstract dao cfor session factory etc
@@ -10,11 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class AbstractDao {
 
-	@Autowired
+	/*@Autowired
 	private SessionFactory sessionFactory;
+*/
+	@Autowired
+	private EntityManager entityManager;
 	//added comment
 	protected Session getSession() {
-		return sessionFactory.getCurrentSession();
+		Session session = entityManager.unwrap(Session.class);
+
+		return session;
+		//return sessionFactory.getCurrentSession();
 	}
 
 	public void persist(Object entity) {
