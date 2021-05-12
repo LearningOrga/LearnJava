@@ -26,24 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Environment environment;
 
-
-
-
-    // In-memory authentication to authenticate the user i.e. the user credentials are stored in the memory.
-    /*@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("Jitendra1").password("guest1234").roles("USER");
-        auth.inMemoryAuthentication().withUser("Jitendra").password("{noop}nicetrykeepitup").roles("ADMIN");
-    }*/
-
-
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth)
             throws Exception {
 
         System.out.print("DB USED - " + dataSource.toString());
-
-
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
@@ -52,8 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery(
                         "select LOGIN_NAME, LOGIN_ROLE from user_master where LOGIN_NAME=?").passwordEncoder(passwordEncoder());
     }
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -74,7 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .and().logout().permitAll();
 
-        //http.csrf().disable();
         http.formLogin().defaultSuccessUrl("/ipl_home").and()
                 .exceptionHandling().accessDeniedPage("/Access_Denied").and()
                 .formLogin().loginPage("/login").failureUrl("/login?error")
@@ -82,13 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
                 .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
                 .logout().logoutSuccessUrl("/login?logout");
-
-
-
     }
-
-
-
 
     private CsrfTokenRepository csrfTokenRepository() {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();

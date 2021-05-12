@@ -1,7 +1,6 @@
 
 package com.backend.dao;
 
-import com.backend.configuration.HibernateTestConfiguration;
 import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
@@ -13,7 +12,7 @@ import org.springframework.test.context.event.annotation.BeforeTestMethod;
 import javax.sql.DataSource;
 
 
-@ContextConfiguration(classes = { HibernateTestConfiguration.class })
+@ContextConfiguration
 public abstract class IPLDaoImplBaseTest //extends AbstractTransactionalTestNGSpringContextTests
 {
 
