@@ -1,30 +1,10 @@
 package com.jbehave.Steps;
 
-import com.backend.config.Application;
-import org.jbehave.core.configuration.Configuration;
-import org.jbehave.core.configuration.MostUsefulConfiguration;
-import org.jbehave.core.io.LoadFromClasspath;
-import org.jbehave.core.junit.JUnitStories;
-import org.jbehave.core.reporters.Format;
-import org.jbehave.core.reporters.StoryReporterBuilder;
-import org.jbehave.core.steps.CandidateSteps;
-import org.jbehave.core.steps.InstanceStepsFactory;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.boot.test.WebIntegrationTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
 //1
-@RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles(profiles="test")
-@SpringApplicationConfiguration(Application.class)
-@WebIntegrationTest("server.port:8082")
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ActiveProfiles(profiles="test")
+//@SpringApplicationConfiguration(Application.class)
+//@WebIntegrationTest("server.port:8082")
 
 public class AutomatedTests  {/*
 

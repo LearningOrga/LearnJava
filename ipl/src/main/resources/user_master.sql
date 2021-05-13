@@ -28,5 +28,5 @@ CREATE TABLE `user_master` (
 -- ----------------------------
 -- Records 
 -- ----------------------------
-INSERT INTO `user_master` VALUES ('1', 'Jitendra', '$2a$10$6OUSpQV.BVgB5iP8NyChdewV/3xiCEQkhxB9cibGXc/BTl7gVWiW6', 'ROLE_ADMIN', '1', '505', null);
-
+INSERT INTO `user_master` VALUES ('1', 'Jitendra', '$2a$10$nRWaDn5ejnYnhByj8FZdoeDxIf3zM4264/YQR9VxqD1q6DQ7tt4LC', 'ROLE_ADMIN', '1', '505', null);
+INSERT INTO `user_master` VALUES ('2', 'Priyesh', '$2a$10$pPJuzwEf.SYwmwQJoj7nseJ6zyApTj7pUx444aOM4mUqw8/30xL/C', 'ROLE_ADMIN', '1', '500', null);

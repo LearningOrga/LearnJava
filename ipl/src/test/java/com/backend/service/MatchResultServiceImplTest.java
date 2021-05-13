@@ -4,13 +4,13 @@ import com.backend.dao.MatchDao;
 import com.backend.dao.MatchResultDao;
 import com.backend.dao.RuleDao;
 import com.backend.model.MatchResult;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
-import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;

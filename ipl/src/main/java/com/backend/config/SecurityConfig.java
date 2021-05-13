@@ -1,7 +1,5 @@
 package com.backend.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +14,8 @@ import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -26,23 +26,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private Environment environment;
 
-
-
-
-    // In-memory authentication to authenticate the user i.e. the user credentials are stored in the memory.
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("Jitendra1").password("guest1234").roles("USER");
-        auth.inMemoryAuthentication().withUser("Jitendra").password("{noop}nicetrykeepitup").roles("ADMIN");
-    }
-
-    /*@Autowired
+    @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth)
             throws Exception {
 
         System.out.print("DB USED - " + dataSource.toString());
-
-
 
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
@@ -52,52 +40,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "select LOGIN_NAME, LOGIN_ROLE from user_master where LOGIN_NAME=?").passwordEncoder(passwordEncoder());
     }
 
-*/
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers( "/","/home","/setup/**","/console/*","/console/**").permitAll()
+                .antMatchers("/user/all").hasAnyRole("ADMIN")
+                .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                /*.antMatchers("/playResult/deleteDuplicate").hasAnyRole("ROLE_ADMIN")
+                .antMatchers("/dba/**").hasAnyRole("DBA")*/
+                //.antMatchers("/**").hasAnyRole("ADMIN")
+                .anyRequest().authenticated().and().formLogin()
+                .loginPage("/login").permitAll()
+                .and().logout().permitAll();
 
-		http.authorizeRequests().antMatchers("/", "/home","/setup/**","/console/*","/console/**").permitAll()
-				.antMatchers("/user/all").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
-				.antMatchers("/playResult/deleteDuplicate")
-				.access("hasRole('ROLE_ADMIN')").antMatchers("/dba/**")
-				.access("hasRole('ROLE_ADMIN') and hasRole('DBA')");
-
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").permitAll();
-
-
-		http.formLogin().defaultSuccessUrl("/ipl_home").and()
-				.exceptionHandling().accessDeniedPage("/Access_Denied").and()
-				.formLogin().loginPage("/login").failureUrl("/login?error")
-				.usernameParameter("username").passwordParameter("password")
-				.and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
-				.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
-				.logout().logoutSuccessUrl("/login?logout");
-
-
-		String[] activeProfiles = environment.getActiveProfiles();
-		String active = activeProfiles[0];
-		if(active.equals("inmem")) {
-			http.authorizeRequests().antMatchers("/console/*","/console/**").permitAll();
-			http.csrf().disable();
-			http.headers().frameOptions().disable();
-		}
-		/*http.sessionManagement().maximumSessions(1)
-				.expiredUrl("/login?expired").maxSessionsPreventsLogin(true)
-				.and().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-				.invalidSessionUrl("/"); */
-
-    // TODO http.authorizeRequests().anyRequest().authenticated();
-
+        http.formLogin().defaultSuccessUrl("/ipl_home").and()
+                .exceptionHandling().accessDeniedPage("/Access_Denied").and()
+                .formLogin().loginPage("/login").failureUrl("/login?error")
+                .usernameParameter("username").passwordParameter("password")
+                .and().csrf().csrfTokenRepository(csrfTokenRepository()).and()
+                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class)
+                .logout().logoutSuccessUrl("/login?logout");
     }
-
 
     private CsrfTokenRepository csrfTokenRepository() {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
