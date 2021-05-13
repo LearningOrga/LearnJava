@@ -54,7 +54,7 @@ color: #9c27b0 !important;
     <title>Predict and Win - Manage Users Admin</title>
 
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 
 
 </head>
