@@ -14,7 +14,7 @@ color: deepskyblue !important;
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Predict and Win - Welcome Page</title>
     
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
     
 </head>
 <body>

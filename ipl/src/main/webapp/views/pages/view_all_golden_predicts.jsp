@@ -46,9 +46,9 @@ font-weight: bold !important;
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Predict and Win - View Golden Predicts</title>
 
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
 <script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <!-- load momentJS (required for angular-moment) -->
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
