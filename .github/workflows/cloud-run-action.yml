@@ -1,4 +1,4 @@
-name: deploy to online delivery project
+name: deploy ipl
 
 on: [push]
 
@@ -24,15 +24,15 @@ jobs:
           gcloud auth configure-docker
       - name: Build
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/onlinedelivery:latest .
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl:latest .
       - name: Push
         run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/onlinedelivery:latest
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl:latest
       - name: 3. Deploy
         run: |
-          gcloud run deploy onlinedelivery \
+          gcloud run deploy gcp-fundamentals \
           --region europe-west1 \
-          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/onlinedelivery \
+          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl \
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
