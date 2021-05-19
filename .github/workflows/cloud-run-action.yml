@@ -36,4 +36,3 @@ jobs:
           --platform managed \
           --allow-unauthenticated \
           --project ${{ secrets.GCP_PROJECT_ID }}
-          --port 8090:8090
