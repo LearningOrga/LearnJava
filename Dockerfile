@@ -4,4 +4,4 @@ COPY ./ipl ./
 
 RUN mvn package -DskipTests
 
-CMD ["java","-jar","./ipl/target/LearnJava-0.0.1.jar"]
+CMD ["java","-jar","./target/LearnJava-0.0.1.jar"]
