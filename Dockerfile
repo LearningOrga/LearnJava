@@ -1,6 +1,6 @@
 FROM maven:3.5-jdk-8 as maven
 
-COPY ./ipl
+COPY ./ipl ./
 
 RUN mvn package -DskipTests
 
