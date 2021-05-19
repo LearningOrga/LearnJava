@@ -6,7 +6,7 @@
     <groupId>org.learnjava</groupId>
     <artifactId>LearnJava</artifactId>
     <version>0.0.1</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>ipl-java-learning</name>
 
