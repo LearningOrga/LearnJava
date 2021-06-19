@@ -30,8 +30,8 @@ jobs:
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl:latest
       - name: 3. Deploy
         run: |
-          gcloud run deploy gcp-fundamentals \
-          --region europe-west1 \
+          gcloud run deploy serverless-app \
+          --region asia-south1-a \
           --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl \
           --platform managed \
           --allow-unauthenticated \
