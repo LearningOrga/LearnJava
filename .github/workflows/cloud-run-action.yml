@@ -31,7 +31,7 @@ jobs:
       - name: 3. Deploy
         run: |
           gcloud run deploy serverless-app \
-          --region asia-south1-a \
+          --region asia-south1 \
           --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl \
           --platform managed \
           --allow-unauthenticated \
