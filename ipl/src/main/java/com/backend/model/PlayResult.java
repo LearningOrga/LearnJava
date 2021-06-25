@@ -38,7 +38,7 @@ public class PlayResult implements Serializable {
 	@Column(name = "RULE_VALUE", nullable = false)
 	private String ruleValue;
 	
-	@Column(name = "RULE_RESULT", nullable = false)
+	@Column(name = "RULE_RESULT", nullable = true)
 	private String ruleResult;
 
 	@ManyToOne(fetch=FetchType.EAGER)
