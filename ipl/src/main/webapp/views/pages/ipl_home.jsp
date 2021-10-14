@@ -56,7 +56,7 @@ background-color: #9CAEB7 !important;
 
 <div ng-app="myIplApp" ng-controller="userController" class="w3-container"> 
 
-		<h2>Predict and Win - Home</h2>
+		<h2>Predict and Win - Home Page</h2>
 		
 		<a href="<c:url value="/summary" />" class="w3-btn w3-ripple">&#10004;Summary</a>
 		
