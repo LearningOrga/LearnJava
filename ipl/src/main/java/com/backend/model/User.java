@@ -1,8 +1,8 @@
 package com.backend.model;
 
+import jakarta.persistence.*;
 import org.hibernate.envers.Audited;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity

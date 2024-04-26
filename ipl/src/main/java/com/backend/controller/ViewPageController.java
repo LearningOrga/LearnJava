@@ -1,7 +1,6 @@
 package com.backend.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
@@ -19,7 +18,7 @@ public class ViewPageController {
 
 	@RequestMapping(value = "/addMatchPoints", method = RequestMethod.GET)
 	public ModelAndView addMatchPoints(HttpServletRequest request, ModelMap model,
-			@RequestParam("matchid") int matchId) {
+									   @RequestParam("matchid") int matchId) {
 		request.getSession().setAttribute("matchId", matchId);
 
 		ModelAndView mav = new ModelAndView("add_points");

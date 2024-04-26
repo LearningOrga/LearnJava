@@ -7,20 +7,20 @@ Target Database: ipldb
 Date: 4/9/2017 7:34:41 PM
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+--SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for match_master
 -- ----------------------------
-DROP TABLE IF EXISTS `match_master`;
-CREATE TABLE `match_master` (
-  `MATCH_NO` int(4) NOT NULL auto_increment,
-  `MATCH_DATE` varchar(50) default NULL,
-  `MATCH_DAY` varchar(50) default NULL,
-  `MATCH_TIME` varchar(100) default NULL,
-  `MATCH_DETAILS` varchar(100) default NULL,
-  `MATCH_VENUE` varchar(50) default NULL,
-  `MATCH_STATUS` varchar(2) default 'A',
-  PRIMARY KEY  (`MATCH_NO`)
+DROP TABLE IF EXISTS match_master;
+CREATE TABLE match_master (
+  MATCH_NO int NOT NULL auto_increment,
+  MATCH_DATE varchar(50) default NULL,
+  MATCH_DAY varchar(50) default NULL,
+  MATCH_TIME varchar(100) default NULL,
+  MATCH_DETAILS varchar(100) default NULL,
+  MATCH_VENUE varchar(50) default NULL,
+  MATCH_STATUS varchar(2) default 'A',
+  PRIMARY KEY  ( MATCH_NO )
 );
 --ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
 

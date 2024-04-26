@@ -1,16 +1,10 @@
 package com.backend.controller;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.backend.model.*;
+import com.backend.model.fe.PlaySelection;
+import com.backend.service.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,27 +12,11 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.backend.model.Match;
-import com.backend.model.MatchResult;
-import com.backend.model.PlayResult;
-import com.backend.model.Rule;
-import com.backend.model.Summary;
-import com.backend.model.User;
-import com.backend.service.MatchResultService;
-import com.backend.service.MatchService;
-import com.backend.service.PlayResultService;
-import com.backend.service.RuleService;
-import com.backend.service.UserService;
-import com.backend.model.fe.*;
+import java.text.DecimalFormat;
+import java.util.*;
 
 @RestController
 @RequestMapping("/playResult")
@@ -204,8 +182,8 @@ public class PlayResultController {
 	@Secured("ROLE_ADMIN")
 	@ResponseBody
 	public List<User> reconcilePlayResultByUserId(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model,
-			@RequestBody Match matchReq) {
+												  HttpServletResponse response, ModelMap model,
+												  @RequestBody Match matchReq) {
 
 		List<User> users = new ArrayList();
 

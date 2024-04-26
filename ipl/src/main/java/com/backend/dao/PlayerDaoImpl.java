@@ -1,15 +1,22 @@
 package com.backend.dao;
 
-import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import com.backend.model.Player;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.backend.model.Player;
+import java.util.List;
 
 @Repository("playerDao")
 public class PlayerDaoImpl extends AbstractDao implements PlayerDao{
+
+	@Autowired
+	private EntityManager entityManager;
 
 	@Override
 	public void savePlayer(Player player) {
@@ -17,19 +24,30 @@ public class PlayerDaoImpl extends AbstractDao implements PlayerDao{
 		
 	}
 
+
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Player> findAllPlayers() {
-		Criteria criteria = getSession().createCriteria(Player.class);
-		//("here");
-		return (List<Player>) criteria.list();
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Player> cq = cb.createQuery(Player.class);
+		Root<Player> player = cq.from(Player.class);
+		cq.select(player);
+		return (List<Player>) entityManager.createQuery(cq).getResultList();
+
 	}
 
 	@Override	
 	public Player findPlayerById(int playerId) {
-		Criteria criteria = getSession().createCriteria(Player.class);
-		criteria.add(Restrictions.eq("id",playerId));
-		return (Player) criteria.uniqueResult();
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Player> cq = cb.createQuery(Player.class);
+		Root<Player> player = cq.from(Player.class);
+		Predicate idPredicate = cb.equal(player.get("id"),playerId);
+		cq.where( idPredicate);
+		TypedQuery<Player> query = entityManager.createQuery(cq);
+		return (Player) query.getSingleResult();
+
 	}
 
 	

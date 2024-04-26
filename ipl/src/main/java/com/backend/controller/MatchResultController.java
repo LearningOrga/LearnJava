@@ -1,27 +1,20 @@
 package com.backend.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.backend.model.MatchResult;
+import com.backend.service.MatchResultService;
+import com.backend.service.MatchService;
+import com.backend.service.RuleService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.backend.model.MatchResult;
-import com.backend.service.MatchResultService;
-import com.backend.service.MatchService;
-import com.backend.service.RuleService;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class MatchResultController {
@@ -59,7 +52,7 @@ public class MatchResultController {
 	@Secured ("ROLE_ADMIN")
 	public @ResponseBody
 	List<MatchResult> addMatchResult(HttpServletRequest request,
-			HttpServletResponse response, ModelMap model, @RequestBody MatchResult matchResultReq) {
+									 HttpServletResponse response, ModelMap model, @RequestBody MatchResult matchResultReq) {
 		 logger.info("Updating Playresult......");
 		
 		MatchResult matchResult;

@@ -1,16 +1,21 @@
 package com.backend.dao;
 
-import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import com.backend.model.Predict;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.backend.model.Predict;
+import java.util.List;
 
 @Repository("predictDao")
 public class PredictDaoImpl extends AbstractDao implements PredictDao{
-
+	@Autowired
+	private EntityManager entityManager;
 	@Override
 	public void savePredict(Predict predict) {
 		persist(predict);
@@ -18,42 +23,32 @@ public class PredictDaoImpl extends AbstractDao implements PredictDao{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Predict> findAllPredicts() {
-		//("I am in Dao");
-		Criteria criteria = getSession().createCriteria(Predict.class);
-		
-		//("I am in Dao"+criteria.toString());
-		List<Predict> list = criteria.list();
-//		List<Predict> finalList = new ArrayList();
-//		for (Predict predict : list) {
-//			Team team1 = predict.getQfTeam1Result();
-//			Team team2 = predict.getQfTeam2Result();
-//			Team team3 = predict.getQfTeam3Result();
-//			Team team4 = predict.getQfTeam4Result();
-//			Team team5;
-//			Team team6;
-//			Team team7;
-//			if(predict.getQfteam1().getId() == predict.getQfTeam1Result().getId() && 
-//					predict.getQfteam2().getId() == .getId() && 
-//					predict.getQfteam3().getId() == predict.getQfTeam3Result().getId() && 
-//					predict.getQfteam4().getId() == predict.getQfTeam4Result().getId() && 
-//					predict.getSfteam1().getId() == predict.getSfTeam1Result().getId() && 
-//					predict.getSfteam2().getId() == predict.getSfTeam2Result().getId() && 
-//					predict.getFinalWinningTeam().getId() == predict.getFinalWinningTeamResult().getId()){
-//				
-//				finalList.add(predict);
-//			}
-//		}
-		return list;
+
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Predict> cq = cb.createQuery(Predict.class);
+		Root<Predict> match = cq.from(Predict.class);
+		cq.select(match);
+		return (List<Predict>) entityManager.createQuery(cq).getResultList();
+
+
 	}
 
 
 	@Override
 	public Predict findByUserId(int userId){
-		//("I am in Dao");
-		Criteria criteria = getSession().createCriteria(Predict.class);
-		//("I am in Dao"+userId);
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Predict> cq = cb.createQuery(Predict.class);
+		Root<Predict> match = cq.from(Predict.class);
+		Predicate idPredicate = cb.equal(match.get("id"),userId);
+		cq.where( idPredicate);
+		TypedQuery<Predict> query = entityManager.createQuery(cq);
+		return (Predict) query.getSingleResult();
+
+		/*Criteria criteria = getSession().createCriteria(Predict.class);
 		criteria.add(Restrictions.eq("userId.id",userId));
-		return (Predict) criteria.uniqueResult();
+		return (Predict) criteria.uniqueResult();*/
 	}
 	@Override
 	public void updatePredict(Predict predict){

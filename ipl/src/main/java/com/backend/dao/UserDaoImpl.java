@@ -1,16 +1,21 @@
 package com.backend.dao;
 
-import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import com.backend.model.User;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.backend.model.User;
+import java.util.List;
 
 @Repository("loginMasterDao")
 public class UserDaoImpl extends AbstractDao implements UserDao{
-
+	@Autowired
+	private EntityManager entityManager;
 	@Override
 	public void saveUser(User match) {
 		persist(match);
@@ -20,23 +25,34 @@ public class UserDaoImpl extends AbstractDao implements UserDao{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> findAllUsers() {
-		Criteria criteria = getSession().createCriteria(User.class);
-		//criteria.addOrder(Order.desc("availablePoints"));
-		return (List<User>) criteria.list();
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> match = cq.from(User.class);
+		cq.select(match);
+		return (List<User>) entityManager.createQuery(cq).getResultList();
 	}
 
 	@Override	
 	public User findUserByName(String name) {
-		Criteria criteria = getSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("loginName",name));
-		return (User) criteria.uniqueResult();
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> match = cq.from(User.class);
+		Predicate idPredicate = cb.equal(match.get("loginName"),name);
+		cq.where( idPredicate);
+		TypedQuery<User> query = entityManager.createQuery(cq);
+		return (User) query.getSingleResult();
+
 	}
 	
 	@Override	
 	public User findUserById(int userId) {
-		Criteria criteria = getSession().createCriteria(User.class);
-		criteria.add(Restrictions.eq("id",userId));
-		return (User) criteria.uniqueResult();
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<User> cq = cb.createQuery(User.class);
+		Root<User> match = cq.from(User.class);
+		Predicate idPredicate = cb.equal(match.get("id"),userId);
+		cq.where( idPredicate);
+		TypedQuery<User> query = entityManager.createQuery(cq);
+		return (User) query.getSingleResult();
 	}
 
 	@Override
