@@ -1,5 +1,6 @@
 package com.backend.config;
 
+import jakarta.servlet.DispatcherType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,6 +49,7 @@ public class SecurityConfig  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
+                        .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
                         .requestMatchers("/", "/home","/login").permitAll()
                         .anyRequest().authenticated()
                 )
