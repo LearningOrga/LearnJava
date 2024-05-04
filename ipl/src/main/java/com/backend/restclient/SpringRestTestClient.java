@@ -2,7 +2,8 @@ package com.backend.restclient;
 
 import java.net.URI;
 import java.util.List;
- 
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.backend.model.User;
@@ -11,7 +12,7 @@ import com.backend.model.User;
  
 public class SpringRestTestClient {
  
-    public static final String REST_SERVICE_URI = "http://localhost:8080/backend";
+    public static final String REST_SERVICE_URI = "http://localhost:8080/";
      
     /* GET */
     @SuppressWarnings("unchecked")
@@ -19,8 +20,10 @@ public class SpringRestTestClient {
         //("Testing listAllUsers API-----------");
          
         RestTemplate restTemplate = new RestTemplate();
-        List<User> users = restTemplate.getForObject(REST_SERVICE_URI+"/user/all", List.class);
-         
+       List<User> users = restTemplate.getForObject(REST_SERVICE_URI+"/user/all", List.class);
+
+       // ResponseEntity<T> response =  callRestEndPoint(User[].class,restTemplate,retryTemplate);
+
       if(users.size()==0){
 		for (User user : users) {
 			//(user);
@@ -70,11 +73,11 @@ public class SpringRestTestClient {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(REST_SERVICE_URI+"/user/");
     }
-    /*
+
    
     public static void main(String args[]){
         listAllUsers();
-        createUser();
+       /* createUser();
         getUser();
        
         listAllUsers();
@@ -83,6 +86,6 @@ public class SpringRestTestClient {
         deleteUser();
         listAllUsers();
         deleteAllUsers();
-        listAllUsers();
-    }*/
+        listAllUsers();*/
+    }
 }

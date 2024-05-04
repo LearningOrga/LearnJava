@@ -17,8 +17,8 @@ public class UserDaoImpl extends AbstractDao implements UserDao{
 	@Autowired
 	private EntityManager entityManager;
 	@Override
-	public void saveUser(User match) {
-		persist(match);
+	public void saveUser(User user) {
+		persist(user);
 		
 	}
 
