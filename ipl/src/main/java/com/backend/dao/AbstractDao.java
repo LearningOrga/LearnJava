@@ -1,9 +1,8 @@
 package com.backend.dao;
 
+import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.persistence.EntityManager;
 
 /**
  * Abstract dao cfor session factory etc

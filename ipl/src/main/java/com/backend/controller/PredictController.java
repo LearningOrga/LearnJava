@@ -1,26 +1,19 @@
 package com.backend.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.backend.model.Predict;
 import com.backend.model.Team;
 import com.backend.model.User;
 import com.backend.service.PredictService;
 import com.backend.service.TeamService;
 import com.backend.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class PredictController {
@@ -43,7 +36,7 @@ public class PredictController {
 	}
 
 	@RequestMapping(value = { "/addGoldenPredicts" }, method = RequestMethod.GET)
-	public ModelAndView addGoldenPredicts(HttpServletRequest request,ModelMap model) {
+	public ModelAndView addGoldenPredicts(HttpServletRequest request, ModelMap model) {
 		
 		ModelAndView mav = new ModelAndView("add_golden_predicts");
 		mav.addObject(model);

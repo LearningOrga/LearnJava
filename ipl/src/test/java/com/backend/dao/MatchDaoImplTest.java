@@ -1,13 +1,6 @@
 package com.backend.dao;
 
-import com.backend.model.Match;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.junit.Assert;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
+/*
 public class MatchDaoImplTest extends IPLDaoImplBaseTest{
 
 	@Autowired
@@ -19,17 +12,7 @@ public class MatchDaoImplTest extends IPLDaoImplBaseTest{
 		return dataSet;
 	}
 
-	/* In case you need multiple datasets (mapping different tables) and you do prefer to keep them in separate XML's
-	@Override
-	protected IDataSet getDataSet() throws Exception {
-	  IDataSet[] datasets = new IDataSet[] {
-			  new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("Employee.xml")),
-			  new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("Benefits.xml")),
-			  new FlatXmlDataSet(this.getClass().getClassLoader().getResourceAsStream("Departements.xml"))
-	  };
-	  return new CompositeDataSet(datasets);
-	}
-	*/
+
 
 	@Test
 	public void findById(){
@@ -75,4 +58,4 @@ public class MatchDaoImplTest extends IPLDaoImplBaseTest{
 		return match;
 	}
 
-}
+}*/

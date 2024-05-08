@@ -18,7 +18,9 @@ public class HomeSteps extends Steps {
     public void openABrowser(){
     if(driver==null){
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=");
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
     }
 

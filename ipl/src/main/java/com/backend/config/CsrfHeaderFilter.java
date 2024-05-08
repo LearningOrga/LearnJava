@@ -1,23 +1,22 @@
 package com.backend.config;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
+import java.io.IOException;
+
 public class CsrfHeaderFilter extends OncePerRequestFilter {
 	  @Override
 	  protected void doFilterInternal(HttpServletRequest request,
-	      HttpServletResponse response, FilterChain filterChain)
+									  HttpServletResponse response, FilterChain filterChain)
 	      throws ServletException, IOException {
-	    CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
+   	    CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
 	        .getName());
 	    if (csrf != null) {
 	      Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");

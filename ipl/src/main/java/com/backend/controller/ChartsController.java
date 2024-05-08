@@ -4,6 +4,7 @@ import com.backend.model.Match;
 import com.backend.model.PlayResult;
 import com.backend.service.MatchService;
 import com.backend.service.PlayResultService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.awt.*;
 import java.io.OutputStream;
 import java.util.List;
