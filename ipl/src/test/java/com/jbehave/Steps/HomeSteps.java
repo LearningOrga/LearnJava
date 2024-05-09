@@ -29,7 +29,8 @@ public class HomeSteps extends Steps {
 
     @When("Applicaion $ipl is launched")
     public void openApp(String ipl){
-      driver.get(ipl);
+     //TODO:fix driver path and file issue
+         driver.get(ipl);
     }
 
     @Then("$title page is displayed")
