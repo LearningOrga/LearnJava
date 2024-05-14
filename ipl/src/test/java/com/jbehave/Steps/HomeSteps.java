@@ -6,30 +6,18 @@ import org.jbehave.core.annotations.When;
 import org.jbehave.core.steps.Steps;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class HomeSteps extends Steps {
 
-    private static WebDriver driver=null;
+    private WebDriver driver;
 
     @Given("browser is opened")
     public void openABrowser(){
-    if(driver==null){
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-    }
-
-
+        this.driver=AutomatedTests.driver;
     }
 
     @When("Applicaion $ipl is launched")
     public void openApp(String ipl){
-     //TODO:fix driver path and file issue
          driver.get(ipl);
     }
 
