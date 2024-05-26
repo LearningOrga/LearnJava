@@ -206,7 +206,8 @@ public class PlayResultController {
 			}
 
 			user.setAvailablePoints(user.getAvailablePoints() + totalLossOrWin);
-			userService.updateUser(user);
+			//Below one is not required as it is in same transaction!!
+			//userService.updateUser(user);
 		}
 
 		// TODO: this list may not be updated so if you are planning to use get
@@ -346,6 +347,8 @@ public class PlayResultController {
 
 		String wininTeam = matchResultService.findAllRecordsByRuleIdnadMatchId(
 				ruleId, matchId).getRuleResult();
+
+
 		for (PlayResult result : playResult) {
 
 			if (result.getRuleValue().equals(wininTeam)) {
@@ -375,7 +378,7 @@ public class PlayResultController {
 					temp1 = Double.parseDouble(pointsInvested.get(val2)
 							.toString());
 				} else {
-					temp = result.getPointsInvested()
+					temp =  result.getPointsInvested()
 							/ Double.parseDouble(pointsInvested.get(val2)
 									.toString());
 					temp1 = Double.parseDouble(pointsInvested.get(val1)
@@ -425,10 +428,44 @@ public class PlayResultController {
 			List playResultList = playResultService
 					.findAllRecordsByParams(param);
 
-			PlayResult playResult;
+			PlayResult playResult = null;
+			if(playResultList.size() == 0) {
+				playResult = new PlayResult();
+				playResult.setUserId(user);
+				playResult.setRuleId(ruleService.findRuleById(ruleId));
+				playResult.setRuleValue(playResultReq.getRuleValue());
+				playResult.setMatchId(matchService.findMatchById(matchId));
+				playResult.setPointsInvested(Double.parseDouble(playResultReq
+						.getPointsInvested().toString()));
+				playResultService.savePlayResult(playResult);
+			}else{
+				 List<PlayResult> result = playResultList;
+				 boolean exactMatchFound = result.stream().allMatch(x-> x.getMatchId().getId() == matchId && x.getUserId().getId() == userId && x.getRuleId().getId() == ruleId);
+				 if(exactMatchFound){
+					 result.forEach(x->{
+						 if(x.getMatchId().getId() == matchId && x.getUserId().getId() == userId && x.getRuleId().getId() == ruleId){
+							 x.setUserId(user);
+							 x.setRuleId(ruleService.findRuleById(ruleId));
+							 x.setRuleValue(playResultReq.getRuleValue());
+							 x.setMatchId(matchService.findMatchById(matchId));
+							 x.setPointsInvested(Double.parseDouble(playResultReq
+									 .getPointsInvested().toString()));
+						 }
+					 });
+				 }else{
+					 playResult = new PlayResult();
+					 playResult.setUserId(user);
+					 playResult.setRuleId(ruleService.findRuleById(ruleId));
+					 playResult.setRuleValue(playResultReq.getRuleValue());
+					 playResult.setMatchId(matchService.findMatchById(matchId));
+					 playResult.setPointsInvested(Double.parseDouble(playResultReq
+							 .getPointsInvested().toString()));
+					 playResultService.savePlayResult(playResult);
+				 }
 
-			if (playResultList.size() == 0) {
-
+			}
+			//old code
+			/*if (playResultList.size() == 0) {
 				playResult = new PlayResult();
 				playResult.setUserId(user);
 				playResult.setRuleId(ruleService.findRuleById(ruleId));
@@ -441,15 +478,28 @@ public class PlayResultController {
 
 			} else {
 				playResult = (PlayResult) playResultList.get(0);
-				playResult.setUserId(user);
-				playResult.setRuleId(ruleService.findRuleById(ruleId));
-				playResult.setRuleValue(playResultReq.getRuleValue());
-				playResult.setMatchId(matchService.findMatchById(matchId));
-				playResult.setPointsInvested(Double.parseDouble(playResultReq
-						.getPointsInvested().toString()));
-
-				playResultService.updateResult(playResult);
-			}
+				if(playResult.getMatchId().getId() == matchId && playResult.getUserId().getId() == userId && playResult.getRuleId().getId() == ruleId)
+				{
+					System.out.println("Adding data in same record=============================");
+					playResult.setUserId(user);
+					playResult.setRuleId(ruleService.findRuleById(ruleId));
+					playResult.setRuleValue(playResultReq.getRuleValue());
+					playResult.setMatchId(matchService.findMatchById(matchId));
+					playResult.setPointsInvested(Double.parseDouble(playResultReq
+							.getPointsInvested().toString()));
+					//playResultService.updateResult(playResult);
+				}else {
+				playResult = new PlayResult();
+					playResult.setUserId(user);
+					playResult.setRuleId(ruleService.findRuleById(ruleId));
+					playResult.setRuleValue(playResultReq.getRuleValue());
+					playResult.setMatchId(matchService.findMatchById(matchId));
+					playResult.setPointsInvested(Double.parseDouble(playResultReq
+							.getPointsInvested().toString()));
+					playResultService.savePlayResult(playResult);
+				}
+				//playResultService.updateResult(playResult);
+			}*/
 
 			// return updated;
 
@@ -476,5 +526,6 @@ public class PlayResultController {
 		}
 		return userName;
 	}
+
 
 }

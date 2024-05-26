@@ -2,14 +2,14 @@ package com.backend.dao;
 
 import com.backend.model.MatchResult;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository("matchResultDao")
 public class MatchResultDaoImpl extends AbstractDao implements MatchResultDao {
@@ -18,9 +18,13 @@ public class MatchResultDaoImpl extends AbstractDao implements MatchResultDao {
 	
 	/*private Criteria createAlias(Criteria criteria ){
 		criteria.createAlias("ruleId", "ruleId", JoinType.LEFT_OUTER_JOIN);
-		criteria.createAlias("matchId", "matchId", JoinType.LEFT_OUTER_JOIN);
+		criteria.createAlias("matchId", "ruleId", JoinType.LEFT_OUTER_JOIN);
 		return criteria;
 	}*/
+
+    private Selection<MatchResult> createAlias(CriteriaQuery<MatchResult> criteriaQuery){
+        return criteriaQuery.from(MatchResult.class).alias("matchId").alias("ruleId");
+    }
 
     @Override
     public List<MatchResult> findAllRecords() {
@@ -37,15 +41,16 @@ public class MatchResultDaoImpl extends AbstractDao implements MatchResultDao {
     @Override
     public List<MatchResult> findAllRecordsByMatchId(int matchId) {
 
-        TypedQuery<MatchResult> query
-                = entityManager.createQuery(
-                "SELECT r FROM MatchResult mr, Match m WHERE mr.matchId = matchId", MatchResult.class);
-        List<MatchResult> resultList = query.getResultList();
-        return resultList;
-		/*Criteria criteria = getSession().createCriteria(MatchResult.class);
-		criteria=createAlias(criteria);
-		criteria.add(Restrictions.eq("matchId.id",matchId));
-		return (List<MatchResult>) criteria.list();*/
+        try{
+            CriteriaQuery<MatchResult> criteriaQuery = getSession().getCriteriaBuilder().createQuery(MatchResult.class);
+            CriteriaBuilder cb = getSession().getCriteriaBuilder();
+            Root<MatchResult> root = criteriaQuery.from(MatchResult.class);
+            criteriaQuery.where(cb.equal(root.get("matchId").get("id"),matchId));
+            return Optional.ofNullable(getSession().createQuery(criteriaQuery).getResultList()).get();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -56,32 +61,28 @@ public class MatchResultDaoImpl extends AbstractDao implements MatchResultDao {
                 "SELECT r FROM MatchResult mr, Match m WHERE mr.matchId = matchId", MatchResult.class);
         List<MatchResult> resultList = query.getResultList();
         return resultList;
-		/*Criteria criteria = getSession().createCriteria(MatchResult.class);
-		criteria=createAlias(criteria);
-		criteria.add(Restrictions.eq("ruleId.id",ruleId));
-		return (List<MatchResult>) criteria.list();*/
     }
 
     @Override
     public void saveMatchResult(MatchResult result) {
-        //("Saving match result"+result);
         persist(result);
 
     }
 
     @Override
     public MatchResult findAllRecordsByRuleIdnadMatchId(int ruleId, int matchId) {
-
-        TypedQuery<MatchResult> query
-                = entityManager.createQuery(
-                "SELECT r FROM MatchResult mr, Match m WHERE mr.matchId = matchId", MatchResult.class);
-        List<MatchResult> resultList = query.getResultList();
-        return resultList.get(0);
-		/*Criteria criteria = getSession().createCriteria(MatchResult.class);
-		criteria=createAlias(criteria);
-		criteria.add(Restrictions.eq("matchId.id",matchId));
-		criteria.add(Restrictions.eq("ruleId.id",ruleId));
-		return (MatchResult) criteria.uniqueResult();*/
+        EntityManager manager = null;
+        try{
+            CriteriaBuilder cb = getSession().getCriteriaBuilder();
+            CriteriaQuery<MatchResult> criteriaQuery = getSession().getCriteriaBuilder().createQuery(MatchResult.class);
+            Root<MatchResult> root = (Root<MatchResult>) createAlias(criteriaQuery);
+            criteriaQuery.where(cb.equal(root.get("matchId").get("id"),matchId), cb.equal(root.get("ruleId").get("id"),ruleId));
+            return Optional.ofNullable(getSession().createQuery(criteriaQuery).getSingleResult()).get();
+        }
+        catch (NoResultException e){
+            e.getCause();
+        }
+       return null;
     }
 
     @Override
