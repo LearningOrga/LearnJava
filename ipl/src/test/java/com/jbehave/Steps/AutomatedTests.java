@@ -63,7 +63,7 @@ public class AutomatedTests extends JUnitStories {
         if(driver==null){
             //System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
             //TODO:124 issue
-            WebDriverManager.chromedriver().browserVersion("124").setup();
+            WebDriverManager.chromedriver().browserVersion("128").setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=");
             driver = new ChromeDriver(options);
