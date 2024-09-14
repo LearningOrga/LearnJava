@@ -1,57 +1,79 @@
 package com.backend.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.sql.JoinType;
+import com.backend.model.PlayResult;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.backend.model.PlayResult;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Repository("playResultDao")
 public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
-	private Criteria createAlias(Criteria criteria) {
+	@Autowired
+	private EntityManager entityManager;
+
+	/*private Criteria createAlias(Criteria criteria) {
 		criteria.createAlias("userId", "userId", JoinType.LEFT_OUTER_JOIN);
 		criteria.createAlias("ruleId", "ruleId", JoinType.LEFT_OUTER_JOIN);
 		criteria.createAlias("matchId", "matchId", JoinType.LEFT_OUTER_JOIN);
 		return criteria;
+	}*/
+	private Selection<PlayResult> createAlias(CriteriaQuery<PlayResult> criteriaQuery){
+		return criteriaQuery.from(PlayResult.class).alias("ruleId").alias("matchId").alias("userId");
 	}
 
 	@Override
 	public List<PlayResult> findAllRecords() {
-		Criteria criteria = getSession().createCriteria(PlayResult.class);
+  		//TODO:order
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<PlayResult> cq = cb.createQuery(PlayResult.class);
+		Root<PlayResult> match = cq.from(PlayResult.class);
+		cq.select(match);
+		return (List<PlayResult>) entityManager.createQuery(cq).getResultList();
+		/*Criteria criteria = getSession().createCriteria(PlayResult.class);
 		criteria.addOrder(Order.desc("totalPointsEarned"));
-		return (List<PlayResult>) criteria.list();
+		return (List<PlayResult>) criteria.list();*/
 	}
 
 	@Override
 	public List<PlayResult> findAllRecordsByUserId(int userId) {
-		Criteria criteria = getSession().createCriteria(PlayResult.class);
+
+		//TODO
+		TypedQuery<PlayResult> query
+				= entityManager.createQuery(
+				"SELECT r FROM MatchResult mr, Match m WHERE mr.matchId = matchId", PlayResult.class);
+		List<PlayResult> resultList = query.getResultList();
+		return resultList;
+		/*Criteria criteria = getSession().createCriteria(PlayResult.class);
 		criteria = createAlias(criteria);
 		criteria.add(Restrictions.eq("userId.id", userId));
-		return (List<PlayResult>) criteria.list();
+		return (List<PlayResult>) criteria.list();*/
 	}
 
 	@Override
 	public List<PlayResult> findAllRecordsByParams(Map params) {
-		Criteria criteria = getSession().createCriteria(PlayResult.class);
-		criteria.addOrder(Order.desc("totalPointsEarned"));
-		criteria = createAlias(criteria);
-		if (params.containsKey("ruleId")) {
-			criteria.add(Restrictions.eq("ruleId.id", params.get("ruleId")));
+		//TODO
+		CriteriaBuilder criteriaBuilder = getSession().getCriteriaBuilder();
+		CriteriaQuery<PlayResult> criteriaQuery = criteriaBuilder.createQuery(PlayResult.class);
+		Root<PlayResult> resultRoot = (Root<PlayResult>) createAlias(criteriaQuery);
+		criteriaQuery.orderBy(criteriaBuilder.desc(resultRoot.get("totalPointsEarned")));
+		List<Predicate> predicates = new ArrayList<>();
+
+		if(params.containsKey("ruleId")){
+			predicates.add(criteriaBuilder.equal(resultRoot.get("ruleId").get("id"),params.get("ruleId")));
+		}if(params.containsKey("matchId")){
+			predicates.add(criteriaBuilder.equal(resultRoot.get("matchId").get("id"),params.get("matchId")));
+		}if(params.containsKey("userId")){
+			criteriaQuery.where(criteriaBuilder.equal(resultRoot.get("userId").get("id"),params.get("userId")));
+			predicates.add(criteriaBuilder.equal(resultRoot.get("userId").get("id"),params.get("userId")));
 		}
-		if (params.containsKey("matchId")) {
-			criteria.add(Restrictions.eq("matchId.id", params.get("matchId")));
-		}
-		if (params.containsKey("userId")) {
-			criteria.add(Restrictions.eq("userId.id", params.get("userId")));
-		}
-		// ("critera--------------" + criteria);
-		return (List<PlayResult>) criteria.list();
+		criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
+		return getSession().createQuery(criteriaQuery).getResultList();
 	}
 
 	@Override
@@ -82,7 +104,7 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 	@Override
 	public void updateResult(PlayResult result) {
-		getSession().update(result);
+		getSession().merge(result);
 
 	}
 
@@ -157,6 +179,13 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 	@Override
 	public void removePlayByIds(Map params) {
 
+		//TODO
+		TypedQuery<PlayResult> query
+				= entityManager.createQuery(
+				"SELECT r FROM MatchResult mr, Match m WHERE mr.matchId = matchId", PlayResult.class);
+		List<PlayResult> resultList = query.getResultList();
+
+		/*
 		Criteria criteria = getSession().createCriteria(PlayResult.class);
 		criteria = createAlias(criteria);
 		if (params.containsKey("ruleId")) {
@@ -176,7 +205,7 @@ public class PlayResultDaoImpl extends AbstractDao implements PlayResultDao {
 
 			getSession().delete(list.get(i));
 		}
-		// return getSession().delete(list);
+		// return getSession().delete(list);*/
 
 	}
 

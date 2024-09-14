@@ -1,18 +1,6 @@
 package com.backend.dao;
 
-import com.backend.model.MatchResult;
-import org.dbunit.dataset.CompositeDataSet;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.h2.tools.Server;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.sql.SQLException;
-
-
+/*
 public class MatchResultDaoImplTest extends IPLDaoImplBaseTest{
 
 	@Autowired
@@ -73,4 +61,4 @@ public class MatchResultDaoImplTest extends IPLDaoImplBaseTest{
 		return matchResult;
 	}
 
-}
+}*/

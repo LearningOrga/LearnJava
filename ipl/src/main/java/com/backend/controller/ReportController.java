@@ -1,16 +1,8 @@
 package com.backend.controller;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.backend.model.PlayResult;
+import com.backend.service.PlayResultService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
@@ -29,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.backend.model.PlayResult;
-import com.backend.service.PlayResultService;
+import java.awt.*;
+import java.io.OutputStream;
+import java.util.List;
+import java.util.*;
 
 @RestController
 public class ReportController {

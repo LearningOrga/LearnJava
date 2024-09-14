@@ -1,11 +1,11 @@
 package com.backend.model;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="rule_master")
@@ -16,7 +16,7 @@ public class Rule implements Serializable {
 	private static final long serialVersionUID = -4033282747353741985L;
 
 
-	@Id	
+	@Id
 	@Column(name = "RULE_ID", nullable = false)
 	private int id;
 	

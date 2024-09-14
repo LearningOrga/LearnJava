@@ -1,15 +1,22 @@
 package com.backend.dao;
 
-import java.util.List;
-
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
+import com.backend.model.Rule;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.backend.model.Rule;
+import java.util.List;
 
 @Repository("ruleDao")
 public class RuleDaoImpl extends AbstractDao implements RuleDao{
+
+	@Autowired
+	private EntityManager entityManager;
 
 	@Override
 	public void saveRule(Rule rule) {
@@ -20,16 +27,26 @@ public class RuleDaoImpl extends AbstractDao implements RuleDao{
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Rule> findAllRules() {
-		Criteria criteria = getSession().createCriteria(Rule.class);
-		//("here");
-		return (List<Rule>) criteria.list();
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Rule> cq = cb.createQuery(Rule.class);
+		Root<Rule> match = cq.from(Rule.class);
+		cq.select(match);
+		return (List<Rule>) entityManager.createQuery(cq).getResultList();
+
 	}
 
 	@Override	
 	public Rule findRuleById(int ruleId) {
-		Criteria criteria = getSession().createCriteria(Rule.class);
-		criteria.add(Restrictions.eq("id",ruleId));
-		return (Rule) criteria.uniqueResult();
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Rule> cq = cb.createQuery(Rule.class);
+		Root<Rule> match = cq.from(Rule.class);
+		Predicate idPredicate = cb.equal(match.get("id"),ruleId);
+		cq.where( idPredicate);
+		TypedQuery<Rule> query = entityManager.createQuery(cq);
+		return (Rule) query.getSingleResult();
+
+
 	}
 
 	

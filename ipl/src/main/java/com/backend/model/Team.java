@@ -1,11 +1,11 @@
 package com.backend.model;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="team_master")
@@ -16,7 +16,7 @@ public class Team implements Serializable{
 	private static final long serialVersionUID = -1637292535699347414L;
 
 
-	@Id	
+	@Id
 	@Column(name = "TEAM_ID", nullable = false)
 	private int id;
 	
