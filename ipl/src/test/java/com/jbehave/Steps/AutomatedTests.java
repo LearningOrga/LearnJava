@@ -62,7 +62,7 @@ public class AutomatedTests extends JUnitStories {
         System.out.println("Into the setup method of AccountStep...");
         if(driver==null){
             //System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-            //TODO:124 issue
+            //TODO:128 issue
             WebDriverManager.chromedriver().browserVersion("128").setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=");
