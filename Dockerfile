@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-8 as maven
+FROM maven:3.8.3-openjdk-17 as maven
 
 COPY ./ipl ./
 
