@@ -31,7 +31,7 @@ jobs:
 
       - name: Build
         run: |
-          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl:latest .
+          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl/ipl:latest .
       - name: Push
         run: |
           docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl/ipl:latest
