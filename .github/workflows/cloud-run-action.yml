@@ -34,7 +34,7 @@ jobs:
           docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl:latest .
       - name: Push
         run: |
-          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl:latest
+          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl/ipl:latest
       - name: 3. Deploy
         run: |
           gcloud run deploy serverless-app \
