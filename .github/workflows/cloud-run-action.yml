@@ -22,15 +22,19 @@ jobs:
           export_default_credentials: true
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: 2. Configure Docker
-        run: |
-          gcloud auth configure-docker
+      - name: Configure Docker
+        uses: docker/login-action@v2
+        with:
+          registry: us-central1-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GCP_SA_KEY }}
+
       - name: Build
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl:latest .
+          docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl:latest .
       - name: Push
         run: |
-          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/ipl:latest
+          docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/ipl:latest
       - name: 3. Deploy
         run: |
           gcloud run deploy serverless-app \
