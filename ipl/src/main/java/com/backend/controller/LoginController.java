@@ -38,19 +38,19 @@ public class LoginController {
 	@RequestMapping(value = { "/ipl_home" }, method = RequestMethod.GET)
 	public ModelAndView iplehomePage(HttpServletRequest request, ModelMap model) {
 		model.addAttribute("greeting", "Hi, Welcome to Predict and Win. ");
-		/*request.getSession().setAttribute("loginName",
+		request.getSession().setAttribute("loginName",
 				getCompleteUserDetailss(model).getLoginName());
 		request.getSession().setAttribute("userId",
 				getCompleteUserDetailss(model).getId());
 		request.getSession().setAttribute("totalRemainingPoints",
-				getCompleteUserDetailss(model).getAvailablePoints());*/
+				getCompleteUserDetailss(model).getAvailablePoints());
 
-        request.getSession().setAttribute("loginName",
+     /*   request.getSession().setAttribute("loginName",
                 "Jitendra");
         request.getSession().setAttribute("userId",
                 "1");
         request.getSession().setAttribute("totalRemainingPoints",
-                "505");
+                "505");*/
 
 		ModelAndView mav = new ModelAndView("ipl_home");
 		mav.addObject(model);
