@@ -41,7 +41,7 @@ height:138px !important;
 
 <div class="w3-container headerContainer"> 
 
-<p class = "centerAlign">Hello, <b><%=session.getAttribute("loginName") %></b>. Welcome to Predict and Win - Season 2024 <br></br> Total Points Remaining : <b><%=session.getAttribute("totalRemainingPoints") %></p>
+<p class = "centerAlign">Hello, <b><%=session.getAttribute("loginName") %></b>. Welcome to Predict and Win - Season 2023 <br></br> Total Points Remaining : <b><%=session.getAttribute("totalRemainingPoints") %></p>
 <%-- <p class = "rightAlign">Total Points Remaining : <b><%=session.getAttribute("totalRemainingPoints") %></b></p> --%>
 
 <a href="<c:url value="/ipl_home" />" class="w3-btn w3-ripple homeAlign">&#10004;Home</a>
