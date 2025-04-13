@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ipl
+  labels:
+    app: ipl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ipl
+  template:
+    metadata:
+      labels:
+        app: ipl
+    spec:
+      containers:
+        - name: ipl
+          image: docker.io/hirparajitendra/images:ipljan4
+          ports:
+            - containerPort: 9090
