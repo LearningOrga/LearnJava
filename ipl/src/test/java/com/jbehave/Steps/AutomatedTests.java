@@ -36,7 +36,7 @@ public class AutomatedTests extends JUnitStories {
 
 
     @LocalServerPort
-    private int port = 8080;
+    private int port = 9090;
 
     @Override
     public Configuration configuration() {
